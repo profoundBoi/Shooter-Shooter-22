@@ -25,7 +25,7 @@ public class FirstPersonControl : MonoBehaviour
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the
     CharacterController component
-private void Awake()
+    private void Awake()
     {
         // Get and store the CharacterController component attached to
         this GameObject
