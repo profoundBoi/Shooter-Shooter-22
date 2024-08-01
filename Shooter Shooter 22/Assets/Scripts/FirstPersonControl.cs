@@ -45,7 +45,6 @@ public class FirstPersonControl : MonoBehaviour
 
         // Subscribe to the jump input event
         //playerInput.Player.Jump.performed += ctx => Jump(); // Call the Jump method when jump input is performed
-
     }
     private void Update()
     {
@@ -58,8 +57,10 @@ public class FirstPersonControl : MonoBehaviour
     {
         // Create a movement vector based on the input
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+
         // Transform direction from local to world space
         move = transform.TransformDirection(move);
+
         // Move the character controller based on the movement vector and speed
         characterController.Move(move * moveSpeed * Time.deltaTime);
     }
@@ -68,12 +69,14 @@ public class FirstPersonControl : MonoBehaviour
         // Get horizontal and vertical look inputs and adjust based on sensitivity
         float LookX = lookInput.x * lookSpeed;
         float LookY = lookInput.y * lookSpeed;
+
         // Horizontal rotation: Rotate the player object around the y-axis
         transform.Rotate(0, LookX, 0);
+
         // Vertical rotation: Adjust the vertical look rotation and clamp it to prevent flipping
         verticalLookRotation -= LookY;
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f,
-        90f);
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
+
         // Apply the clamped vertical rotation to the player camera
         playerCamera.localEulerAngles = new Vector3(verticalLookRotation, 0, 0);
     }
