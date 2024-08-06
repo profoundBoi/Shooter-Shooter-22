@@ -11,6 +11,9 @@ public class CodeWorkShop02 : MonoBehaviour
     int a = 8;
     int b = 12;
 
+    
+    
+
     public int c = 7;
 
     int number = 3;
@@ -124,14 +127,19 @@ public class CodeWorkShop02 : MonoBehaviour
             case 10:
                 print("you are great at this game");
                 break;
-
-                
+               
         }
+
         
-        
+        print(nums[4]);
+        nums[0] = 7;
+
+        print(names);
+
     }
 
-    
+    int[] nums = { 1, 2, 3, 4, 5 };
+    string[] names = { "Finn", "Jake", "Fionna", "Marceline"};
     void Update()
     {
         
