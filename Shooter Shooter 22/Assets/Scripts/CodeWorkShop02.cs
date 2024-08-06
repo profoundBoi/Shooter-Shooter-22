@@ -13,7 +13,11 @@ public class CodeWorkShop02 : MonoBehaviour
 
     public int c = 7;
 
+    int number = 3;
+
     public int playerScore = 100;
+
+    
     
     void Start()
     {
@@ -65,6 +69,63 @@ public class CodeWorkShop02 : MonoBehaviour
         else if(playerScore >= 7 && playerScore <= 10)
         {
             print("you are great at this game");
+        }
+
+        switch(name)
+        {
+            case "Dollapho":
+                print("Hello Dollapho");
+                break;
+            default:    
+                print("Hello Stranger");
+                break;
+        }
+
+        switch (number)
+        {
+            case 0:
+                print("zero");
+                break;
+            case 1:
+                print("one");
+                break;
+            case 2:
+                print("two");
+                break;
+            case 3:
+                print("three");
+                break;
+            case 4:
+                print("four");
+                break;
+            case 5:
+                print("five");
+                break;
+        }
+
+        switch (playerScore)
+        {
+            case 0:
+            case 1:
+            case 2:
+                print("you suck at this game");
+                break;
+            case 3:
+            case 4:
+                print("you are ok at this game");
+                break;
+            case 5:
+            case 6:
+                print("you are good at this game");
+                break;
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                print("you are great at this game");
+                break;
+
+                
         }
         
         
