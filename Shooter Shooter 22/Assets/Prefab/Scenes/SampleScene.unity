@@ -275,6 +275,12 @@ MonoBehaviour:
   gravity: -9.81
   jumpHeight: 1
   playerCamera: {fileID: 330585546}
+  projectilePrefab: {fileID: 7953342800068395124, guid: 7006644d3f7ff674da6bd25fe9d0a140,
+    type: 3}
+  firePoint: {fileID: 1921750151}
+  projectileSpeed: 20
+  pickUpRange: 3
+  holdPosition: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.59, z: -0.68}
+  m_LocalPosition: {x: 0, y: 0.59, z: -0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -559,7 +565,7 @@ Transform:
   m_GameObject: {fileID: 795065195}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.73240346, z: -0, w: 0.6808709}
-  m_LocalPosition: {x: 0.23728561, y: -0.5221644, z: 1.0766022}
+  m_LocalPosition: {x: 0.22, y: -0.5221644, z: 0.86}
   m_LocalScale: {x: 1, y: 0.40543, z: 0.26567003}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -816,13 +822,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921750150}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.56, y: 0, z: 0}
+  m_LocalRotation: {x: 0.02534585, y: -0.68079007, z: 0.020927165, w: 0.7317407}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 795065196}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.761, y: -85.876, z: -0.223}
 --- !u!1 &2140356044
 GameObject:
   m_ObjectHideFlags: 0
