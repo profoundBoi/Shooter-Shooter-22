@@ -281,6 +281,9 @@ MonoBehaviour:
   projectileSpeed: 20
   holdPosition: {fileID: 1444999426}
   pickUpRange: 3
+  crouchHeight: 1
+  standingHeight: 2
+  crouchSpeed: 1.5
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,13 +856,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444999425}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.6858175, z: -0, w: 0.7277736}
-  m_LocalPosition: {x: -0.36999893, y: -0.000000059604645, z: -0.0000002104789}
+  m_LocalRotation: {x: 0, y: -0.72777283, z: 0, w: -0.68581825}
+  m_LocalPosition: {x: 0.25, y: -0.000000059604645, z: -0.04}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 330585546}
-  m_LocalEulerAnglesHint: {x: 0, y: -86.6, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: -86.6, z: 180}
 --- !u!135 &1444999427
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -956,7 +959,7 @@ Transform:
   m_GameObject: {fileID: 1921750150}
   serializedVersion: 2
   m_LocalRotation: {x: 0.02534585, y: -0.68079007, z: 0.020927165, w: 0.7317407}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.71, y: -0.12, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
