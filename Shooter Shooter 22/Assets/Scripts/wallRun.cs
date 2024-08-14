@@ -4,51 +4,51 @@ using UnityEngine;
 
 public class wallRun : MonoBehaviour
 {
-    [Header("wallRunSettings")]
-    [Space(5)]
-    public FirstPersonControl fr;
-    public float wallRunSpeed;
-    public float wallRunTime;
-    private GameObject wall;
-    private GameObject player;
+    public float wallRunSpeed = 10f; // Speed during wall run
+    public float wallRunDuration = 10f; // Duration of the wall run
+   
+   
 
-    private Rigidbody rb;
-    private bool isWallRunning = false;
+    private CharacterController characterController; // Reference to the CharacterController component
+  
+    private FirstPersonControl fr; // Reference to the PlayerMovement script
 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        player = this.gameObject;
+        // Get and store the CharacterController component attached to this GameObject
+        characterController = GetComponent<CharacterController>();
+        fr = GetComponent<FirstPersonControl>();
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        // Check if the player has collided with the wall
-        if (collision.gameObject.CompareTag("wall")) // Using tags to identify the wall
+     
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        // Check if the player collides with an object tagged as "Wall"
+        if (other.gameObject.CompareTag("Wall"))
         {
-            wall = collision.gameObject; // Store the wall reference
-            StartWallRun(); // Start wall run logic
+            fr.gravity = 0f; // Disable gravity during wall run
+            fr.moveSpeed = wallRunSpeed; // Set wall run speed
+            print("wow you are wall running");
         }
     }
 
-    void StartWallRun()
+    void OnCollisionExit(Collision other)
     {
-        if (!isWallRunning)
+        // Check if the player stops colliding with the object tagged as "Wall"
+        if (other.gameObject.CompareTag("Wall"))
         {
-            isWallRunning = true;
-
-            // Set the player's velocity to move along the wall
-            Vector3 wallRunDirection = Vector3.Cross(wall.transform.forward, Vector3.up).normalized; // Determine wall run direction
-            rb.velocity = wallRunDirection * wallRunSpeed;
-
-            // Adjust the player's orientation to match the wall
-            Vector3 wallNormal = wall.transform.forward;
-            Quaternion targetRotation = Quaternion.LookRotation(wallNormal);
-            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, Time.deltaTime * 10f);
-
-           
+            fr.gravity = -9.81f; // Reset gravity to normal value
+            fr.moveSpeed = 5f; // Reset move speed to normal value
         }
     }
+
+  
 
    
+
+    
 }
