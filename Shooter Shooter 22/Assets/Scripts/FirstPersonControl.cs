@@ -22,13 +22,14 @@ public class FirstPersonControl : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
+    
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
     public GameObject projectilePrefab; // Projectile prefab for shooting
     public Transform firePoint; // Point from which the projectile is fired
     public float projectileSpeed = 20f; // Speed at which the projectile is fired
-   
+
 
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
@@ -43,6 +44,10 @@ public class FirstPersonControl : MonoBehaviour
     public float standingHeight = 2.0f; //make normal
     public float crouchSpeed = 1.5f; //make slow
     private bool isCrouching = false; //chech if crouch
+
+   
+
+
 
     public void Shoot()
     {
@@ -95,6 +100,7 @@ public class FirstPersonControl : MonoBehaviour
 
         // subscribe to the crouch input event
         playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); //Call the ToggleCrouch method when Crouch input is performed
+
 
     }
     private void Update()
