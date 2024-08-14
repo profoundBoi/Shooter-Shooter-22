@@ -8,6 +8,7 @@ TagManager:
   - PickUp
   - Bullet
   - wall
+  - Wall
   layers:
   - Default
   - TransparentFX

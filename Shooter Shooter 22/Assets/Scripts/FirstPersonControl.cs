@@ -22,7 +22,15 @@ public class FirstPersonControl : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
-    
+
+    [Header("WALL RUN SETTINGS")]
+    [Space(5)]
+    public float wallRunSpeed = 8f; // Speed while wall running
+    public float wallRunDuration = 2f; // How long the player can wall run
+    public float wallGravity = -2f; // Gravity while wall running
+    private bool isWallRunning = false;
+    private float wallRunTime;
+    private Vector3 wallNormal;
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
@@ -109,6 +117,8 @@ public class FirstPersonControl : MonoBehaviour
         Move();
         LookAround();
         ApplyGravity();
+        HandleWallRun();
+
     }
     public void Move()
     {
@@ -129,6 +139,16 @@ public class FirstPersonControl : MonoBehaviour
         else
         {
             currentSpeed = moveSpeed;
+        }
+
+        if (isWallRunning)
+        {
+            move = Vector3.Cross(wallNormal, Vector3.up).normalized * moveInput.y;
+            characterController.Move(move * wallRunSpeed * Time.deltaTime);
+        }
+        else
+        {
+            characterController.Move(move * currentSpeed * Time.deltaTime);
         }
     }
 
@@ -169,6 +189,15 @@ public class FirstPersonControl : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime; // Apply gravity to the velocity
 
+        if (!isWallRunning)
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+        else
+        {
+            velocity.y = wallGravity;
+        }
+
         characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
        
     }
@@ -179,6 +208,54 @@ public class FirstPersonControl : MonoBehaviour
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+        else if (isWallRunning)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            isWallRunning = false;
+        }
+    }
+
+    private void HandleWallRun()
+    {
+        if (isWallRunning)
+        {
+            wallRunTime -= Time.deltaTime;
+            if (wallRunTime <= 0)
+            {
+                isWallRunning = false;
+            }
+        }
+        else
+        {
+            CheckForWall();
+        }
+    }
+
+    private void CheckForWall()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.right, out hit, 1f))
+        {
+            if (hit.collider.CompareTag("Wall"))
+            {
+                StartWallRun(hit.normal);
+            }
+        }
+        else if (Physics.Raycast(transform.position, -transform.right, out hit, 1f))
+        {
+            if (hit.collider.CompareTag("Wall"))
+            {
+                StartWallRun(hit.normal);
+            }
+        }
+    }
+
+    private void StartWallRun(Vector3 normal)
+    {
+        isWallRunning = true;
+        wallRunTime = wallRunDuration;
+        wallNormal = normal;
+        velocity.y = 0;
     }
 
     public void PickUpObject()

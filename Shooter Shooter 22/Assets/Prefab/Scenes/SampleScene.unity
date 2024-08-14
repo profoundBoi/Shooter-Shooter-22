@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 241236786}
   - component: {fileID: 241236785}
   - component: {fileID: 241236790}
-  - component: {fileID: 241236791}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -276,6 +275,9 @@ MonoBehaviour:
   gravity: -9.81
   jumpHeight: 1
   playerCamera: {fileID: 330585546}
+  wallRunSpeed: 8
+  wallRunDuration: 2
+  wallGravity: -2
   projectilePrefab: {fileID: 7953342800068395124, guid: 7006644d3f7ff674da6bd25fe9d0a140,
     type: 3}
   firePoint: {fileID: 1921750151}
@@ -285,21 +287,6 @@ MonoBehaviour:
   crouchHeight: 1
   standingHeight: 2
   crouchSpeed: 1.5
---- !u!114 &241236791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241236784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f36eb112a080da0498cc214a001df32e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fr: {fileID: 241236790}
-  wallRunSpeed: 0
-  wallRunTime: 9
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +858,7 @@ GameObject:
   - component: {fileID: 844684074}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
