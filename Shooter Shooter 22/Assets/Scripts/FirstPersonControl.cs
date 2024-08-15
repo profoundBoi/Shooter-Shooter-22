@@ -174,6 +174,8 @@ public class FirstPersonControl : MonoBehaviour
             pickUpAim.SetActive(true);
         }
 
+
+
         
 
         if (Ammo > 0 && holdingGun)
@@ -201,6 +203,8 @@ public class FirstPersonControl : MonoBehaviour
             holdingKnife = false;
             Destroy(heldObject);
         }
+
+        
 
 
 
@@ -331,7 +335,7 @@ public class FirstPersonControl : MonoBehaviour
 
                 // Attach the object to the hold position
                 heldObject.transform.position = holdPosition.position;
-                heldObject.transform.rotation = holdPosition.rotation;
+                heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 heldObject.transform.parent = holdPosition;
                 holdingGun = true;
 
@@ -342,6 +346,7 @@ public class FirstPersonControl : MonoBehaviour
 
     public GameObject gunAim;
     public GameObject pickUpAim;
+    public Vector3 GunRotation;
 
     public int Ammo = 10;
     public GameObject ammoPrefab;
