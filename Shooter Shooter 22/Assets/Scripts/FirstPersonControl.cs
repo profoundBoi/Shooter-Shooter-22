@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Presets;
 using UnityEditor.Rendering;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.Windows;
 
 public class FirstPersonControl : MonoBehaviour
@@ -70,9 +72,31 @@ public class FirstPersonControl : MonoBehaviour
            
         }
 
-        
+        if (holdingKnife)
+        {
+            // Instantiate the projectile at the fire point
+            GameObject projectile = Instantiate(knifeProjectile,
+            knifeSpawnPoint.position, knifeSpawnPoint.rotation);
+            projectile.transform.localScale = new Vector3(0.12f, 0.2f, 0.9f);
+            // Get the Rigidbody component of the projectile and set its velocity
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            rb.velocity = knifeSpawnPoint.forward * projectileSpeed;
+
+            // Destroy the projectile after 3 seconds
+            Destroy(projectile, 10f);
+            KnifeCount--;
+
+        }
+
+
+
+
+
     }
 
+    private int KnifeCount = 3;
+    public Transform knifeSpawnPoint;
+    public GameObject knifeProjectile;
     public TextMeshProUGUI ammoText;
     private bool CanReload = false;
     public void Reload()
@@ -143,12 +167,14 @@ public class FirstPersonControl : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-        if (holdingGun == false)
+        if (!holdingKnife && holdingGun == false)
         {
 
             gunAim.SetActive(false);
             pickUpAim.SetActive(true);
         }
+
+        
 
         if (Ammo > 0 && holdingGun)
         {
@@ -163,7 +189,19 @@ public class FirstPersonControl : MonoBehaviour
         {
             ammoText.text = "No More Ammo";
         }
-        
+
+        if (!holdingGun)
+        {
+            ammoText.text = "";
+
+        }
+
+        if (holdingKnife && KnifeCount == 0)
+        {
+            holdingKnife = false;
+            Destroy(heldObject);
+        }
+
 
 
     }
@@ -237,7 +275,7 @@ public class FirstPersonControl : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
-
+    private bool holdingKnife = false;
     public void PickUpObject()
     {
         // Check if we are already holding an object
@@ -246,6 +284,13 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
             heldObject.transform.parent = null;
             holdingGun = false;
+        }
+
+        if (heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldObject.transform.parent = null;
+            holdingKnife = false;
         }
 
         // Perform a raycast from the camera's position forward
@@ -261,15 +306,20 @@ public class FirstPersonControl : MonoBehaviour
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.CompareTag("PickUp"))
             {
+
+                gunAim.SetActive(true);
+                pickUpAim.SetActive(false);
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+
 
                 // Attach the object to the hold position
                 heldObject.transform.position = holdPosition.position;
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
-                holdingGun = true;
+                holdingKnife = true;
+
             }
             else if (hit.collider.CompareTag("Gun"))
             {
