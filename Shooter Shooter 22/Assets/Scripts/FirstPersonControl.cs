@@ -72,6 +72,8 @@ public class FirstPersonControl : MonoBehaviour
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
+        //gunAim.SetActive(false);
+       // pickUpAim.SetActive(true);
     }
     private void OnEnable()
     {
@@ -103,12 +105,26 @@ public class FirstPersonControl : MonoBehaviour
 
 
     }
+
+    public GameObject Shoulder;
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
         Move();
         LookAround();
         ApplyGravity();
+
+        if (holdingGun ==  false)
+        {
+            
+                gunAim.SetActive(false);
+                pickUpAim.SetActive(true);   
+        }
+        if (holdingGun == true)
+        {
+            Shoulder.transform.rotation = Quaternion.Euler(playerCamera.rotation.x * lookSpeed - 45 , holdPosition.rotation.x + 45, 0);
+
+        }
     }
     public void Move()
     {
@@ -189,7 +205,7 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
             heldObject.transform.parent = null;
             holdingGun = false;
-        }
+        } 
 
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
@@ -216,6 +232,8 @@ public class FirstPersonControl : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Gun"))
             {
+                gunAim.SetActive(true);
+                pickUpAim.SetActive(false);
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
@@ -225,9 +243,14 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
                 holdingGun = true;
+
             }
+            
         }
     }
+
+    public GameObject gunAim;
+    public GameObject pickUpAim;
 }
 
 
