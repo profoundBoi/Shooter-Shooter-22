@@ -8,6 +8,7 @@ TagManager:
   - PickUp
   - Bullet
   - wall
+  - Ammo
   layers:
   - Default
   - TransparentFX

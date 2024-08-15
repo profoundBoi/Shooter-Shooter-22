@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Presets;
 using UnityEditor.Rendering;
 using UnityEditor.ShaderGraph;
@@ -22,7 +23,7 @@ public class FirstPersonControl : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
-    
+
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
@@ -45,15 +46,15 @@ public class FirstPersonControl : MonoBehaviour
     public float crouchSpeed = 1.5f; //make slow
     private bool isCrouching = false; //chech if crouch
 
-   
+
 
 
 
     public void Shoot()
     {
-        if (holdingGun == true)
+        if (holdingGun == true && Ammo > 0)
         {
-
+            Ammo--;
 
             // Instantiate the projectile at the fire point
             GameObject projectile = Instantiate(projectilePrefab,
@@ -65,15 +66,42 @@ public class FirstPersonControl : MonoBehaviour
 
             // Destroy the projectile after 3 seconds
             Destroy(projectile, 3f);
+
+           
+        }
+
+        
+    }
+
+    public TextMeshProUGUI ammoText;
+    private bool CanReload = false;
+    public void Reload()
+    {
+        if (Ammo < 10 && CanReload)
+        {
+            Ammo = 10;  
+            CanReload = false;
         }
     }
-         
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.gameObject.CompareTag ("Ammo")) 
+        { 
+            Destroy(hit.gameObject);
+            CanReload = true;
+        }
+    }
+
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
         //gunAim.SetActive(false);
-       // pickUpAim.SetActive(true);
+        // pickUpAim.SetActive(true);
+
+        ammoText.text = "";
+
     }
     private void OnEnable()
     {
@@ -89,7 +117,7 @@ public class FirstPersonControl : MonoBehaviour
 
         // Subscribe to the look input events
         playerInput.Player.LookAround.performed += ctx => lookInput = ctx.ReadValue<Vector2>(); // Update lookInput when look input is performed
-        playerInput.Player.LookAround.canceled += ctx => lookInput =  Vector2.zero; // Reset lookInput when look input is canceled
+        playerInput.Player.LookAround.canceled += ctx => lookInput = Vector2.zero; // Reset lookInput when look input is canceled
 
         // Subscribe to the jump input event
         playerInput.Player.Jump.performed += ctx => Jump(); // Call the Jump method when jump input is performed
@@ -97,6 +125,8 @@ public class FirstPersonControl : MonoBehaviour
         // Subscribe to the shoot input event
         playerInput.Player.Shoot.performed += ctx => Shoot(); // Call the Shoot method when shoot input is performed
 
+
+        playerInput.Player.Reload.performed += ctx => Reload();
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); //Call the PickUpObject method when pick-up input is performed
 
@@ -106,7 +136,6 @@ public class FirstPersonControl : MonoBehaviour
 
     }
 
-    public GameObject Shoulder;
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
@@ -114,17 +143,29 @@ public class FirstPersonControl : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-        if (holdingGun ==  false)
+        if (holdingGun == false)
         {
-            
-                gunAim.SetActive(false);
-                pickUpAim.SetActive(true);   
+
+            gunAim.SetActive(false);
+            pickUpAim.SetActive(true);
         }
-        if (holdingGun == true)
+
+        if (Ammo > 0 && holdingGun)
         {
-            Shoulder.transform.rotation = Quaternion.Euler(playerCamera.rotation.x * lookSpeed - 45 , holdPosition.rotation.x + 45, 0);
+            ammoText.text = "";
 
         }
+        else if (Ammo == 0 && holdingGun && CanReload)
+        {
+            ammoText.text = "Click R/Triangle to reload Ammo";
+        }
+        else if (Ammo == 0 && holdingGun && !CanReload)
+        {
+            ammoText.text = "No More Ammo";
+        }
+        
+
+
     }
     public void Move()
     {
@@ -186,7 +227,7 @@ public class FirstPersonControl : MonoBehaviour
         velocity.y += gravity * Time.deltaTime; // Apply gravity to the velocity
 
         characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
-       
+
     }
     public void Jump()
     {
@@ -205,7 +246,7 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
             heldObject.transform.parent = null;
             holdingGun = false;
-        } 
+        }
 
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
@@ -245,12 +286,14 @@ public class FirstPersonControl : MonoBehaviour
                 holdingGun = true;
 
             }
-            
+
         }
     }
 
     public GameObject gunAim;
     public GameObject pickUpAim;
-}
 
+    public int Ammo = 10;
+    public GameObject ammoPrefab;
+}
 
