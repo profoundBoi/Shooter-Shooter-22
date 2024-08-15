@@ -11,6 +11,7 @@ public class BulletScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Gun"))
         {
             return;
+
         } else if (collision.gameObject != null)
         {
             Destroy(gameObject);

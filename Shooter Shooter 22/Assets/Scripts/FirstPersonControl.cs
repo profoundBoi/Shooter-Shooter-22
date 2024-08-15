@@ -69,7 +69,7 @@ public class FirstPersonControl : MonoBehaviour
             // Destroy the projectile after 3 seconds
             Destroy(projectile, 3f);
 
-           
+
         }
 
         if (holdingKnife)
@@ -77,7 +77,7 @@ public class FirstPersonControl : MonoBehaviour
             // Instantiate the projectile at the fire point
             GameObject projectile = Instantiate(knifeProjectile,
             knifeSpawnPoint.position, knifeSpawnPoint.rotation);
-            projectile.transform.localScale = new Vector3(0.12f, 0.2f, 0.9f);
+
             // Get the Rigidbody component of the projectile and set its velocity
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             rb.velocity = knifeSpawnPoint.forward * projectileSpeed;
@@ -86,10 +86,23 @@ public class FirstPersonControl : MonoBehaviour
             Destroy(projectile, 10f);
             KnifeCount--;
 
+
+            StartCoroutine(Throw());
+
+
         }
 
 
 
+
+
+    }
+
+    IEnumerator Throw()
+    {
+        anim.SetBool("Throw", true);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("Throw", false);
 
 
     }
@@ -280,6 +293,7 @@ public class FirstPersonControl : MonoBehaviour
         }
     }
     private bool holdingKnife = false;
+    public Animator anim;
     public void PickUpObject()
     {
         // Check if we are already holding an object
@@ -308,7 +322,7 @@ public class FirstPersonControl : MonoBehaviour
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             // Check if the hit object has the tag "PickUp"
-            if (hit.collider.CompareTag("PickUp"))
+            if (hit.collider.CompareTag("Knife"))
             {
 
                 gunAim.SetActive(true);

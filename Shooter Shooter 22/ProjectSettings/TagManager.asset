@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - wall
   - Ammo
+  - Knife
   layers:
   - Default
   - TransparentFX
