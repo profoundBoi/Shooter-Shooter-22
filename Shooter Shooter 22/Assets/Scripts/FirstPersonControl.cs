@@ -128,6 +128,19 @@ public class FirstPersonControl : MonoBehaviour
             Destroy(hit.gameObject);
             CanReload = true;
         }
+
+        if (hit.gameObject.CompareTag("WallJump"))
+        {
+            canWallJump = true;
+            if(jumpsPerformed < 2)
+            {
+                JumpsLeft++;
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 
     private void Awake()
@@ -187,6 +200,12 @@ public class FirstPersonControl : MonoBehaviour
             pickUpAim.SetActive(true);
         }
 
+        if (characterController.isGrounded)
+        {
+            JumpsLeft = 1;
+            jumpsPerformed = 0;
+        }
+
 
 
         
@@ -215,7 +234,7 @@ public class FirstPersonControl : MonoBehaviour
         {
             holdingKnife = false;
             Destroy(heldObject);
-            KnifeCount = 3;
+            KnifeCount = 3; 
         }
 
         
@@ -285,14 +304,20 @@ public class FirstPersonControl : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
 
     }
+
+    private bool canWallJump;
     public void Jump()
     {
-        if (characterController.isGrounded)
+        if (characterController.isGrounded || (canWallJump && JumpsLeft > 0 && jumpsPerformed < 2))
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            JumpsLeft--;
+            jumpsPerformed++;
         }
     }
+    private int JumpsLeft = 1;
+    private int jumpsPerformed = 0;
     private bool holdingKnife = false;
     public Animator anim;
     public void PickUpObject()
