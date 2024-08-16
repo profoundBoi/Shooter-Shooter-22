@@ -202,7 +202,7 @@ public class FirstPersonControl : MonoBehaviour
         }
         else if (Ammo == 0 && holdingGun && !CanReload)
         {
-            ammoText.text = "No More Ammo";
+            ammoText.text = "No More Ammo, Look for Ammo at the shooting Range Floor";
         }
 
         if (!holdingGun)

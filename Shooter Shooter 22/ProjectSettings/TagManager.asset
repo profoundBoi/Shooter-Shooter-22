@@ -12,6 +12,8 @@ TagManager:
   - Knife
   - Wall
   - WallJump
+  - ShootingRange
+  - KnifePrefab
   layers:
   - Default
   - TransparentFX
