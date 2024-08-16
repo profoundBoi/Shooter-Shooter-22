@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEditor.Presets;
 using UnityEditor.Rendering;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.InputSystem.Interactions;
+using UnityEngine.Rendering;
 using UnityEngine.Windows;
 
 public class FirstPersonControl : MonoBehaviour
@@ -25,7 +23,7 @@ public class FirstPersonControl : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
-
+    
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
@@ -48,15 +46,15 @@ public class FirstPersonControl : MonoBehaviour
     public float crouchSpeed = 1.5f; //make slow
     private bool isCrouching = false; //chech if crouch
 
-
+   
 
 
 
     public void Shoot()
     {
-        if (holdingGun == true && Ammo > 0)
+        if (holdingGun == true)
         {
-            Ammo--;
+
 
             // Instantiate the projectile at the fire point
             GameObject projectile = Instantiate(projectilePrefab,
@@ -68,93 +66,13 @@ public class FirstPersonControl : MonoBehaviour
 
             // Destroy the projectile after 3 seconds
             Destroy(projectile, 3f);
-
-
-        }
-
-        if (holdingKnife && KnifeCount > 0)
-        {
-            // Instantiate the projectile at the fire point
-            GameObject projectile = Instantiate(knifeProjectile,
-            knifeSpawnPoint.position, knifeSpawnPoint.rotation);
-
-            // Get the Rigidbody component of the projectile and set its velocity
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.velocity = knifeSpawnPoint.forward * projectileSpeed;
-
-            // Destroy the projectile after 3 seconds
-            Destroy(projectile, 10f);
-            KnifeCount--;
-
-            
-
-            StartCoroutine(Throw());
-
-        }
-
-
-        
-
-
-
-
-
-    }
-
-    IEnumerator Throw()
-    {
-        anim.SetBool("Throw", true);
-        yield return new WaitForSeconds(0.5f);
-        anim.SetBool("Throw", false);
-
-
-    }
-
-    public int KnifeCount;
-    public Transform knifeSpawnPoint;
-    public GameObject knifeProjectile;
-    public TextMeshProUGUI ammoText;
-    private bool CanReload = false;
-    public void Reload()
-    {
-        if (Ammo < 10 && CanReload)
-        {
-            Ammo = 10;  
-            CanReload = false;
         }
     }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.collider.gameObject.CompareTag ("Ammo")) 
-        { 
-            Destroy(hit.gameObject);
-            CanReload = true;
-        }
-
-        if (hit.gameObject.CompareTag("WallJump"))
-        {
-            canWallJump = true;
-            if(jumpsPerformed < 2)
-            {
-                JumpsLeft++;
-            }
-            else
-            {
-                return;
-            }
-        }
-    }
-
+         
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
-        //gunAim.SetActive(false);
-        // pickUpAim.SetActive(true);
-
-        ammoText.text = "";
-
     }
     private void OnEnable()
     {
@@ -170,7 +88,7 @@ public class FirstPersonControl : MonoBehaviour
 
         // Subscribe to the look input events
         playerInput.Player.LookAround.performed += ctx => lookInput = ctx.ReadValue<Vector2>(); // Update lookInput when look input is performed
-        playerInput.Player.LookAround.canceled += ctx => lookInput = Vector2.zero; // Reset lookInput when look input is canceled
+        playerInput.Player.LookAround.canceled += ctx => lookInput =  Vector2.zero; // Reset lookInput when look input is canceled
 
         // Subscribe to the jump input event
         playerInput.Player.Jump.performed += ctx => Jump(); // Call the Jump method when jump input is performed
@@ -178,17 +96,32 @@ public class FirstPersonControl : MonoBehaviour
         // Subscribe to the shoot input event
         playerInput.Player.Shoot.performed += ctx => Shoot(); // Call the Shoot method when shoot input is performed
 
-
-        playerInput.Player.Reload.performed += ctx => Reload();
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); //Call the PickUpObject method when pick-up input is performed
 
         // subscribe to the crouch input event
         playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); //Call the ToggleCrouch method when Crouch input is performed
 
+        playerInput.Player.SwitchWeapon.performed += ctx => SwitchWeapon(); //Call the SwapWeapon Method
+
+        playerInput.Player.Throw.performed += ctx => ThrowWeapon(); //Call the SwapWeapon Method
+
 
     }
 
+    public void ThrowWeapon()
+    {
+        if (heldObject != null)
+        {
+            heldObject.tag = "Gun";
+            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldObject.transform.parent = null;
+            holdingGun = false;
+
+            weaponsInventory.Remove(heldObject);
+
+        }
+    }
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
@@ -196,55 +129,32 @@ public class FirstPersonControl : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-        if (!holdingKnife && holdingGun == false)
-        {
-
-            gunAim.SetActive(false);
-            pickUpAim.SetActive(true);
-        }
-
-        if (characterController.isGrounded)
-        {
-            JumpsLeft = 1;
-            jumpsPerformed = 0;
-        }
-
-        if (holdingKnife && KnifeCount == 0)
-        {
-            holdingKnife = false;
-            Destroy(heldObject);
-        }
-
-
-
-
-
-        if (Ammo > 0 && holdingGun)
-        {
-            ammoText.text = "";
-
-        }
-        else if (Ammo == 0 && holdingGun && CanReload)
-        {
-            ammoText.text = "Click R/Triangle to reload Ammo";
-        }
-        else if (Ammo == 0 && holdingGun && !CanReload)
-        {
-            ammoText.text = "No More Ammo, Look for Ammo at the shooting Range Floor";
-        }
-
-        if (!holdingGun)
-        {
-            ammoText.text = "";
-
-        }
-
+        weaponsInventory[0].transform.position = holdPosition.position; //puts the weapon at the top of the list as the held object
+        weaponsInventory[0].transform.parent = holdPosition; // set hold position at parent
+        heldObject = weaponsInventory[0]; 
+        weaponsInventory[1].transform.parent = Bag; //set the parent as the bag
         
+        if (weaponsInventory[0] == null && weaponsInventory[1] != null)
+        {
+            weaponsInventory.Reverse();
+        }
 
-        
+        if (weaponsInventory[0].tag == "Gun")
+        {
+            holdingGun = true;
+        }
+        else if (weaponsInventory[1].tag == "PickUp")
+        {
+            holdingGun = false;
+        }
 
 
-
+    }
+    [Header("Weapons Inventory")]
+    public List <GameObject> weaponsInventory;
+    public void SwitchWeapon()
+    {
+        weaponsInventory.Reverse();
     }
     public void Move()
     {
@@ -306,93 +216,56 @@ public class FirstPersonControl : MonoBehaviour
         velocity.y += gravity * Time.deltaTime; // Apply gravity to the velocity
 
         characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
-
+       
     }
-
-    private bool canWallJump;
     public void Jump()
     {
-        if (characterController.isGrounded || (canWallJump && JumpsLeft > 0 && jumpsPerformed < 2))
+        if (characterController.isGrounded)
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            JumpsLeft--;
-            jumpsPerformed++;
         }
     }
-    private int JumpsLeft = 1;
-    private int jumpsPerformed = 0;
-    public bool holdingKnife = false;
-    public Animator anim;
+
+    private int throwdown = 0;
     public void PickUpObject()
     {
         // Check if we are already holding an object
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingGun = false;
-        }
-
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingKnife = false;
-        }
+        
 
         // Perform a raycast from the camera's position forward
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        Ray ray = new Ray(holdPosition.position, playerCamera.forward);
         RaycastHit hit;
 
         // Debugging: Draw the ray in the Scene view
-        Debug.DrawRay(playerCamera.position, playerCamera.forward *
+        Debug.DrawRay(holdPosition.position, playerCamera.forward *
         pickUpRange, Color.red, 2f);
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             // Check if the hit object has the tag "PickUp"
-            if (hit.collider.CompareTag("Knife"))
+            if (hit.collider.CompareTag("PickUp"))
             {
-                KnifeCount = 5;
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
-
-                // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.rotation = holdPosition.rotation;
-                heldObject.transform.parent = holdPosition;
-                holdingKnife = true;
-
+                weaponsInventory.Add(heldObject);
             }
             else if (hit.collider.CompareTag("Gun"))
             {
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
-                // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
-                heldObject.transform.parent = holdPosition;
                 holdingGun = true;
+                weaponsInventory.Add(heldObject);
 
             }
-
         }
     }
 
-    public GameObject gunAim;
-    public GameObject pickUpAim;
-    public Vector3 GunRotation;
-
-    public int Ammo = 10;
-    public GameObject ammoPrefab;
+    public Transform Bag;
 }
+
 
