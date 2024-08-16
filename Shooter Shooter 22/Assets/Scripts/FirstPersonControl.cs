@@ -215,6 +215,7 @@ public class FirstPersonControl : MonoBehaviour
         {
             holdingKnife = false;
             Destroy(heldObject);
+            KnifeCount = 3;
         }
 
         
