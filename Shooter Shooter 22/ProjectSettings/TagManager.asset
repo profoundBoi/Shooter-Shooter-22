@@ -10,6 +10,8 @@ TagManager:
   - wall
   - Ammo
   - Knife
+  - Wall
+  - WallJump
   layers:
   - Default
   - TransparentFX
