@@ -71,3 +71,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Shooter Shooter 22/Assets/Prefab/Scenes/SampleScene.unity
+Shooter Shooter 22/Assets/Scripts/FirstPersonControl.cs
+Shooter Shooter 22/Assets/Scripts/FirstPersonControl.cs
+/Shooter Shooter 22/Assets/Scripts
