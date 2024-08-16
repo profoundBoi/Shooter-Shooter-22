@@ -72,7 +72,7 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
-        if (holdingKnife && KnifeCount > 0)
+        if (holdingKnife)
         {
             // Instantiate the projectile at the fire point
             GameObject projectile = Instantiate(knifeProjectile,
@@ -86,14 +86,11 @@ public class FirstPersonControl : MonoBehaviour
             Destroy(projectile, 10f);
             KnifeCount--;
 
-            
 
             StartCoroutine(Throw());
 
+
         }
-
-
-        
 
 
 
@@ -110,7 +107,7 @@ public class FirstPersonControl : MonoBehaviour
 
     }
 
-    public int KnifeCount;
+    private int KnifeCount = 3;
     public Transform knifeSpawnPoint;
     public GameObject knifeProjectile;
     public TextMeshProUGUI ammoText;
@@ -209,15 +206,9 @@ public class FirstPersonControl : MonoBehaviour
             jumpsPerformed = 0;
         }
 
-        if (holdingKnife && KnifeCount == 0)
-        {
-            holdingKnife = false;
-            Destroy(heldObject);
-        }
 
 
-
-
+        
 
         if (Ammo > 0 && holdingGun)
         {
@@ -239,7 +230,12 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
-        
+        if (holdingKnife && KnifeCount == 0)
+        {
+            holdingKnife = false;
+            Destroy(heldObject);
+            KnifeCount = 3; 
+        }
 
         
 
@@ -322,7 +318,7 @@ public class FirstPersonControl : MonoBehaviour
     }
     private int JumpsLeft = 1;
     private int jumpsPerformed = 0;
-    public bool holdingKnife = false;
+    private bool holdingKnife = false;
     public Animator anim;
     public void PickUpObject()
     {
@@ -354,7 +350,7 @@ public class FirstPersonControl : MonoBehaviour
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.CompareTag("Knife"))
             {
-                KnifeCount = 5;
+
                 gunAim.SetActive(true);
                 pickUpAim.SetActive(false);
                 // Pick up the object
