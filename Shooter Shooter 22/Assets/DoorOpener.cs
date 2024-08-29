@@ -9,12 +9,14 @@ public class DoorOpener : MonoBehaviour
     public GameObject rightDoor;
 
 
+    public bool OpenDoors = false;
+    public bool CloseDoors = false;
 
-    private Vector3 rightposition = new Vector3(-5, 24, 263);
-   private Vector3 leftposition = new Vector3(-5    , 24, 240);
 
-    private bool OpenDoors = false;
-    private bool CloseDoors = false;
+    public Transform leftpos;
+    public Transform rightpos;
+    public Transform leftMiddlepost;
+    public Transform rightMiddlepost;
 
 
     private void OnTriggerEnter(Collider other)
@@ -38,15 +40,15 @@ public class DoorOpener : MonoBehaviour
 
     void Update()
     {
-        if (OpenDoors == true && leftDoor.transform.position.z > 240 )
+        if (OpenDoors == true )
         {
-            leftDoor.transform.position = Vector3.MoveTowards(leftDoor.transform.position, leftposition, 3 * Time.deltaTime);
-            rightDoor.transform.position = Vector3.MoveTowards(rightDoor.transform.position, rightposition, 3 * Time.deltaTime);
+            leftDoor.transform.position = Vector3.MoveTowards(leftDoor.transform.position, leftpos.position, 3 * Time.deltaTime);
+            rightDoor.transform.position = Vector3.MoveTowards(rightDoor.transform.position, rightpos.position, 3 * Time.deltaTime);
         }
-        else if (OpenDoors == false && leftDoor.transform.position.z < 248)
+        else if (CloseDoors == true)
         {
-            leftDoor.transform.position = Vector3.MoveTowards(leftDoor.transform.position, new Vector3(-5, 24, 248), 3 * Time.deltaTime);
-            rightDoor.transform.position = Vector3.MoveTowards(rightDoor.transform.position, new Vector3(-5, 24, 256), 3 * Time.deltaTime);
+            leftDoor.transform.position = Vector3.MoveTowards(leftDoor.transform.position, leftMiddlepost.position, 3 * Time.deltaTime);
+            rightDoor.transform.position = Vector3.MoveTowards(rightDoor.transform.position, rightMiddlepost.position, 3 * Time.deltaTime);
         }
        
        

@@ -16,6 +16,7 @@ TagManager:
   - KnifePrefab
   - Switch
   - Door
+  - DoorKnob
   layers:
   - Default
   - TransparentFX
