@@ -33,9 +33,11 @@ public class FirstPersonControl : MonoBehaviour
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
+    public Transform sythHoldingPosition;
     private GameObject heldObject; // Reference to the currently held object
     public float pickUpRange = 3f; // Range within which objects can be picked up
     private bool holdingGun = false;
+    private bool holdingSyth = false;   
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -90,12 +92,25 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
+        if (holdingSyth)
+        {
+            StartCoroutine(Slice());
+        }
+
 
 
 
 
     }
+    public Animator Sliced;
+    IEnumerator Slice()
+    {
+        Sliced.SetBool("Slice", true);
+        yield return new WaitForSeconds(0.5f);
+        Sliced.SetBool("Slice", false);
 
+
+    }
     IEnumerator Throw()
     {
         anim.SetBool("Throw", true);
@@ -362,6 +377,25 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
                 holdingKnife = true;
+
+            }
+
+            // Check if the hit object has the tag "PickUp"
+            if (hit.collider.CompareTag("Syth"))
+            {
+
+                gunAim.SetActive(true);
+                pickUpAim.SetActive(false);
+                // Pick up the object
+                heldObject = hit.collider.gameObject;
+                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+
+
+                // Attach the object to the hold position
+                heldObject.transform.position = sythHoldingPosition.position;
+                heldObject.transform.rotation = sythHoldingPosition.rotation;
+                heldObject.transform.parent = sythHoldingPosition;
+                holdingSyth = true;
 
             }
             else if (hit.collider.CompareTag("Gun"))
