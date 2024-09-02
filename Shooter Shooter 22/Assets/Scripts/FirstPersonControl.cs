@@ -105,7 +105,7 @@ public class FirstPersonControl : MonoBehaviour
             Bottles.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
             Rigidbody bt = Bottles.GetComponent<Rigidbody>();
-            bt.velocity = bottlShootP.forward * projectileSpeed;
+            bt.velocity = bottlShootP.forward * 20;
             
             foreach (Transform child in Bottles.transform)
             {
@@ -178,7 +178,7 @@ public class FirstPersonControl : MonoBehaviour
             }
         }
     }
-
+    private GameObject Gun;
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
@@ -187,6 +187,7 @@ public class FirstPersonControl : MonoBehaviour
         // pickUpAim.SetActive(true);
 
         ammoText.text = "";
+        Gun = GameObject.FindGameObjectWithTag("Gun");
 
     }
     private void OnEnable()
@@ -265,7 +266,12 @@ public class FirstPersonControl : MonoBehaviour
         if (!holdingGun)
         {
             ammoText.text = "";
-
+            MeshCollider MC = Gun.GetComponent<MeshCollider>();
+            MC.isTrigger = false;
+        }else
+        {
+            MeshCollider MC = Gun.GetComponent<MeshCollider>();
+            MC.isTrigger= true;
         }
 
         if (holdingKnife && KnifeCount == 0)
@@ -402,8 +408,7 @@ public class FirstPersonControl : MonoBehaviour
             if (hit.collider.CompareTag("Knife"))
             {
 
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
+               
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
@@ -414,15 +419,15 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
                 holdingKnife = true;
-
+                gunAim.SetActive(true);
+                pickUpAim.SetActive(false);
             }
 
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.CompareTag("Syth"))
             {
 
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
+               
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
@@ -433,12 +438,12 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.rotation = sythHoldingPosition.rotation;
                 heldObject.transform.parent = sythHoldingPosition;
                 holdingSyth = true;
-
+                gunAim.SetActive(true);
+                pickUpAim.SetActive(false);
             }
             else if (hit.collider.CompareTag("Gun"))
             {
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
+                
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
@@ -448,11 +453,12 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 heldObject.transform.parent = holdPosition;
                 holdingGun = true;
+                gunAim.SetActive(true);
+                pickUpAim.SetActive(false);
 
             }
             else if (hit.collider.CompareTag("PickUp"))
             {
-                gunAim.SetActive(true);
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
                 heldObject.tag = "Bottle";
@@ -463,6 +469,7 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 heldObject.transform.parent = holdPosition;
                 holdingBottle = true;
+                gunAim.SetActive(true);
 
             }
 
