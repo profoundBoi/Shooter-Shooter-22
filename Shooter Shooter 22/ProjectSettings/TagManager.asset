@@ -18,6 +18,9 @@ TagManager:
   - Door
   - DoorKnob
   - Syth
+  - Bottle
+  - Floor
+  - Stair
   layers:
   - Default
   - TransparentFX

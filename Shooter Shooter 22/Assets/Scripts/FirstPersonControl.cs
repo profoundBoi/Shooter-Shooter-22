@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
 
@@ -35,7 +36,7 @@ public class FirstPersonControl : MonoBehaviour
     public Transform holdPosition; // Position where the picked-up object will be held
     public Transform sythHoldingPosition;
     private GameObject heldObject; // Reference to the currently held object
-    public float pickUpRange = 3f; // Range within which objects can be picked up
+    public float pickUpRange = 10f; // Range within which objects can be picked up
     private bool holdingGun = false;
     private bool holdingSyth = false;   
 
@@ -97,12 +98,34 @@ public class FirstPersonControl : MonoBehaviour
             StartCoroutine(Slice());
         }
 
+        if (holdingBottle)
+        {
+            
+            GameObject Bottles = Instantiate(Bottle, holdPosition.position, Quaternion.identity);
+            Bottles.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+            Rigidbody bt = Bottles.GetComponent<Rigidbody>();
+            bt.velocity = bottlShootP.forward * projectileSpeed;
+            
+            foreach (Transform child in Bottles.transform)
+            {
+                Rigidbody Gp = child.GetComponent<Rigidbody>();
+                Gp.velocity = bottlShootP.forward * projectileSpeed;
+            }
+           holdingBottle = false;
+            Destroy(heldObject);
+
+        }
+
 
 
 
 
     }
+    public GameObject Bottle;
     public Animator Sliced;
+    public Transform bottlShootP;
+
     IEnumerator Slice()
     {
         Sliced.SetBool("Slice", true);
@@ -352,12 +375,26 @@ public class FirstPersonControl : MonoBehaviour
             holdingKnife = false;
         }
 
+        if (heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldObject.transform.parent = null;
+            holdingBottle = false;
+        }
+
+        if (heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldObject.transform.parent = null;
+            holdingSyth = false;
+        }
+
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
 
         // Debugging: Draw the ray in the Scene view
-        //Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 2f);
+        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 10f);
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
@@ -413,6 +450,22 @@ public class FirstPersonControl : MonoBehaviour
                 holdingGun = true;
 
             }
+            else if (hit.collider.CompareTag("PickUp"))
+            {
+                gunAim.SetActive(true);
+                // Pick up the object
+                heldObject = hit.collider.gameObject;
+                heldObject.tag = "Bottle";
+                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+
+                // Attach the object to the hold position
+                heldObject.transform.position = holdPosition.position;
+                heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
+                heldObject.transform.parent = holdPosition;
+                holdingBottle = true;
+
+            }
+
 
         }
     }
@@ -420,6 +473,8 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject gunAim;
     public GameObject pickUpAim;
     public Vector3 GunRotation;
+    private bool holdingBottle = false;
+    private Collider col;
 
     public int Ammo = 10;
     public GameObject ammoPrefab;
