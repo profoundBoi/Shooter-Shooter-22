@@ -12,11 +12,5 @@ public class brokenBottle : MonoBehaviour
         Col = GetComponent<MeshCollider>();
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("wall") || collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Stair") || collision.gameObject.CompareTag("Door"))
-        {
-            Col.isTrigger = false;
-        }
-    }
+   
 }

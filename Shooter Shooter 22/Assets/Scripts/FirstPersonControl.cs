@@ -105,7 +105,7 @@ public class FirstPersonControl : MonoBehaviour
             Bottles.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
             Rigidbody bt = Bottles.GetComponent<Rigidbody>();
-            bt.velocity = bottlShootP.forward * 20;
+            bt.velocity = bottlShootP.forward * 10;
             
             foreach (Transform child in Bottles.transform)
             {

@@ -7,7 +7,7 @@ public class BottleScript : MonoBehaviour
 {
   
     public GameObject brokenBottle;
-
+    
     
 
     private void OnCollisionEnter(Collision collision)
@@ -15,7 +15,7 @@ public class BottleScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Syth") || collision.gameObject.CompareTag("Knife"))
         {
             
-              Instantiate (brokenBottle, transform.position, transform.rotation );
+            GameObject BB =   Instantiate (brokenBottle, transform.position, transform.rotation );
             Destroy(gameObject);
                
             
