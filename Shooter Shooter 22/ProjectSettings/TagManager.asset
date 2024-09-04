@@ -21,6 +21,7 @@ TagManager:
   - Bottle
   - Floor
   - Stair
+  - Key
   layers:
   - Default
   - TransparentFX

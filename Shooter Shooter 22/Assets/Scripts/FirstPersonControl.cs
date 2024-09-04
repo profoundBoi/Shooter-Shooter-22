@@ -232,12 +232,7 @@ public class FirstPersonControl : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-        if (!holdingKnife && holdingGun == false)
-        {
-
-            gunAim.SetActive(false);
-            pickUpAim.SetActive(true);
-        }
+   
 
         if (characterController.isGrounded)
         {
@@ -419,8 +414,7 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
                 holdingKnife = true;
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
+                
             }
 
             // Check if the hit object has the tag "PickUp"
@@ -438,8 +432,7 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.rotation = sythHoldingPosition.rotation;
                 heldObject.transform.parent = sythHoldingPosition;
                 holdingSyth = true;
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
+         
             }
             else if (hit.collider.CompareTag("Gun"))
             {
@@ -453,9 +446,7 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 heldObject.transform.parent = holdPosition;
                 holdingGun = true;
-                gunAim.SetActive(true);
-                pickUpAim.SetActive(false);
-
+    
             }
             else if (hit.collider.CompareTag("PickUp"))
             {
@@ -469,7 +460,7 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 heldObject.transform.parent = holdPosition;
                 holdingBottle = true;
-                gunAim.SetActive(true);
+           
 
             }
 
@@ -477,8 +468,6 @@ public class FirstPersonControl : MonoBehaviour
         }
     }
 
-    public GameObject gunAim;
-    public GameObject pickUpAim;
     public Vector3 GunRotation;
     private bool holdingBottle = false;
 
@@ -504,13 +493,23 @@ public class FirstPersonControl : MonoBehaviour
                     }
                 }
             }
-        else if (hit.collider.CompareTag("Door")) // Check if the object is a door
-        {
+            else if (hit.collider.CompareTag("Door")) // Check if the object is a door
+            {
                 // Start moving the door upwards
                 StartCoroutine(RaiseDoor(hit.collider.gameObject));
             }
+
+            else if (hit.collider.CompareTag("Key"))
+            {
+                hit
+                //Safe.SetBool("Open", true);
+
+            }
         }
     }
+
+    public Animator Safe;
+    public Transform Hinge;
     private IEnumerator RaiseDoor(GameObject door)
     {
         float raiseAmount = 5f; // The total distance the door will be raised
