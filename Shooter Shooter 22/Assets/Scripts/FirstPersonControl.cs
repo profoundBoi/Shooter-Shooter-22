@@ -481,7 +481,6 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject pickUpAim;
     public Vector3 GunRotation;
     private bool holdingBottle = false;
-    private Collider col;
 
     public int Ammo = 10;
     public GameObject ammoPrefab;

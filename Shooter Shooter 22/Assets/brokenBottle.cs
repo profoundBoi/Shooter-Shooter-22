@@ -12,5 +12,12 @@ public class brokenBottle : MonoBehaviour
         Col = GetComponent<MeshCollider>();
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other != null) 
+        {
+            Col.isTrigger = false;
+        }
+    }
+
 }
