@@ -189,6 +189,9 @@ public class FirstPersonControl : MonoBehaviour
         ammoText.text = "";
         Gun = GameObject.FindGameObjectWithTag("Gun");
 
+        //NoKey = GameObject.FindGameObjectsWithTag("NoKey");
+        //Key = GameObject.FindGameObjectsWithTag("Key");
+
     }
     private void OnEnable()
     {
@@ -224,7 +227,22 @@ public class FirstPersonControl : MonoBehaviour
         playerInput.Player.Interact.performed += ctx => Interact(); // Interact with switch
         
     }
+    public GameObject[] safeCode;
+    public GameObject[] unsafeCode;
 
+    bool OpenSafe()
+    {
+        foreach (GameObject go in safeCode)
+        {
+            Renderer Un = go.GetComponent<Renderer>();
+            if (Un == null || Un.material.color != Color.green)
+            {
+                return false ;
+            }
+
+        }
+        return true;
+    }
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
@@ -240,11 +258,38 @@ public class FirstPersonControl : MonoBehaviour
             jumpsPerformed = 0;
         }
 
+        foreach (GameObject go in unsafeCode)
+        {
+            Renderer Un = go.GetComponent<Renderer>();
+            if (Un != null && Un.material.color == Color.green)
+            {
 
+                foreach (GameObject obj in safeCode)
+                {
+                    Renderer renderer = obj.GetComponent<Renderer>();
+                    if (renderer != null)
+                    {
+                        renderer.material.color = Color.red; // Set the color to match the switch material color
+                    }
+                }
 
+                foreach (GameObject obj in unsafeCode)
+                {
+                    Renderer renderer = obj.GetComponent<Renderer>();
+                    if (renderer != null)
+                    {
+                        renderer.material.color = Color.red; // Set the color to match the switch material color
+                    }
+                }
+            }
+        }
+        if (OpenSafe())
+        {
+            Safe.SetBool("Open", true);
+        }
         
 
-        if (Ammo > 0 && holdingGun)
+            if (Ammo > 0 && holdingGun)
         {
             ammoText.text = "";
 
@@ -499,10 +544,16 @@ public class FirstPersonControl : MonoBehaviour
                 StartCoroutine(RaiseDoor(hit.collider.gameObject));
             }
 
-            else if (hit.collider.CompareTag("Key"))
+            else if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
             {
-                hit
-                //Safe.SetBool("Open", true);
+               Renderer Ren = hit.collider.GetComponent<Renderer>();
+                if (Ren != null)
+                {
+                    Ren.material.color = Color.green;
+
+                }
+
+                
 
             }
         }

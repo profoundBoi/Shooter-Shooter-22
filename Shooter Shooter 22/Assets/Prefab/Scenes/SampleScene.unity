@@ -3190,6 +3190,17 @@ MonoBehaviour:
   knifeProjectile: {fileID: 6292991032186730456, guid: 1eed42ad4ee1640468a971e1a74393f8,
     type: 3}
   ammoText: {fileID: 439753351}
+  safeCode:
+  - {fileID: 1850997746}
+  - {fileID: 2069652003}
+  - {fileID: 1484149958}
+  - {fileID: 2111800847}
+  - {fileID: 1508859087}
+  - {fileID: 189126963}
+  unsafeCode:
+  - {fileID: 1874716660}
+  - {fileID: 1875867475}
+  - {fileID: 397456971}
   anim: {fileID: 1444999430}
   GunRotation: {x: 0, y: 0, z: 0}
   Ammo: 10
@@ -28900,12 +28911,12 @@ PrefabInstance:
     - target: {fileID: -7450542930547229183, guid: b6de66104c6172447ac925e75156ac1f,
         type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: NoKey
       objectReference: {fileID: 0}
     - target: {fileID: -5673829042815438358, guid: b6de66104c6172447ac925e75156ac1f,
         type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: NoKey
       objectReference: {fileID: 0}
     - target: {fileID: -5581350323604901829, guid: b6de66104c6172447ac925e75156ac1f,
         type: 3}
@@ -29005,7 +29016,7 @@ PrefabInstance:
     - target: {fileID: 9071884177910345462, guid: b6de66104c6172447ac925e75156ac1f,
         type: 3}
       propertyPath: m_TagString
-      value: Key
+      value: NoKey
       objectReference: {fileID: 0}
     - target: {fileID: 9112724871130584882, guid: b6de66104c6172447ac925e75156ac1f,
         type: 3}
