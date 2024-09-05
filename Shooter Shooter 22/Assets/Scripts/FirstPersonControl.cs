@@ -75,19 +75,6 @@ public class FirstPersonControl : MonoBehaviour
 
         if (holdingKnife)
         {
-            // Instantiate the projectile at the fire point
-            GameObject projectile = Instantiate(knifeProjectile,
-            knifeSpawnPoint.position, knifeSpawnPoint.rotation);
-
-            // Get the Rigidbody component of the projectile and set its velocity
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.velocity = knifeSpawnPoint.forward * projectileSpeed;
-
-            // Destroy the projectile after 3 seconds
-            Destroy(projectile, 10f);
-            KnifeCount--;
-
-
             StartCoroutine(Throw());
 
 
@@ -136,9 +123,9 @@ public class FirstPersonControl : MonoBehaviour
     }
     IEnumerator Throw()
     {
-        anim.SetBool("Throw", true);
-        yield return new WaitForSeconds(0.5f);
-        anim.SetBool("Throw", false);
+        anim.SetBool("Stab", true);
+        yield return new WaitForSeconds(2);
+        anim.SetBool("Stab", false);
 
 
     }
