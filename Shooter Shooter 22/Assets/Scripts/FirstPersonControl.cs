@@ -124,7 +124,7 @@ public class FirstPersonControl : MonoBehaviour
     IEnumerator Throw()
     {
         anim.SetBool("Stab", true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.11f);
         anim.SetBool("Stab", false);
 
 
