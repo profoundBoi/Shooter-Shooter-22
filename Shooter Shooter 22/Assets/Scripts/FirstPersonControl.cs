@@ -230,6 +230,8 @@ public class FirstPersonControl : MonoBehaviour
         }
         return true;
     }
+    [Header("MessageText")]
+    public TextMeshProUGUI Message;
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
@@ -237,9 +239,22 @@ public class FirstPersonControl : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-   
+  
 
-        if (characterController.isGrounded)
+        if (Open1)
+        {
+            Drawer.transform.position = Vector3.MoveTowards(Drawer.transform.position, Opened.position, 3 * Time.deltaTime);
+        }
+        if (Open2)
+        {
+            Drawer2.transform.position = Vector3.MoveTowards(Drawer2.transform.position, Opened2.position, 3 * Time.deltaTime);
+        }
+        if (Open3)
+        {
+            Drawer3.transform.position = Vector3.MoveTowards(Drawer3.transform.position, Opened3.position, 3 * Time.deltaTime);
+        }
+
+            if (characterController.isGrounded)
         {
             JumpsLeft = 1;
             jumpsPerformed = 0;
@@ -421,6 +436,12 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.transform.parent = null;
             holdingSyth = false;
         }
+        if (heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldObject.transform.parent = null;
+            holdingPassKey = false;
+        }
 
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
@@ -495,6 +516,18 @@ public class FirstPersonControl : MonoBehaviour
            
 
             }
+            else if (hit.collider.CompareTag("PassKey"))
+            {
+                // Pick up the object
+                heldObject = hit.collider.gameObject;
+                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+
+                // Attach the object to the hold position
+                heldObject.transform.parent = holdPosition;
+                holdingPassKey = true;
+
+
+            }
 
 
         }
@@ -502,6 +535,7 @@ public class FirstPersonControl : MonoBehaviour
 
     public Vector3 GunRotation;
     private bool holdingBottle = false;
+    private bool holdingPassKey = false;
 
     public int Ammo = 10;
     public GameObject ammoPrefab;
@@ -539,13 +573,57 @@ public class FirstPersonControl : MonoBehaviour
                     Ren.material.color = Color.green;
 
                 }
-
-                
-
             }
+            else if (hit.collider.CompareTag("Handle"))
+            {
+                Open1 = true;
+            }
+            else if (hit.collider.CompareTag("Handle2"))
+            {
+                Open2 = true;
+            }
+            else if (hit.collider.CompareTag("Handle3"))
+            {
+               Open3 = true;
+            }
+
+            else if (Physics.Raycast(ray, out hit, 3))
+                {
+                    // Check if the hit object has the tag "PickUp"
+                    if (hit.collider.CompareTag("Blood"))
+                    {
+
+                    StartCoroutine(WhoseWatching());
+
+
+                    }
+                    else { Message.text = ""; }
+                }
         }
     }
-
+    [Header("NightStand")]
+    public Transform Opened, Opened2, Opened3;
+    public Transform Drawer, Drawer2, Drawer3;
+    private bool Open1, Open2, Open3;
+    IEnumerator WhoseWatching()
+    {
+        yield return new WaitForSeconds(0);
+        Message.text = "What is this?";
+        yield return new WaitForSeconds(5);
+        Message.text = "Who Is Watching me ??";
+        yield return new WaitForSeconds(7);
+        Message.text = "What Happened Last Night?";
+        yield return new WaitForSeconds(7);
+        Message.text = "I better Grab A weapon from The safe!!";
+        yield return new WaitForSeconds(7);
+        Message.text = "";
+        yield return new WaitForSeconds(7);
+        Message.text = "What was the Pin To the safe Again?";
+        yield return new WaitForSeconds(10);
+        Message.text = "Good Thing Dad keeps his stuff safe in the night Stand";
+        yield return new WaitForSeconds(15);
+        Message.text = "";
+    }
     public Animator Safe;
     public Transform Hinge;
     private IEnumerator RaiseDoor(GameObject door)

@@ -23,6 +23,11 @@ TagManager:
   - Stair
   - Key
   - NoKey
+  - Blood
+  - PassKey
+  - Handle
+  - Handle2
+  - Handle3
   layers:
   - Default
   - TransparentFX
