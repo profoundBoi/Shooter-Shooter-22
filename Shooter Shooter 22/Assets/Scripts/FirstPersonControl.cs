@@ -179,6 +179,8 @@ public class FirstPersonControl : MonoBehaviour
         //NoKey = GameObject.FindGameObjectsWithTag("NoKey");
         //Key = GameObject.FindGameObjectsWithTag("Key");
 
+        passKey.SetActive(false);
+
     }
     private void OnEnable()
     {
@@ -436,12 +438,7 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.transform.parent = null;
             holdingSyth = false;
         }
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingPassKey = false;
-        }
+        
 
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
@@ -518,14 +515,7 @@ public class FirstPersonControl : MonoBehaviour
             }
             else if (hit.collider.CompareTag("PassKey"))
             {
-                // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
-
-                // Attach the object to the hold position
-                heldObject.transform.parent = holdPosition;
-                holdingPassKey = true;
-
+                StartCoroutine(PassKey());
 
             }
 
@@ -533,13 +523,20 @@ public class FirstPersonControl : MonoBehaviour
         }
     }
 
+    IEnumerator PassKey()
+    {
+        yield return new WaitForSeconds (0);
+        passKey.SetActive (true);
+        yield return new WaitForSeconds (3);
+        passKey.SetActive(false);
+    }
+
     public Vector3 GunRotation;
     private bool holdingBottle = false;
-    private bool holdingPassKey = false;
 
     public int Ammo = 10;
     public GameObject ammoPrefab;
-
+    public GameObject passKey;
     public void Interact()
     {
         // Perform a raycast to detect the lightswitch
