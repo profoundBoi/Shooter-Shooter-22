@@ -4538,7 +4538,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 380d55dc687a10d4293135442e7480d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 112
+      value: 110.76
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 380d55dc687a10d4293135442e7480d2,
         type: 3}
@@ -6433,7 +6433,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f86f3be57a5df1e4cb58da5f0356df46,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.066357
+      value: -14.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f86f3be57a5df1e4cb58da5f0356df46,
         type: 3}
@@ -6443,7 +6443,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f86f3be57a5df1e4cb58da5f0356df46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 138.38
+      value: 140.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f86f3be57a5df1e4cb58da5f0356df46,
         type: 3}
@@ -6489,6 +6489,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ping Pong Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: f86f3be57a5df1e4cb58da5f0356df46,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18095,7 +18100,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0d6ddaf6090a654459d928e01b052e63,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 111.959015
+      value: 110.71902
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d6ddaf6090a654459d928e01b052e63,
         type: 3}
@@ -22467,7 +22472,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &1220486005
 GameObject:
@@ -27139,7 +27144,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2b7c9d859bad31347ba93d6ede2c7269,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 111.85
+      value: 110.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b7c9d859bad31347ba93d6ede2c7269,
         type: 3}
