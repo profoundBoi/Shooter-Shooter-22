@@ -28,6 +28,8 @@ TagManager:
   - Handle
   - Handle2
   - Handle3
+  - MirrorScare
+  - DoorScare
   layers:
   - Default
   - TransparentFX

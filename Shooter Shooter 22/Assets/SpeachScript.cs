@@ -11,6 +11,7 @@ public class SpeachScript : MonoBehaviour
     [Header("=Scarey LongLegs")]
     public GameObject ScaryLongLegs;
     public Transform ScaryLegsPosition;
+    public Transform ScaryLegsposition2;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +31,23 @@ public class SpeachScript : MonoBehaviour
     {
         if (hit.collider.gameObject.CompareTag("MirrorScare"))
         {
-            Destroy(hit.collider);
+            Destroy(hit.gameObject);
             GameObject Monster = Instantiate(ScaryLongLegs, ScaryLegsPosition.position, Quaternion.identity);
-            Destroy(Monster);
+            Destroy(Monster, 1.5f);
+
+            
+
+        }
+
+        if (hit.collider.gameObject.CompareTag("DoorScare"))
+        {
+            Destroy(hit.gameObject);
+            GameObject Monster = Instantiate(ScaryLongLegs, ScaryLegsposition2.position, Quaternion.identity);
+            Monster.transform.rotation = ScaryLegsposition2.rotation;
+            Destroy(Monster, 1.5f);
+            
+
+
 
         }
 
