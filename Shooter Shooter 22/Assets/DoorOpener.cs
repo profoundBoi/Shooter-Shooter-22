@@ -54,6 +54,5 @@ public class DoorOpener : MonoBehaviour
        
 
         
-        Debug.Log(rightDoor.transform.position);
     }
 }
