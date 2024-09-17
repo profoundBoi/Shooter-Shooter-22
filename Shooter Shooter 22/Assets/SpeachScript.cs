@@ -24,6 +24,13 @@ public class SpeachScript : MonoBehaviour
         yield return new WaitForSeconds(13);
         SpeachBox.SetActive(true);
         speachText.text = "What... What Happened";
+        yield return new WaitForSeconds(4);
+        speachText.text = "WHere did everyone go?";
+        yield return new WaitForSeconds (4);
+        SpeachBox.SetActive(false) ;
+        speachText.text = "";
+
+
 
     }
 
