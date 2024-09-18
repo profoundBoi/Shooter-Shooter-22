@@ -31,6 +31,8 @@ TagManager:
   - MirrorScare
   - DoorScare
   - Letter
+  - Death certificate
+  - Letter.2
   layers:
   - Default
   - TransparentFX
