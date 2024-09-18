@@ -30,6 +30,7 @@ TagManager:
   - Handle3
   - MirrorScare
   - DoorScare
+  - Letter
   layers:
   - Default
   - TransparentFX
