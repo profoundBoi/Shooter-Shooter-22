@@ -220,14 +220,15 @@ public class FirstPersonControl : MonoBehaviour
         // Subscribe to the interact input event
         playerInput.Player.Interact.performed += ctx => Interact(); // Interact with switch
 
-
-        playerInput.Player.FlashOn.performed += ctx => FlashOnAndOff(); // Interact with switch
+        // Subscribe to the FlashOn input event
+        playerInput.Player.FlashOn.performed += ctx => FlashOnAndOff(); // Turn flash on and off
 
 
     }
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
 
+    //Check the colour of the material is Green
     bool OpenSafe()
     {
         foreach (GameObject go in safeCode)

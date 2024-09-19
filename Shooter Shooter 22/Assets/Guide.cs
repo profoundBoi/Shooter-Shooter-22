@@ -54,6 +54,10 @@ public class Guide : MonoBehaviour
             {
                 guideText.text = "'F' To Interact  ";
             }
+            else if (hit.collider.CompareTag("Flash"))
+            {
+                guideText.text = "'E' To PickUp  ";
+            }
 
             else
             {
