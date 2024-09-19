@@ -33,8 +33,10 @@ public class FirstPersonControl : MonoBehaviour
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
+    public Transform holdPosition2;
     public Transform sythHoldingPosition;
     private GameObject heldObject; // Reference to the currently held object
+    private GameObject heldObject2;
     public float pickUpRange = 10f; // Range within which objects can be picked up
     private bool holdingGun = false;
     private bool holdingSyth = false;   
@@ -51,7 +53,17 @@ public class FirstPersonControl : MonoBehaviour
     public Material switchMaterial; // Material to apply when switch is activated
     public GameObject[] objectsToChangeColor; // Array of objects to change color
 
-
+    public void FlashOnAndOff()
+    {
+        if (holdingFlash == true && !FlashLight.activeSelf)
+        {
+            FlashLight.SetActive(true);
+        }
+        else if (holdingFlash && FlashLight.activeSelf)
+        {
+            FlashLight.SetActive(false);
+        }
+    }
     public void Shoot()
     {
         if (holdingGun == true && Ammo > 0)
@@ -79,14 +91,7 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
-        if (holdingFlash == true && !FlashLight.activeSelf)
-        {
-            FlashLight.SetActive (true);
-        }
-        else if(holdingFlash && FlashLight.activeSelf) 
-        { 
-            FlashLight.SetActive (false);
-        }
+        
 
         if (holdingSyth)
         {
@@ -214,7 +219,11 @@ public class FirstPersonControl : MonoBehaviour
 
         // Subscribe to the interact input event
         playerInput.Player.Interact.performed += ctx => Interact(); // Interact with switch
-        
+
+
+        playerInput.Player.FlashOn.performed += ctx => FlashOnAndOff(); // Interact with switch
+
+
     }
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
@@ -296,23 +305,11 @@ public class FirstPersonControl : MonoBehaviour
         }
         
 
-            if (Ammo > 0 && holdingGun)
-        {
-            ammoText.text = "";
-
-        }
-        else if (Ammo == 0 && holdingGun && CanReload)
-        {
-            ammoText.text = "Click R/Triangle to reload Ammo";
-        }
-        else if (Ammo == 0 && holdingGun && !CanReload)
-        {
-            ammoText.text = "No More Ammo, Look for Ammo at the shooting Range Floor";
-        }
+       
+       
 
         if (!holdingGun)
         {
-            ammoText.text = "";
             MeshCollider MC = Gun.GetComponent<MeshCollider>();
             MC.isTrigger = false;
         }else
@@ -440,12 +437,7 @@ public class FirstPersonControl : MonoBehaviour
             holdingSyth = false;
         }
 
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingFlash = false;
-        }
+       
 
 
         // Perform a raycast from the camera's position forward
@@ -511,14 +503,15 @@ public class FirstPersonControl : MonoBehaviour
             {
 
                 // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+                heldObject2 = hit.collider.gameObject;
+                heldObject2.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
                 // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x + 90, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
-                heldObject.transform.parent = holdPosition;
+                heldObject2.transform.position = holdPosition2.position;
+                heldObject2.transform.eulerAngles = new Vector3(holdPosition2.eulerAngles.x + 90, holdPosition2.eulerAngles.y, holdPosition2.eulerAngles.z);
+                heldObject2.transform.parent = holdPosition2;
                 holdingFlash = true;
+                StartCoroutine(FlashLightOn());
 
             }
 
@@ -545,6 +538,14 @@ public class FirstPersonControl : MonoBehaviour
 
 
         }
+    }
+
+    IEnumerator FlashLightOn ()
+    {
+        yield return new WaitForSeconds(0);
+        ammoText.text = "RIght Click to Turn on and off";
+        yield return new WaitForSeconds(4);
+        ammoText.text = "";
     }
 
     IEnumerator PassKey()

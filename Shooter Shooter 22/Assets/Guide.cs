@@ -26,6 +26,35 @@ public class Guide : MonoBehaviour
             {
                 guideText.text = "'F' To Interact"; 
             }
+            else if (hit.collider.CompareTag("Key"))
+            {
+                guideText.text = "'F' To Interact";
+            }
+            else if (hit.collider.CompareTag("Bottle"))
+            {
+                guideText.text = "'E' To Pickup";
+            }
+            else if (hit.collider.CompareTag("Knife"))
+            {
+                guideText.text = "'E' To Pickup";
+            }
+            else if (hit.collider.CompareTag("Gun"))
+            {
+                guideText.text = "'E' To Pickup";
+            }
+            else if (hit.collider.CompareTag("Syth"))
+            {
+                guideText.text = "'E' To Pickup";
+            }
+            else if (hit.collider.CompareTag("PassKey"))
+            {
+                guideText.text = "'E' To Look at PassKey";
+            }
+            else if (hit.collider.CompareTag("Handle"))
+            {
+                guideText.text = "'F' To Interact  ";
+            }
+
             else
             {
                 guideText.text = "";
