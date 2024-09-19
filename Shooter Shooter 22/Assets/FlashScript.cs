@@ -23,7 +23,7 @@ public class FlashScript : MonoBehaviour
         {
             if (hit.collider.CompareTag("Rabbit"))
             {
-                Destroy(hit.collider.gameObject, 3);
+                Destroy(hit.collider.gameObject, 0.2f);
             }
         }
     }

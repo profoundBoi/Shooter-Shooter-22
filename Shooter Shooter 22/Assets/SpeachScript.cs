@@ -55,16 +55,24 @@ public class SpeachScript : MonoBehaviour
             Monster.transform.rotation = ScaryLegsposition2.rotation;
             StartCoroutine(DoorScare());
             Destroy(Monster, 1.5f);
+        }
+        if (hit.collider.gameObject.CompareTag("Scare2"))
+        {
+            Destroy(hit.gameObject);
+            scare = true;
             
-
-
-
         }
 
-       
+        if (hit.collider.gameObject.CompareTag("Rabbit"))
+        {
+            Destroy (hit.gameObject);
+        }
+
 
     }
-
+    private bool scare;
+    public GameObject Rabbit;
+    public GameObject Player;
     IEnumerator DoorScare()
     {
         yield return new WaitForSeconds(1);
@@ -82,5 +90,13 @@ public class SpeachScript : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (scare)
+        {
+            Rabbit.transform.position = Vector3.MoveTowards(Rabbit.transform.position, Player.transform.position, 100 * Time.deltaTime);
+            Rabbit.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+        }
+    }
 
 }
