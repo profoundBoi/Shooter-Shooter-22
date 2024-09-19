@@ -79,6 +79,15 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
+        if (holdingFlash == true && !FlashLight.activeSelf)
+        {
+            FlashLight.SetActive (true);
+        }
+        else if(holdingFlash && FlashLight.activeSelf) 
+        { 
+            FlashLight.SetActive (false);
+        }
+
         if (holdingSyth)
         {
             StartCoroutine(Slice());
@@ -111,6 +120,8 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject Bottle;
     public Animator Sliced;
     public Transform bottlShootP;
+
+    public GameObject FlashLight;
 
     IEnumerator Slice()
     {
@@ -151,18 +162,7 @@ public class FirstPersonControl : MonoBehaviour
             CanReload = true;
         }
 
-        if (hit.gameObject.CompareTag("WallJump"))
-        {
-            canWallJump = true;
-            if(jumpsPerformed < 2)
-            {
-                JumpsLeft++;
-            }
-            else
-            {
-                return;
-            }
-        }
+        
     }
     private GameObject Gun;
     private void Awake()
@@ -179,6 +179,7 @@ public class FirstPersonControl : MonoBehaviour
         //Key = GameObject.FindGameObjectsWithTag("Key");
 
         passKey.SetActive(false);
+        FlashLight.SetActive(false);
 
     }
     private void OnEnable()
@@ -240,7 +241,10 @@ public class FirstPersonControl : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-  
+        if (!holdingFlash)
+        {
+            FlashLight.SetActive(false);
+        }
 
         if (Open1)
         {
@@ -392,15 +396,13 @@ public class FirstPersonControl : MonoBehaviour
 
     }
 
-    private bool canWallJump;
+    private bool holdingFlash = false;
     public void Jump()
     {
-        if (characterController.isGrounded || (canWallJump && JumpsLeft > 0 && jumpsPerformed < 2))
+        if (characterController.isGrounded )
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            JumpsLeft--;
-            jumpsPerformed++;
         }
     }
     private int JumpsLeft = 1;
@@ -437,7 +439,14 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.transform.parent = null;
             holdingSyth = false;
         }
-        
+
+        if (heldObject != null)
+        {
+            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
+            heldObject.transform.parent = null;
+            holdingFlash = false;
+        }
+
 
         // Perform a raycast from the camera's position forward
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
@@ -467,7 +476,7 @@ public class FirstPersonControl : MonoBehaviour
             }
 
             // Check if the hit object has the tag "PickUp"
-            if (hit.collider.CompareTag("Syth"))
+            else if (hit.collider.CompareTag("Syth"))
             {
 
                
@@ -497,6 +506,22 @@ public class FirstPersonControl : MonoBehaviour
                 holdingGun = true;
     
             }
+
+            else if (hit.collider.CompareTag("Flash"))
+            {
+
+                // Pick up the object
+                heldObject = hit.collider.gameObject;
+                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+
+                // Attach the object to the hold position
+                heldObject.transform.position = holdPosition.position;
+                heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x + 90, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
+                heldObject.transform.parent = holdPosition;
+                holdingFlash = true;
+
+            }
+
             else if (hit.collider.CompareTag("PickUp"))
             {
                 // Pick up the object
