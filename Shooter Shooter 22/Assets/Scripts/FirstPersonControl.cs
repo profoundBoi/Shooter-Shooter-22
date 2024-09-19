@@ -544,7 +544,7 @@ public class FirstPersonControl : MonoBehaviour
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
-        {
+            {
                 // Change the material color of the objects in the array
                 foreach (GameObject obj in objectsToChangeColor)
                 {
@@ -583,18 +583,15 @@ public class FirstPersonControl : MonoBehaviour
                Open3 = true;
             }
 
-            else if (Physics.Raycast(ray, out hit, 3))
-                {
-                    // Check if the hit object has the tag "PickUp"
-                    if (hit.collider.CompareTag("Blood"))
-                    {
+       else if (Physics.Raycast(ray, out hit, 3))
+            {
+               if (hit.collider.CompareTag("Letter"))
+                  {
+                    StartCoroutine(ReadLetter1());
+                  } 
+            }
 
-                    StartCoroutine(WhoseWatching());
 
-
-                    }
-                    else { Message.text = ""; }
-                }
         }
     }
     [Header("NightStand")]
@@ -635,6 +632,19 @@ public class FirstPersonControl : MonoBehaviour
             door.transform.position = Vector3.MoveTowards(door.transform.position, endPosition, raiseSpeed * Time.deltaTime);
             yield return null; // Wait until the next frame before continuing the loop
 }
+    }
+
+    [Header("Letters")]
+    public GameObject Letter1;
+    public GameObject Letter2;
+    public GameObject Letter3;
+
+   IEnumerator ReadLetter1()
+    {
+        yield return new WaitForSeconds(1);
+        Letter1.SetActive(true);
+        yield return new WaitForSeconds(10);
+        Letter1.SetActive(false);
     }
 }
 

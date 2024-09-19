@@ -25,8 +25,10 @@ public class SpeachScript : MonoBehaviour
         SpeachBox.SetActive(true);
         speachText.text = "What... What Happened";
         yield return new WaitForSeconds(4);
-        speachText.text = "WHere did everyone go?";
+        speachText.text = "Where did everyone go?";
         yield return new WaitForSeconds (4);
+        speachText.text = "Who left a letter on the night stand?";
+        yield return new WaitForSeconds(4);
         SpeachBox.SetActive(false) ;
         speachText.text = "";
 
@@ -51,6 +53,7 @@ public class SpeachScript : MonoBehaviour
             Destroy(hit.gameObject);
             GameObject Monster = Instantiate(ScaryLongLegs, ScaryLegsposition2.position, Quaternion.identity);
             Monster.transform.rotation = ScaryLegsposition2.rotation;
+            StartCoroutine(DoorScare());
             Destroy(Monster, 1.5f);
             
 
@@ -58,7 +61,26 @@ public class SpeachScript : MonoBehaviour
 
         }
 
+       
+
     }
 
-    
+    IEnumerator DoorScare()
+    {
+        yield return new WaitForSeconds(1);
+        SpeachBox.SetActive(true);
+        speachText.text = "What was that";
+        yield return new WaitForSeconds(4);
+        speachText.text = "This Place is not Safe no more";
+        yield return new WaitForSeconds(4);
+        speachText.text = "Let me grab Dads weapon from the Safe";
+        yield return new WaitForSeconds(3);
+        speachText.text = "";
+        SpeachBox.SetActive(false);
+
+
+
+    }
+
+
 }
