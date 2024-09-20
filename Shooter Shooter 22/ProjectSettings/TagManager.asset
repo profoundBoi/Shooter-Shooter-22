@@ -36,6 +36,7 @@ TagManager:
   - Flash
   - Rabbit
   - Scare2
+  - BloodTrail
   layers:
   - Default
   - TransparentFX

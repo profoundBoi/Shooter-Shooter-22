@@ -37,14 +37,17 @@ public class SpiderScript : MonoBehaviour
         
     }
     public int ShotS;
-    
 
+    public GameObject Blood;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Knife") || other.gameObject.CompareTag("Syth"))
         {
+            GameObject Bloodtrail = Instantiate(Blood, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
-            Destroy(gameObject); 
+            Destroy(gameObject);
+            Destroy(Bloodtrail, 0.5f);
+            
         }
     }
 }
