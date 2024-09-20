@@ -650,7 +650,7 @@ public class FirstPersonControl : MonoBehaviour
 
    IEnumerator ReadLetter1()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         Letter1.SetActive(true);
         yield return new WaitForSeconds(10);
         Letter1.SetActive(false);

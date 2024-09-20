@@ -5,14 +5,16 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    private void OnCollisionEnter(Collision collision)
+    
+
+    private void OnTriggerEnter(Collider other)
     {
-         
-        if (collision.gameObject.CompareTag("Gun"))
+        if (other.gameObject.CompareTag("Gun"))
         {
             return;
 
-        } else if (collision.gameObject != null)
+        }
+        else if (other.gameObject != null)
         {
             Destroy(gameObject);
         }

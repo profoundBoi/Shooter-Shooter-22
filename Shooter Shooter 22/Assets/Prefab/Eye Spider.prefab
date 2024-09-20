@@ -436,3 +436,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  Walk: {fileID: 4210214467280348272}
