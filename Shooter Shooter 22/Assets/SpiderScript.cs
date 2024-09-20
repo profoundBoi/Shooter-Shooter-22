@@ -34,11 +34,7 @@ public class SpiderScript : MonoBehaviour
         
         }
 
-        if (ShotS ==2)
-        {
-            Destroy(gameObject);
-
-        }
+        
     }
     public int ShotS;
     
@@ -47,8 +43,8 @@ public class SpiderScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Knife") || other.gameObject.CompareTag("Syth"))
         {
-            ShotS++;
             Destroy(other.gameObject);
+            Destroy(gameObject); 
         }
     }
 }
