@@ -37,6 +37,7 @@ public class SpiderScript : MonoBehaviour
         if (ShotS ==2)
         {
             Destroy(gameObject);
+
         }
     }
     public int ShotS;
@@ -44,7 +45,7 @@ public class SpiderScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Knife") || other.gameObject.CompareTag("Syth"))
         {
             ShotS++;
             Destroy(other.gameObject);

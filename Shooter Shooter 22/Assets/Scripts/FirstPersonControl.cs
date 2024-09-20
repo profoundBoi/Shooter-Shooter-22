@@ -128,19 +128,29 @@ public class FirstPersonControl : MonoBehaviour
 
     public GameObject FlashLight;
 
+    public Collider Knifecollider;
+    public Collider SythCollider;
     IEnumerator Slice()
     {
         Sliced.SetBool("Slice", true);
+        SythCollider.isTrigger = false;
+
         yield return new WaitForSeconds(0.5f);
         Sliced.SetBool("Slice", false);
+        SythCollider.isTrigger = false;
+
 
 
     }
     IEnumerator Throw()
     {
         anim.SetBool("Stab", true);
+        Knifecollider.isTrigger = true;
+
         yield return new WaitForSeconds(0.11f);
         anim.SetBool("Stab", false);
+        Knifecollider.isTrigger = false;
+
 
 
     }
@@ -647,13 +657,20 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject Letter1;
     public GameObject Letter2;
     public GameObject Letter3;
-
+    public TextMeshProUGUI Speach;
+    public GameObject speachBubble;
    IEnumerator ReadLetter1()
     {
         yield return new WaitForSeconds(0);
         Letter1.SetActive(true);
         yield return new WaitForSeconds(10);
         Letter1.SetActive(false);
+        yield return new WaitForSeconds(0);
+        speachBubble.SetActive(true);
+        Speach.text = "Let Me grab a flash light and Look for everyone";
+        yield return new WaitForSeconds(3);
+        speachBubble.SetActive(false);
+        Speach.text = "";
     }
 }
 

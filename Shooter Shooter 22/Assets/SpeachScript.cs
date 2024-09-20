@@ -8,7 +8,7 @@ public class SpeachScript : MonoBehaviour
     public TextMeshProUGUI speachText;
     public GameObject SpeachBox;
 
-    [Header("=Scarey LongLegs")]
+    [Header("Scarey LongLegs")]
     public GameObject ScaryLongLegs;
     public Transform ScaryLegsPosition;
     public Transform ScaryLegsposition2;
@@ -81,7 +81,11 @@ public class SpeachScript : MonoBehaviour
         yield return new WaitForSeconds(2);
         speachText.text = "Let me grab Dads weapon from the Safe";
         yield return new WaitForSeconds(3);
-        speachText.text = "Its Too Dark out here, Let me find a tourch inside";
+        speachText.text = "I Need a weapon if i want to get out of here";
+        yield return new WaitForSeconds(3);
+        speachText.text = "Let Me use Dads weapons from the safe";
+        yield return new WaitForSeconds(3);
+        speachText.text = "Luckily he keeps important things in the Safe";
         yield return new WaitForSeconds(3);
         speachText.text = "";
         SpeachBox.SetActive(false);
