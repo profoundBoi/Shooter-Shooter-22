@@ -625,25 +625,7 @@ public class FirstPersonControl : MonoBehaviour
     public Transform Opened, Opened2, Opened3;
     public Transform Drawer, Drawer2, Drawer3;
     private bool Open1, Open2, Open3;
-    IEnumerator WhoseWatching()
-    {
-        yield return new WaitForSeconds(0);
-        Message.text = "What is this?";
-        yield return new WaitForSeconds(5);
-        Message.text = "Who Is Watching me ??";
-        yield return new WaitForSeconds(7);
-        Message.text = "What Happened Last Night?";
-        yield return new WaitForSeconds(7);
-        Message.text = "I better Grab A weapon from The safe!!";
-        yield return new WaitForSeconds(7);
-        Message.text = "";
-        yield return new WaitForSeconds(7);
-        Message.text = "What was the Pin To the safe Again?";
-        yield return new WaitForSeconds(10);
-        Message.text = "Good Thing Dad keeps his stuff safe in the night Stand";
-        yield return new WaitForSeconds(15);
-        Message.text = "";
-    }
+    
     public Animator Safe;
     public Transform Hinge;
     private IEnumerator RaiseDoor(GameObject door)

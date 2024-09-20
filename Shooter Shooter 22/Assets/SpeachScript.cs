@@ -75,13 +75,13 @@ public class SpeachScript : MonoBehaviour
     public GameObject Player;
     IEnumerator DoorScare()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         SpeachBox.SetActive(true);
         speachText.text = "What was that";
-        yield return new WaitForSeconds(4);
-        speachText.text = "This Place is not Safe no more";
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
         speachText.text = "Let me grab Dads weapon from the Safe";
+        yield return new WaitForSeconds(3);
+        speachText.text = "Its Too Dark out here, Let me find a tourch inside";
         yield return new WaitForSeconds(3);
         speachText.text = "";
         SpeachBox.SetActive(false);
