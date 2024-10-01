@@ -133,9 +133,9 @@ public class FirstPersonControl : MonoBehaviour
     IEnumerator Slice()
     {
         Sliced.SetBool("Slice", true);
-        SythCollider.isTrigger = false;
+        SythCollider.isTrigger = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         Sliced.SetBool("Slice", false);
         SythCollider.isTrigger = false;
 

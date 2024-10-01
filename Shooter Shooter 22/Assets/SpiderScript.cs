@@ -41,13 +41,36 @@ public class SpiderScript : MonoBehaviour
     public GameObject Blood;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("Knife") || other.gameObject.CompareTag("Syth"))
+        if (other.gameObject.CompareTag("Bullet") )
         {
             GameObject Bloodtrail = Instantiate(Blood, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             Destroy(gameObject);
             Destroy(Bloodtrail, 0.5f);
             
+        }
+        else if (other.gameObject.CompareTag("Knife") || other.gameObject.CompareTag("Syth"))
+        {
+            GameObject Syth = GameObject.FindGameObjectWithTag("Syth");
+            MeshCollider SC = Syth.GetComponent<MeshCollider>();
+
+            GameObject Knife = GameObject.FindGameObjectWithTag("Knife");
+            MeshCollider KC = Syth.GetComponent<MeshCollider>();
+            if (SC.isTrigger)
+            {
+                GameObject Bloodtrails = Instantiate(Blood, transform.position, Quaternion.identity);
+                Destroy(Bloodtrails, 0.5f);
+                Destroy(gameObject);
+            }
+            else if (KC.isTrigger)
+            {
+                GameObject Bloodtrail = Instantiate(Blood, transform.position, Quaternion.identity);
+                Destroy(Bloodtrail, 0.5f);
+                Destroy(gameObject);
+            }
+            else { return; }
+
+
         }
     }
 }
