@@ -103,8 +103,17 @@ public class SpeachScript : MonoBehaviour
         {
             Rabbit.transform.position = Vector3.MoveTowards(Rabbit.transform.position, Player.transform.position, 100 * Time.deltaTime);
             Rabbit.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
-            SFXSRCE.PlayOneShot(ScareSound);
+            StartCoroutine(ScareSounds());
         }
+    }
+
+    IEnumerator ScareSounds()
+    {
+        yield return new WaitForSeconds(0);
+        SFXSRCE.PlayOneShot(ScareSound);
+        yield return new WaitForSeconds(1);
+        SFXSRCE.Stop();
+
     }
 
 }
