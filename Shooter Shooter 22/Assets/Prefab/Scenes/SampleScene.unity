@@ -14387,7 +14387,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7340138986347263542, guid: fc48bee604089c642ba41e53ddb80ddf,
     type: 3}
   firePoint: {fileID: 1921750151}
-  projectileSpeed: 70
+  projectileSpeed: 200
   holdPosition: {fileID: 1444999426}
   holdPosition2: {fileID: 730322865}
   sythHoldingPosition: {fileID: 57180861}
@@ -14403,6 +14403,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  Cam: {fileID: 330585545}
+  Scoped: 0
+  scopeView: 20
   Bottle: {fileID: 6454087465527252900, guid: 05d46619a5856ce4a97286e978109b8f, type: 3}
   Sliced: {fileID: 57180866}
   bottlShootP: {fileID: 902144097}
@@ -14479,6 +14482,7 @@ MonoBehaviour:
   - {fileID: 734364275}
   - {fileID: 1432925004}
   - {fileID: 121047548}
+  - {fileID: 3651462}
   Eyes: {fileID: 1177218156}
   Rabbit: {fileID: 1281998458}
   Player: {fileID: 241236784}
@@ -14945,7 +14949,7 @@ Transform:
   m_GameObject: {fileID: 251259815}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22, y: 19.788282, z: 180.3}
+  m_LocalPosition: {x: -25.99128, y: 10.692968, z: -53.877243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14959,7 +14963,7 @@ Transform:
   - {fileID: 1779959063}
   - {fileID: 1249389655}
   - {fileID: 389568994}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1929246629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &258365772
 GameObject:
@@ -16419,7 +16423,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 20
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -51004,7 +51008,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20.000244, y: -286}
+  m_AnchoredPosition: {x: -20.000275, y: -286.00003}
   m_SizeDelta: {x: -303.5573, y: -190.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &928640841
@@ -85260,7 +85264,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1432925006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4515863344285757497, guid: b350d0ee6adff493c954545853ab9922,
+          type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1432925008
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -105971,6 +105988,7 @@ Transform:
   m_Children:
   - {fileID: 10364066}
   - {fileID: 1281998461}
+  - {fileID: 251259816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1936548375
@@ -110606,7 +110624,6 @@ SceneRoots:
   - {fileID: 588787510}
   - {fileID: 56157658}
   - {fileID: 1173440022}
-  - {fileID: 251259816}
   - {fileID: 1316316171}
   - {fileID: 1286689409}
   - {fileID: 1929246629}
