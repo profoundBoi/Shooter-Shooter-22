@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Prefab/Scenes/Start Manu.unity
+    guid: 659c230b6169ada478706e510de283cd
+  - enabled: 1
+    path: Assets/Prefab/Scenes/Story.unity
+    guid: 4efc6208db3c4a2408dae264ec7b971c
+  - enabled: 1
     path: Assets/Prefab/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
