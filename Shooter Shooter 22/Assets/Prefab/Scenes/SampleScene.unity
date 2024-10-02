@@ -14242,7 +14242,6 @@ GameObject:
   - component: {fileID: 241236786}
   - component: {fileID: 241236785}
   - component: {fileID: 241236790}
-  - component: {fileID: 241236792}
   - component: {fileID: 241236793}
   - component: {fileID: 241236794}
   - component: {fileID: 241236795}
@@ -14444,18 +14443,6 @@ MonoBehaviour:
   Letter3: {fileID: 779346516}
   Speach: {fileID: 288594155}
   speachBubble: {fileID: 928640839}
---- !u!114 &241236792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 241236784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d4fe7ee82146b49b43b406d91ce725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &241236793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14806,7 +14793,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 963e84b97e2116446bcca5ade39526c0,
         type: 3}
       propertyPath: m_Name
-      value: Gun blender
+      value: Gun
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 963e84b97e2116446bcca5ade39526c0,
         type: 3}
@@ -69764,7 +69751,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.4
+      value: 21.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
@@ -69774,27 +69761,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
@@ -69814,7 +69801,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}
       propertyPath: m_Name
-      value: Flash
+      value: Flash Light
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 509b1ce13c6e6a34da860a6d87572784,
         type: 3}

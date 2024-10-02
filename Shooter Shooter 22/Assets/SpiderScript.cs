@@ -17,7 +17,6 @@ public class SpiderScript : MonoBehaviour
         
         float distance = Vector3.Distance (transform.position, Player.transform.position);
 
-        Debug.Log(distance);
         if (distance <= 20)
         {
             Walk.SetBool("Walk", true);
