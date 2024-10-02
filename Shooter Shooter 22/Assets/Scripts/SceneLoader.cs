@@ -7,13 +7,13 @@ public class SceneLoader : MonoBehaviour
 {
     public void StartButtonClicked()
     {
-        SceneManager.LoadSceneAsync("Story Scene");
+        SceneManager.LoadSceneAsync("Story");
         Debug.Log("m mmmmmmmm");
     }
 
     public void NextButtonClicked()
     {
-        SceneManager.LoadSceneAsync("Sample Scene");
+        SceneManager.LoadSceneAsync("SampleScene");
     }
 
 
