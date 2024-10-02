@@ -107,6 +107,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scope"",
+                    ""type"": ""Button"",
+                    ""id"": ""55fdf055-4417-42cd-8c62-94f8a4f266c0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -395,6 +404,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""FlashOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4b81181-e60c-4f47-b08b-a63654e60a38"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scope"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -435,6 +455,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_FlashOn = m_Player.FindAction("FlashOn", throwIfNotFound: true);
+        m_Player_Scope = m_Player.FindAction("Scope", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -505,6 +526,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Reload;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_FlashOn;
+    private readonly InputAction m_Player_Scope;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -518,6 +540,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @FlashOn => m_Wrapper.m_Player_FlashOn;
+        public InputAction @Scope => m_Wrapper.m_Player_Scope;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -554,6 +577,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @FlashOn.started += instance.OnFlashOn;
             @FlashOn.performed += instance.OnFlashOn;
             @FlashOn.canceled += instance.OnFlashOn;
+            @Scope.started += instance.OnScope;
+            @Scope.performed += instance.OnScope;
+            @Scope.canceled += instance.OnScope;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -585,6 +611,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @FlashOn.started -= instance.OnFlashOn;
             @FlashOn.performed -= instance.OnFlashOn;
             @FlashOn.canceled -= instance.OnFlashOn;
+            @Scope.started -= instance.OnScope;
+            @Scope.performed -= instance.OnScope;
+            @Scope.canceled -= instance.OnScope;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -631,5 +660,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFlashOn(InputAction.CallbackContext context);
+        void OnScope(InputAction.CallbackContext context);
     }
 }

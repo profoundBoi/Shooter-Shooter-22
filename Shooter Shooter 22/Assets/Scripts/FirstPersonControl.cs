@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
 
@@ -53,6 +54,10 @@ public class FirstPersonControl : MonoBehaviour
     public Material switchMaterial; // Material to apply when switch is activated
     public GameObject[] objectsToChangeColor; // Array of objects to change color
 
+    [Header("Scope Camera")]
+    public Camera Cam;
+    public bool Scoped = false;
+    public int scopeView;
     public void FlashOnAndOff()
     {
         if (holdingFlash == true && !FlashLight.activeSelf)
@@ -154,6 +159,22 @@ public class FirstPersonControl : MonoBehaviour
 
 
     }
+    public void Scope()
+    {
+        if (holdingGun)
+        {
+            if (!Scoped)
+            {
+                Scoped = true;
+            }
+            else if (Scoped)
+            {
+                Scoped = false;
+            }
+        }
+        else { return; }
+        
+    }
 
     private int KnifeCount = 3;
     public Transform knifeSpawnPoint;
@@ -233,6 +254,9 @@ public class FirstPersonControl : MonoBehaviour
         // Subscribe to the FlashOn input event
         playerInput.Player.FlashOn.performed += ctx => FlashOnAndOff(); // Turn flash on and off
 
+        playerInput.Player.Scope.performed += ctx => Scope(); // Turn flash on and off
+
+
 
     }
     public GameObject[] safeCode;
@@ -260,6 +284,20 @@ public class FirstPersonControl : MonoBehaviour
         Move();
         LookAround();
         ApplyGravity();
+
+        if (Scoped)
+        {
+
+            Cam.fieldOfView = scopeView;
+        }
+        else if (!Scoped)
+        {
+            Cam.fieldOfView = 60;
+        }
+        ;
+        
+
+
 
         if (!holdingFlash)
         {
