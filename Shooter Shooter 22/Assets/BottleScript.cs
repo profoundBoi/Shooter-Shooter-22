@@ -7,12 +7,14 @@ public class BottleScript : MonoBehaviour
 {
   
     public GameObject brokenBottle;
-    
-    
 
-    private void OnCollisionEnter(Collision collision)
+
+
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Syth") || collision.gameObject.CompareTag("Knife") || collision.gameObject.CompareTag("Door"))
+        
+    
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Syth") || collision.gameObject.CompareTag("Knife"))
         {
             
             GameObject BB =   Instantiate (brokenBottle, transform.position, transform.rotation );
@@ -21,5 +23,14 @@ public class BottleScript : MonoBehaviour
             
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("wall") || collision.gameObject.CompareTag("Door"))
+        {
+            GameObject BB = Instantiate(brokenBottle, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }

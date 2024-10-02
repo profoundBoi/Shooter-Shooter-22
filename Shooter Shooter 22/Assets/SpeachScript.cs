@@ -12,10 +12,18 @@ public class SpeachScript : MonoBehaviour
     public GameObject ScaryLongLegs;
     public Transform ScaryLegsPosition;
     public Transform ScaryLegsposition2;
+
+    public List<GameObject> inGameUI;
+    public GameObject Eyes;
     // Start is called before the first frame update
     void Start()
     {
         SpeachBox.SetActive(false);
+        Eyes.SetActive(true);
+        foreach (GameObject t in inGameUI)
+        {
+            t.SetActive(false);
+        }
         StartCoroutine(WakeUp());
     }
 
@@ -23,6 +31,11 @@ public class SpeachScript : MonoBehaviour
     {
         yield return new WaitForSeconds(13);
         SpeachBox.SetActive(true);
+        Destroy(Eyes);
+        foreach (GameObject t in inGameUI)
+        {
+            t.SetActive(true);
+        }
         speachText.text = "What... What Happened";
         yield return new WaitForSeconds(4);
         speachText.text = "Where did everyone go?";

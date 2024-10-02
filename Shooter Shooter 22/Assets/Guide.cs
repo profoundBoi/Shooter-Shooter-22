@@ -54,6 +54,7 @@ public class Guide : MonoBehaviour
                 GameObject Object = hit.collider.gameObject;
                 guideText.text = hit.collider.name + " - Click 'E' To PickUp";
             }
+            
             else { guideText.text = ""; }
         }
         else if (guided) { guideText.text = ""; }
