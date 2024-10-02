@@ -116,6 +116,7 @@ public class SpeachScript : MonoBehaviour
         {
             Rabbit.transform.position = Vector3.MoveTowards(Rabbit.transform.position, Player.transform.position, 100 * Time.deltaTime);
             Rabbit.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+            Destroy(Rabbit, 0.3f);
             StartCoroutine(ScareSounds());
         }
     }
