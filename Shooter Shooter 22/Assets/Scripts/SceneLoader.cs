@@ -8,14 +8,23 @@ public class SceneLoader : MonoBehaviour
     public void StartButtonClicked()
     {
         SceneManager.LoadSceneAsync("Story");
-        Debug.Log("m mmmmmmmm");
+        Debug.Log("Loading Story");
     }
 
-    public void NextButtonClicked()
+    public void Next01ButtonClicked()
+    {
+        SceneManager.LoadSceneAsync("Story2");
+    }
+
+    public void Next02ButtonClicked()
     {
         SceneManager.LoadSceneAsync("SampleScene");
     }
 
+    public void Prev01ButtonClicked()
+    {
+        SceneManager.LoadSceneAsync("Story");
+    }
 
     public void QuitButtonClicked()
     {
