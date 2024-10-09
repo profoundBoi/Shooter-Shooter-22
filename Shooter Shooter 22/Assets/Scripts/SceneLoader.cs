@@ -6,6 +6,24 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public GameObject ControlPanel;
+    public GameObject ControlPanel02;
+    public GameObject PauseButton;
+    public GameObject PausePanel;
+    public GameObject SettingsPanel;
+
+    public void PausedButtonClicked()
+    {
+        PausePanel.SetActive(true);
+        Time.timeScale = 0;
+        PauseButton.SetActive(false);
+    }
+
+    public void PlayButtonClicked()
+    {
+        PausePanel.SetActive(false);
+        Time.timeScale = 1;
+        PauseButton.SetActive(true);
+    }
     public void StartButtonClicked()
     {
         SceneManager.LoadSceneAsync("Story");
