@@ -504,7 +504,7 @@ RectTransform:
   m_GameObject: {fileID: 457961706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.792, y: 1.792, z: 1.792}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 787484914}
@@ -512,8 +512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64.18729, y: 41.92347}
-  m_SizeDelta: {x: 15.37093, y: 12.13081}
+  m_AnchoredPosition: {x: -65.2, y: 38.9}
+  m_SizeDelta: {x: 11.75654, y: 12.13081}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457961708
 MonoBehaviour:
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: b1d88481f9adf27448e7624097ba8f74, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6c03ef6d34592664e8210060dc8e2ed9, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 457961708}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1572,6 +1572,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControlPanel: {fileID: 1217926396}
+  ControlPanel02: {fileID: 0}
+  PauseButton: {fileID: 0}
+  PausePanel: {fileID: 0}
+  SettingsPanel: {fileID: 0}
 --- !u!1 &980677547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1737,7 @@ RectTransform:
   m_GameObject: {fileID: 1217926396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.258327, y: 6.3968863, z: 6.3968863}
+  m_LocalScale: {x: 10.93165, y: 6.8167577, z: 6.8167577}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 457961707}
@@ -1741,8 +1745,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.688798, y: 5}
-  m_SizeDelta: {x: 146.9663, y: 100}
+  m_AnchoredPosition: {x: 15.5579, y: 5}
+  m_SizeDelta: {x: 144.6118, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1217926398
 MonoBehaviour:
@@ -1757,7 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
