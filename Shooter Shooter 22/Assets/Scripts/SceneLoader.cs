@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public GameObject ControlPanel;
     public void StartButtonClicked()
     {
         SceneManager.LoadSceneAsync("Story");
@@ -15,7 +16,6 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("Story2");
     }
-
     public void Next02ButtonClicked()
     {
         SceneManager.LoadSceneAsync("SampleScene");
@@ -24,6 +24,16 @@ public class SceneLoader : MonoBehaviour
     public void Prev01ButtonClicked()
     {
         SceneManager.LoadSceneAsync("Story");
+    }
+
+    public void ControlsButtonClicked()
+    {
+        ControlPanel.SetActive(true);
+    }
+
+    public void ControlsExit01Clicked()
+    {
+        ControlPanel.SetActive(false);
     }
 
     public void QuitButtonClicked()
