@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour
     public void PausedButtonClicked()
     {
         PausePanel.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0; //i am pausing the state at which the game runs
         PauseButton.SetActive(false);
     }
 
