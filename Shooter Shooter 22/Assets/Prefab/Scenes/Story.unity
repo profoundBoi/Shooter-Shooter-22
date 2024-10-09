@@ -149,7 +149,7 @@ RectTransform:
   m_GameObject: {fileID: 89442983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2645409, y: 1.304, z: 1.304}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1970325591}
@@ -172,14 +172,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5622641, g: 0.032887116, b: 0.032887116, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 234af4c8bc13c4a49847f5fc42d6dd89, type: 3}
+  m_Texture: {fileID: 2800000, guid: c3e0313563d639a47a60f4a0a29eb705, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -423,6 +423,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1c985ad0984ee419bb83e33927bcdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlPanel: {fileID: 0}
+  ControlPanel02: {fileID: 0}
+  PauseButton: {fileID: 0}
+  PausePanel: {fileID: 0}
+  SettingsPanel: {fileID: 0}
 --- !u!1 &262508735
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +524,7 @@ RectTransform:
   m_GameObject: {fileID: 1688062528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6363, y: 1.6363, z: 1.6363}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 95794436}
@@ -527,7 +532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 628, y: -29}
+  m_AnchoredPosition: {x: 628, y: -281}
   m_SizeDelta: {x: 160, y: 71.9592}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1688062530
