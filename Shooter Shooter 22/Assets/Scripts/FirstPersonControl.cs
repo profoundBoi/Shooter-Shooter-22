@@ -241,7 +241,6 @@ public class FirstPersonControl : MonoBehaviour
         playerInput.Player.Shoot.performed += ctx => Shoot(); // Call the Shoot method when shoot input is performed
 
 
-        playerInput.Player.Reload.performed += ctx => Reload();
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); //Call the PickUpObject method when pick-up input is performed
 

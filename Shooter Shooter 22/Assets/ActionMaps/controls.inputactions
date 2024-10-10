@@ -60,15 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reload",
-                    "type": "Button",
-                    "id": "84d6527b-2a44-476d-a7cb-ce6341971eda",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "2d7c310d-10ae-43c8-b345-23dec674c31e",
@@ -330,28 +321,6 @@
                 },
                 {
                     "name": "",
-                    "id": "8fab5632-8adf-45fd-9610-b6eaa8c15508",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "08e4ccba-bb5a-43e7-91a8-f5e7d06988af",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2f8195ff-b7ce-4da0-8ed4-580dfa31bea5",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -364,7 +333,7 @@
                 {
                     "name": "",
                     "id": "1d83d8bb-0ce3-4e92-b3f6-8ca78981a9d9",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -385,8 +354,30 @@
                 },
                 {
                     "name": "",
+                    "id": "a5fb6383-98b6-4bde-9c62-fbd565a07f5d",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlashOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e4b81181-e60c-4f47-b08b-a63654e60a38",
                     "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scope",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c920b1af-e247-4b2f-afac-edb7f80d3341",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
