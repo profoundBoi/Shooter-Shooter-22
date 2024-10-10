@@ -49,9 +49,19 @@ public class SceneLoader : MonoBehaviour
         ControlPanel.SetActive(true);
     }
 
+    public void ControlsButton02Clicked()
+    {
+        ControlPanel02.SetActive(true);
+    }
+
     public void ControlsExit01Clicked()
     {
         ControlPanel.SetActive(false);
+    }
+
+    public void ControlsExit02Clicked()
+    {
+        ControlPanel02.SetActive(false);
     }
 
     public void QuitButtonClicked()
