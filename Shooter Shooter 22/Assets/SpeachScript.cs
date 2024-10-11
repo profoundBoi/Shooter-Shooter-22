@@ -15,6 +15,8 @@ public class SpeachScript : MonoBehaviour
 
     public List<GameObject> inGameUI;
     public GameObject Eyes;
+
+    public bool GetGun;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +70,7 @@ public class SpeachScript : MonoBehaviour
             Monster.transform.rotation = ScaryLegsposition2.rotation;
             StartCoroutine(DoorScare());
             Destroy(Monster, 1.5f);
+            GetGun = true;
         }
         if (hit.collider.gameObject.CompareTag("Scare2"))
         {

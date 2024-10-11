@@ -39,8 +39,8 @@ public class FirstPersonControl : MonoBehaviour
     private GameObject heldObject; // Reference to the currently held object
     private GameObject heldObject2;
     public float pickUpRange = 10f; // Range within which objects can be picked up
-    private bool holdingGun = false;
-    private bool holdingSyth = false;   
+    public bool holdingGun = false;
+    public bool holdingSyth = false;   
 
     [Header("CROUCH SETTINGS")]
     [Space(5)]
@@ -241,7 +241,7 @@ public class FirstPersonControl : MonoBehaviour
         playerInput.Player.Shoot.performed += ctx => Shoot(); // Call the Shoot method when shoot input is performed
 
 
-        // Subscribe to the pick-up input event
+        // Subscribe to the pick-up input event 
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); //Call the PickUpObject method when pick-up input is performed
 
         // subscribe to the crouch input event
@@ -441,7 +441,7 @@ public class FirstPersonControl : MonoBehaviour
 
     }
 
-    private bool holdingFlash = false;
+    public bool holdingFlash = false;
     public void Jump()
     {
         if (characterController.isGrounded )
@@ -452,7 +452,7 @@ public class FirstPersonControl : MonoBehaviour
     }
     private int JumpsLeft = 1;
     private int jumpsPerformed = 0;
-    private bool holdingKnife = false;
+    public bool holdingKnife = false;
     public Animator anim;
     public void PickUpObject()
     {
