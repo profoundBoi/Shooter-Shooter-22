@@ -662,7 +662,11 @@ public class FirstPersonControl : MonoBehaviour
                if (hit.collider.CompareTag("Letter"))
                   {
                     StartCoroutine(ReadLetter1());
-                  } 
+                  }
+                if (hit.collider.CompareTag("Letter.3"))
+                {
+                    StartCoroutine(ReadLetter4());
+                }
             }
 
 
@@ -694,6 +698,8 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject Letter1;
     public GameObject Letter2;
     public GameObject Letter3;
+    public GameObject Letter4;
+    
     public TextMeshProUGUI Speach;
     public GameObject speachBubble;
    IEnumerator ReadLetter1()
@@ -708,6 +714,15 @@ public class FirstPersonControl : MonoBehaviour
         yield return new WaitForSeconds(3);
         speachBubble.SetActive(false);
         Speach.text = "";
+    }
+
+    IEnumerator ReadLetter4()
+    {
+        yield return new WaitForSeconds(0);
+        Letter4.SetActive(true);
+        yield return new WaitForSeconds(2);
+        Letter4.SetActive(false);
+       
     }
 }
 

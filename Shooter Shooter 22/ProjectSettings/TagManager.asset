@@ -39,6 +39,8 @@ TagManager:
   - BloodTrail
   - Spider
   - Letter.3
+  - StorageRoom
+  - GameRoom
   layers:
   - Default
   - TransparentFX

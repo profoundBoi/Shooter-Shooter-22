@@ -84,6 +84,21 @@ public class SpeachScript : MonoBehaviour
             Destroy (hit.gameObject);
         }
 
+        if (hit.collider.gameObject.CompareTag("GameRoom"))
+        {
+            Destroy(hit.gameObject);
+            SpeachBox.SetActive(true);
+            StartCoroutine(GameRoomTrigger());
+
+        }
+
+        if (hit.collider.gameObject.CompareTag("StorageRoom"))
+        {
+            Destroy(hit.gameObject);
+            SpeachBox.SetActive(true);
+            StartCoroutine(StorageRoomTrigger());
+        }
+
 
     }
     private bool scare;
@@ -102,6 +117,41 @@ public class SpeachScript : MonoBehaviour
         speachText.text = "Let Me use Dads weapons from the safe";
         yield return new WaitForSeconds(3);
         speachText.text = "Luckily he keeps important things in the Safe";
+        yield return new WaitForSeconds(3);
+        speachText.text = "";
+        SpeachBox.SetActive(false);
+
+
+
+    }
+
+    IEnumerator StorageRoomTrigger()
+    {
+        yield return new WaitForSeconds(0);
+        SpeachBox.SetActive(true);
+        speachText.text = "What happened in here";
+        yield return new WaitForSeconds(2);
+        speachText.text = "All these Boxes scatted around";
+        yield return new WaitForSeconds(3);
+        speachText.text = "Dads going to be mad at me";
+        yield return new WaitForSeconds(3);
+        speachText.text = "Whats that on the table?";
+        yield return new WaitForSeconds(3);
+        speachText.text = "Another one of those weird letters!";
+        yield return new WaitForSeconds(3);
+        speachText.text = "";
+        SpeachBox.SetActive(false);
+
+
+
+    }
+
+    IEnumerator GameRoomTrigger()
+    {
+        SpeachBox.SetActive(true);
+        speachText.text = "Oh no! Why is the storage room open!";
+        yield return new WaitForSeconds(2);
+        speachText.text = "I hope nothing bad happened!";
         yield return new WaitForSeconds(3);
         speachText.text = "";
         SpeachBox.SetActive(false);

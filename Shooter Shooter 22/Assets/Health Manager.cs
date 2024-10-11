@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
@@ -14,6 +15,10 @@ public class HealthManager : MonoBehaviour
     {
         Slider.value = Health;
 
+        if (Health <= 0)
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,4 +28,5 @@ public class HealthManager : MonoBehaviour
             Health -= 0.04f;
         }
     }
+
 }
