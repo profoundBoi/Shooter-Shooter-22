@@ -38,6 +38,7 @@ TagManager:
   - Scare2
   - BloodTrail
   - Spider
+  - Letter.3
   layers:
   - Default
   - TransparentFX
