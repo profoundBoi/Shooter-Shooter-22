@@ -14744,6 +14744,8 @@ MonoBehaviour:
   holdPosition2: {fileID: 730322865}
   sythHoldingPosition: {fileID: 57180861}
   pickUpRange: 6
+  holdingGun: 0
+  holdingSyth: 0
   crouchHeight: 1
   standingHeight: 2
   crouchSpeed: 1.5
@@ -14781,6 +14783,7 @@ MonoBehaviour:
   - {fileID: 397456971}
   Message: {fileID: 288594155}
   holdingFlash: 0
+  holdingKnife: 0
   anim: {fileID: 1444999430}
   GunRotation: {x: 0, y: 0, z: 0}
   Ammo: 1000000
@@ -14836,7 +14839,9 @@ MonoBehaviour:
   - {fileID: 1432925004}
   - {fileID: 121047548}
   - {fileID: 3651462}
+  - {fileID: 1442363558}
   Eyes: {fileID: 1177218156}
+  GetGun: 0
   Rabbit: {fileID: 1281998458}
   Player: {fileID: 241236784}
   ScareSound: {fileID: 8300000, guid: 534f76959aada3f458b48283caed94f6, type: 3}
@@ -33024,78 +33029,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &583593358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 583593359}
-  - component: {fileID: 583593361}
-  - component: {fileID: 583593360}
-  m_Layer: 5
-  m_Name: Check
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &583593359
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583593358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 1442363559}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.9, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &583593360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583593358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2512a31f410d0df44b79e44f56bacee2, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &583593361
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583593358}
-  m_CullTransparentMesh: 1
 --- !u!1 &588787509
 GameObject:
   m_ObjectHideFlags: 0
@@ -51905,7 +51838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20.000275, y: -286}
+  m_AnchoredPosition: {x: -20.000244, y: -286}
   m_SizeDelta: {x: -303.5573, y: -190.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &928640841
@@ -86365,9 +86298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ca5c45a8eeba740af765b3d6d73898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskText: {fileID: 0}
-  Check: {fileID: 0}
-  checkBox: {fileID: 0}
+  firstPersonControlScript: {fileID: 241236790}
+  taskText: {fileID: 1469938175}
+  Check: {fileID: 7068840849946858530, guid: 4c30f3a32425857409abf179687820ee, type: 3}
+  checkBox: {fileID: 1935850471}
+  Tasks: []
+  SpeachScriptTask: {fileID: 241236794}
 --- !u!4 &1393930666
 Transform:
   m_ObjectHideFlags: 0
@@ -87092,7 +87028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1442363559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -87105,8 +87041,8 @@ RectTransform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 583593359}
   - {fileID: 1469938174}
+  - {fileID: 1935850471}
   m_Father: {fileID: 1216089638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -108345,6 +108281,41 @@ Transform:
   - {fileID: 251259816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1935850470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935850471}
+  m_Layer: 5
+  m_Name: CheckBox Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1935850471
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935850470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1442363559}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.6, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1936548375
 GameObject:
   m_ObjectHideFlags: 0
