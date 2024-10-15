@@ -19105,9 +19105,11 @@ MonoBehaviour:
   Cam: {fileID: 330585545}
   Scoped: 0
   scopeView: 20
-  keyPress: {fileID: 8300000, guid: 43238e278b3293546be2e172697c6b42, type: 3}
+  keyPress: {fileID: 8300000, guid: 2f25d2642f3004e45918764d5d40dbee, type: 3}
   gunShot: {fileID: 8300000, guid: f74d6017201a96a48924f27b36b0c4fc, type: 3}
   SFXSRCE: {fileID: 1286689408}
+  Error: {fileID: 8300000, guid: 639ee55b61d69ce40b26037c35846339, type: 3}
+  FlashSound: {fileID: 8300000, guid: ea027134fc8b7404486e88d0caabe1a3, type: 3}
   Stamina: {fileID: 33018746}
   StaminaSpeed: 1
   Bottle: {fileID: 6454087465527252900, guid: 05d46619a5856ce4a97286e978109b8f, type: 3}

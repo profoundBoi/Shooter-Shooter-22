@@ -66,6 +66,10 @@ public class FirstPersonControl : MonoBehaviour
     [SerializeField]
     AudioSource SFXSRCE;
 
+    [Header("Audio")]
+    public AudioClip Error;
+    public AudioClip FlashSound;
+
     [Header("Running")]
     public Slider Stamina;
     public float StaminaSpeed = 1f;
@@ -74,10 +78,15 @@ public class FirstPersonControl : MonoBehaviour
         if (holdingFlash == true && !FlashLight.activeSelf)
         {
             FlashLight.SetActive(true);
+            SFXSRCE.clip = FlashSound;
+            SFXSRCE.Play();
         }
         else if (holdingFlash && FlashLight.activeSelf)
         {
+            SFXSRCE.clip = FlashSound;
             FlashLight.SetActive(false);
+            SFXSRCE.Play();
+
         }
     }
     public void Shoot()
@@ -377,11 +386,7 @@ public class FirstPersonControl : MonoBehaviour
             Drawer3.transform.position = Vector3.MoveTowards(Drawer3.transform.position, Opened3.position, 3 * Time.deltaTime);
         }
 
-            if (characterController.isGrounded)
-        {
-            JumpsLeft = 1;
-            jumpsPerformed = 0;
-        }
+     
 
         foreach (GameObject go in unsafeCode)
         {
@@ -404,6 +409,9 @@ public class FirstPersonControl : MonoBehaviour
                     if (renderer != null)
                     {
                         renderer.material.color = Color.red; // Set the color to match the switch material color
+                        SFXSRCE.clip = Error;
+                        SFXSRCE.Play();
+
                     }
                 }
             }
@@ -511,8 +519,7 @@ public class FirstPersonControl : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
     }
-    private int JumpsLeft = 1;
-    private int jumpsPerformed = 0;
+
     public bool holdingKnife = false;
     public Animator anim;
     public void PickUpObject()
