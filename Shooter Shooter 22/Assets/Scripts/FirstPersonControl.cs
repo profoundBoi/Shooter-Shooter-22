@@ -58,6 +58,12 @@ public class FirstPersonControl : MonoBehaviour
     public Camera Cam;
     public bool Scoped = false;
     public int scopeView;
+
+    [Header("Safe Keys")]
+    public AudioClip keyPress;
+    public AudioClip gunShot;
+    [SerializeField]
+    AudioSource SFXSRCE;
     public void FlashOnAndOff()
     {
         if (holdingFlash == true && !FlashLight.activeSelf)
@@ -85,7 +91,7 @@ public class FirstPersonControl : MonoBehaviour
 
             // Destroy the projectile after 3 seconds
             Destroy(projectile, 3f);
-
+          
 
         }
 
@@ -255,11 +261,29 @@ public class FirstPersonControl : MonoBehaviour
 
         playerInput.Player.Scope.performed += ctx => Scope(); // Turn flash on and off
 
+        playerInput.Player.Sprint.performed += ctx => Sprinted();
+        playerInput.Player.Sprint.canceled += ctx => SprintDone();
+
 
 
     }
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
+
+    public GameObject runningPanel;
+    public void Sprinted()
+    {
+        moveSpeed += 5;
+        runningPanel.SetActive(true);
+    }
+
+    public void SprintDone()
+    {
+        moveSpeed -= 5;
+        runningPanel.SetActive(false);
+
+    }
+
 
     //Check the colour of the material is Green
     bool OpenSafe()
@@ -610,6 +634,9 @@ public class FirstPersonControl : MonoBehaviour
     public int Ammo = 10;
     public GameObject ammoPrefab;
     public GameObject passKey;
+
+    [Header("Emergancy Call")]
+    public HealthManager healthManager;
     public void Interact()
     {
         // Perform a raycast to detect the lightswitch
@@ -617,17 +644,10 @@ public class FirstPersonControl : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
-            if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
+            if (hit.collider.CompareTag("EmergancySwitch")) // Assuming the switch has this tag
             {
-                // Change the material color of the objects in the array
-                foreach (GameObject obj in objectsToChangeColor)
-                {
-                    Renderer renderer = obj.GetComponent<Renderer>();
-                    if (renderer != null)
-                    {
-                        renderer.material.color = switchMaterial.color; // Set the color to match the switch material color
-                    }
-                }
+                healthManager.EmergancyStopped = true;
+               
             }
             else if (hit.collider.CompareTag("Door")) // Check if the object is a door
             {
@@ -637,7 +657,9 @@ public class FirstPersonControl : MonoBehaviour
 
             else if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
             {
-               Renderer Ren = hit.collider.GetComponent<Renderer>();
+                SFXSRCE.clip = keyPress;
+
+                Renderer Ren = hit.collider.GetComponent<Renderer>();
                 if (Ren != null)
                 {
                     Ren.material.color = Color.green;

@@ -41,6 +41,7 @@ TagManager:
   - Letter.3
   - StorageRoom
   - GameRoom
+  - EmergancySwitch
   layers:
   - Default
   - TransparentFX
