@@ -4,6 +4,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 
 public class FirstPersonControl : MonoBehaviour
@@ -64,6 +65,10 @@ public class FirstPersonControl : MonoBehaviour
     public AudioClip gunShot;
     [SerializeField]
     AudioSource SFXSRCE;
+
+    [Header("Running")]
+    public Slider Stamina;
+    public float StaminaSpeed = 1f;
     public void FlashOnAndOff()
     {
         if (holdingFlash == true && !FlashLight.activeSelf)
@@ -79,6 +84,8 @@ public class FirstPersonControl : MonoBehaviour
     {
         if (holdingGun == true && Ammo > 0)
         {
+            SFXSRCE.clip = gunShot;
+            SFXSRCE.Play();  
             Ammo--;
 
             // Instantiate the projectile at the fire point
@@ -270,17 +277,26 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
 
-    public GameObject runningPanel;
+    private bool CanSprint = true;
     public void Sprinted()
     {
-        moveSpeed += 5;
-        runningPanel.SetActive(true);
+        if (CanSprint)
+        {
+            if (StaminaSpeed > 0)
+            {
+                moveSpeed += 5;
+                running = true;
+            }
+
+        }
+        else { return; }
+        
     }
 
     public void SprintDone()
     {
-        moveSpeed -= 5;
-        runningPanel.SetActive(false);
+
+        running = false;
 
     }
 
@@ -301,6 +317,7 @@ public class FirstPersonControl : MonoBehaviour
     }
     [Header("MessageText")]
     public TextMeshProUGUI Message;
+    private bool running;
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
@@ -317,8 +334,28 @@ public class FirstPersonControl : MonoBehaviour
         {
             Cam.fieldOfView = 60;
         }
-        ;
-        
+
+        Stamina.value = StaminaSpeed;
+
+        if (StaminaSpeed > 0)
+        {
+            CanSprint = true;
+        }
+        else { 
+            Sprinted();
+            CanSprint = false;
+            moveSpeed = 10;
+        }
+
+        if (StaminaSpeed < 1 && !running)
+        {
+            StaminaSpeed += 0.002f;
+        }
+        else if (StaminaSpeed >= 0 && running)
+        {
+            StaminaSpeed -= 0.005f;
+        }
+
 
 
 
@@ -658,6 +695,7 @@ public class FirstPersonControl : MonoBehaviour
             else if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
             {
                 SFXSRCE.clip = keyPress;
+                SFXSRCE.Play();
 
                 Renderer Ren = hit.collider.GetComponent<Renderer>();
                 if (Ren != null)
