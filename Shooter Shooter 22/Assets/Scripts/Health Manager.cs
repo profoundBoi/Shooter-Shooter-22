@@ -17,6 +17,9 @@ public class HealthManager : MonoBehaviour
     public GameObject emergancyCallPanel;
     public bool EmergancyStopped;
     private bool Choke;
+    public GameObject Arrow;
+    public GameObject EmergancyButton;
+
     [Header("Scare Audio")]
     public AudioClip Alarm;
     
@@ -46,6 +49,7 @@ public class HealthManager : MonoBehaviour
         if (Choke)
         {
             Health -= 0.00005f;
+            Arrow.SetActive(true);  
 
         }
         else
@@ -56,6 +60,12 @@ public class HealthManager : MonoBehaviour
                 SFXSRCE.clip = null;
                 SFXSRCE.Stop();
             }
+            Arrow.SetActive(false) ;
+        }
+
+       if (Arrow != null)
+        {
+            Arrow.transform.LookAt(EmergancyButton.transform.position);
         }
         
     }
