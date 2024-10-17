@@ -80,6 +80,7 @@ public class HealthManager : MonoBehaviour
         StartCoroutine(CallEmergancy());
         SFXSRCE.clip = Alarm;
         SFXSRCE.Play();
+        SFXSRCE.loop = true;
         yield return new WaitForSeconds(Random.RandomRange(MinTime,MaxTime));
         StartCoroutine(CallEmergancy());
 
