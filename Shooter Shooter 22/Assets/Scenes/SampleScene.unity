@@ -19410,7 +19410,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7340138986347263542, guid: fc48bee604089c642ba41e53ddb80ddf,
     type: 3}
   firePoint: {fileID: 1921750151}
-  projectileSpeed: 200
+  projectileSpeed: 300
   holdPosition: {fileID: 1444999426}
   holdPosition2: {fileID: 730322865}
   sythHoldingPosition: {fileID: 57180861}
@@ -93156,7 +93156,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.484
+  m_Volume: 0.352
   m_Pitch: 1
   Loop: 0
   Mute: 0

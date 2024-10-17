@@ -344,6 +344,11 @@ public class FirstPersonControl : MonoBehaviour
             Cam.fieldOfView = 60;
         }
 
+        if (!holdingGun)
+        {
+            Scoped = false;
+        }
+
         Stamina.value = StaminaSpeed;
 
         if (StaminaSpeed > 0)
