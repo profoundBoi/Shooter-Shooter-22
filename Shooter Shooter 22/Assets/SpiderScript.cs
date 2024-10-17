@@ -53,8 +53,8 @@ public class SpiderScript : MonoBehaviour
             GameObject Syth = GameObject.FindGameObjectWithTag("Syth");
             MeshCollider SC = Syth.GetComponent<MeshCollider>();
 
-            GameObject Knife = GameObject.FindGameObjectWithTag("Knife");
-            MeshCollider KC = Syth.GetComponent<MeshCollider>();
+            GameObject Knife = GameObject.FindGameObjectWithTag("Nothing");
+            BoxCollider KC = Knife.GetComponent<BoxCollider>();
             if (SC.isTrigger)
             {
                 GameObject Bloodtrails = Instantiate(Blood, transform.position, Quaternion.identity);
