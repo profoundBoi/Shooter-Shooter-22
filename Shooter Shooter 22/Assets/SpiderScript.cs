@@ -48,7 +48,7 @@ public class SpiderScript : MonoBehaviour
             Destroy(Bloodtrail, 0.5f);
             
         }
-        else if (other.gameObject.CompareTag("Knife") || other.gameObject.CompareTag("Syth"))
+        else if (other.gameObject.CompareTag("Nothing") || other.gameObject.CompareTag("Syth"))
         {
             GameObject Syth = GameObject.FindGameObjectWithTag("Syth");
             MeshCollider SC = Syth.GetComponent<MeshCollider>();

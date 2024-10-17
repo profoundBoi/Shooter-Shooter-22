@@ -198,7 +198,6 @@ public class FirstPersonControl : MonoBehaviour
         
     }
 
-    private int KnifeCount = 3;
     public Transform knifeSpawnPoint;
     public GameObject knifeProjectile;
     public TextMeshProUGUI ammoText;
@@ -286,14 +285,14 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
 
-    private bool CanSprint = true;
+    public bool CanSprint = true;
     public void Sprinted()
     {
         if (CanSprint)
         {
             if (StaminaSpeed > 0)
             {
-                moveSpeed += 5;
+                moveSpeed = 15;
                 running = true;
             }
 
@@ -306,6 +305,7 @@ public class FirstPersonControl : MonoBehaviour
     {
 
         running = false;
+        moveSpeed = 10;
 
     }
 
@@ -350,11 +350,12 @@ public class FirstPersonControl : MonoBehaviour
         {
             CanSprint = true;
         }
-        else { 
-            Sprinted();
+        else if (StaminaSpeed <= 0)
+        {
             CanSprint = false;
             moveSpeed = 10;
         }
+      
 
         if (StaminaSpeed < 1 && !running)
         {
@@ -371,7 +372,9 @@ public class FirstPersonControl : MonoBehaviour
         if (!holdingFlash)
         {
             FlashLight.SetActive(false);
+            flashUI.SetActive(false);
         }
+        else { flashUI.SetActive(true); }
 
         if (Open1)
         {
@@ -429,24 +432,42 @@ public class FirstPersonControl : MonoBehaviour
         {
             MeshCollider MC = Gun.GetComponent<MeshCollider>();
             MC.isTrigger = false;
+            gunUI.SetActive(false);
         }else
         {
             MeshCollider MC = Gun.GetComponent<MeshCollider>();
             MC.isTrigger= true;
+
+            gunUI.SetActive(true);
         }
 
-        if (holdingKnife && KnifeCount == 0)
+        if (holdingKnife)
         {
-            holdingKnife = false;
-            Destroy(heldObject);
-            KnifeCount = 3; 
+            knifeUI.SetActive(true);
+            Knife.tag = "Nothing";
+            Knife.layer = 0;
+        }
+        else
+        {
+            knifeUI.SetActive(false);
+            Knife.tag = "Knife";
+            Knife.layer = 6;
+
         }
 
-        
+
 
 
 
     }
+
+    [Header("Main UI")]
+    public GameObject gunUI;
+    public GameObject flashUI;
+    public GameObject knifeUI;
+
+
+
     public void Move()
     {
         // Create a movement vector based on the input
@@ -521,6 +542,7 @@ public class FirstPersonControl : MonoBehaviour
     }
 
     public bool holdingKnife = false;
+    public GameObject Knife;
     public Animator anim;
     public void PickUpObject()
     {
