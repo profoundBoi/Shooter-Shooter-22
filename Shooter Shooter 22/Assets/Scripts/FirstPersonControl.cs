@@ -69,6 +69,7 @@ public class FirstPersonControl : MonoBehaviour
     [Header("Audio")]
     public AudioClip Error;
     public AudioClip FlashSound;
+    public AudioClip SafeOpeningSound;
 
     [Header("Running")]
     public Slider Stamina;
@@ -237,6 +238,8 @@ public class FirstPersonControl : MonoBehaviour
 
         passKey.SetActive(false);
         FlashLight.SetActive(false);
+
+        Gun.SetActive(false);
 
     }
     private void OnEnable()
@@ -427,6 +430,8 @@ public class FirstPersonControl : MonoBehaviour
         if (OpenSafe())
         {
             Safe.SetBool("Open", true);
+            Gun.SetActive(true);
+            
         }
         
 
