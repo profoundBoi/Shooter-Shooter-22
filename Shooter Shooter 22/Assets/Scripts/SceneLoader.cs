@@ -10,7 +10,7 @@ public class SceneLoader : MonoBehaviour
     public GameObject PauseButton;
     public GameObject PausePanel;
     public GameObject SettingsPanel;
-
+    public GameObject LoadingPage;
     public void PausedButtonClicked()
     {
         PausePanel.SetActive(true);
@@ -37,6 +37,7 @@ public class SceneLoader : MonoBehaviour
     public void Next02ButtonClicked()
     {
         SceneManager.LoadSceneAsync("SampleScene");
+        LoadingPage.SetActive(true);
     }
 
     public void Prev01ButtonClicked()
