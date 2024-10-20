@@ -743,6 +743,22 @@ public class FirstPersonControl : MonoBehaviour
 
                 }
             }
+
+
+            else if (hit.collider.CompareTag("BDOOR"))
+            {
+                bool OpenedBDoor = BDOORS.GetBool("OpenBD");
+
+                if (OpenedBDoor)
+                {
+                BDOORS.SetBool("OpenBD", false);
+
+                }
+                else { BDOORS.SetBool("OpenBD", true); }
+            }
+
+
+
             else if (hit.collider.CompareTag("Handle"))
             {
                 Open1 = true;
@@ -823,5 +839,7 @@ public class FirstPersonControl : MonoBehaviour
         Letter4.SetActive(false);
        
     }
+    [Header ("Bathroom Animation")]
+    public Animator BDOORS;
 }
 

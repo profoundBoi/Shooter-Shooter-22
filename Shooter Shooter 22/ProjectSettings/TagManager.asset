@@ -43,6 +43,7 @@ TagManager:
   - GameRoom
   - EmergancySwitch
   - Nothing
+  - BDOOR
   layers:
   - Default
   - TransparentFX
