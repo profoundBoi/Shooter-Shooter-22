@@ -36,7 +36,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void Next02ButtonClicked()
     {
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("Laoding");
         LoadingPage.SetActive(true);
     }
 
