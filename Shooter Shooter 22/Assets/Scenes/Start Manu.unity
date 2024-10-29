@@ -1170,8 +1170,8 @@ RectTransform:
   m_GameObject: {fileID: 958858347}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8556, y: 1.8556, z: 1.8556}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9500001, y: 0.9500001, z: 0.9500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1327355721}
   m_Father: {fileID: 516803757}
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 85751cfc880343442be2c32c680ae8e0, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0a0e19da92912bf4dbff6bb74952fdef, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1361,13 +1361,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960093124}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -45.3, y: 4.8, z: 16}
+  m_LocalRotation: {x: 0.026247283, y: 0.88693243, z: -0.05079022, w: 0.45834738}
+  m_LocalPosition: {x: -52.77, y: 14.57, z: 33.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.555, y: 125.342, z: 0}
 --- !u!95 &960093128
 Animator:
   serializedVersion: 5
@@ -1464,6 +1464,7 @@ MonoBehaviour:
   PauseButton: {fileID: 0}
   PausePanel: {fileID: 0}
   SettingsPanel: {fileID: 0}
+  LoadingPage: {fileID: 0}
 --- !u!1 &980677547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,17 +1522,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: EXIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35915717aedb8144cbac34282bc1bd3d, type: 2}
+  m_sharedMaterial: {fileID: 420400272832244219, guid: 35915717aedb8144cbac34282bc1bd3d,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4286479998
+  m_fontColor: {r: 0.4943396, g: 0.4943396, b: 0.4943396, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1554,7 +1556,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1700,17 +1702,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35915717aedb8144cbac34282bc1bd3d, type: 2}
+  m_sharedMaterial: {fileID: 420400272832244219, guid: 35915717aedb8144cbac34282bc1bd3d,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4286479998
+  m_fontColor: {r: 0.4943396, g: 0.4943396, b: 0.4943396, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1733,7 +1736,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2038,17 +2041,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: CONTROLLS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35915717aedb8144cbac34282bc1bd3d, type: 2}
+  m_sharedMaterial: {fileID: 420400272832244219, guid: 35915717aedb8144cbac34282bc1bd3d,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4286479998
+  m_fontColor: {r: 0.4943396, g: 0.4943396, b: 0.4943396, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2071,7 +2075,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2149,8 +2153,8 @@ RectTransform:
   m_GameObject: {fileID: 1690549666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9759, y: 1.9759, z: 1.9759}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9500001, y: 0.9500001, z: 0.9500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 980677548}
   m_Father: {fileID: 516803757}
@@ -2180,7 +2184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 76c6e8b9709aa4248aec1574585778aa, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0a0e19da92912bf4dbff6bb74952fdef, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2422,8 +2426,8 @@ RectTransform:
   m_GameObject: {fileID: 2085078920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9759, y: 1.9759, z: 1.9759}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9500001, y: 0.9500001, z: 0.9500001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1634903242}
   m_Father: {fileID: 516803757}
@@ -2453,7 +2457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: d304b2c3438785842bde12c4558e3e7f, type: 3}
+  m_Texture: {fileID: 2800000, guid: 0a0e19da92912bf4dbff6bb74952fdef, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
