@@ -79,6 +79,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3276099519805357533}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e3fa38282f357741ae29ed25faebf2b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4649083799645766455}
     - targetCorrespondingSourceObject: {fileID: -3661985432938654458, guid: 8e3fa38282f357741ae29ed25faebf2b,
         type: 3}
       insertIndex: -1
@@ -437,3 +441,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Walk: {fileID: 4210214467280348272}
+  HPs: 4
+  eyeCollectable: {fileID: 0}
+  Blood: {fileID: 0}
+--- !u!65 &4649083799645766455
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624421239356874560}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.63, y: 1.6, z: 1.66}
+  m_Center: {x: 0, y: 0, z: 0}
