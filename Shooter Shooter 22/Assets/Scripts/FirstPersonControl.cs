@@ -713,6 +713,9 @@ public class FirstPersonControl : MonoBehaviour
 
     [Header("Emergancy Call")]
     public HealthManager healthManager;
+
+    [Header("Helper UI")]
+    public GameObject helperUI;
     public void Interact()
     {
         // Perform a raycast to detect the lightswitch
@@ -725,10 +728,11 @@ public class FirstPersonControl : MonoBehaviour
                 healthManager.EmergancyStopped = true;
                
             }
-            else if (hit.collider.CompareTag("Door")) // Check if the object is a door
+            else if (hit.collider.CompareTag("Helper")) // Check if the object is a door
             {
-                // Start moving the door upwards
-                StartCoroutine(RaiseDoor(hit.collider.gameObject));
+                helperUI.SetActive(true);
+                Time.timeScale = 0;
+                
             }
 
             else if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
@@ -794,20 +798,7 @@ public class FirstPersonControl : MonoBehaviour
     
     public Animator Safe;
     public Transform Hinge;
-    private IEnumerator RaiseDoor(GameObject door)
-    {
-        float raiseAmount = 5f; // The total distance the door will be raised
-        float raiseSpeed = 2f; // The speed at which the door will be raised
-        Vector3 startPosition = door.transform.position; // Store the initial position of the door
-        Vector3 endPosition = startPosition + Vector3.up * raiseAmount; // Calculate the final position of the door after raising
-        // Continue raising the door until it reaches the target height
-        while (door.transform.position.y < endPosition.y)
-        {
-            // Move the door towards the target position at the specified speed
-            door.transform.position = Vector3.MoveTowards(door.transform.position, endPosition, raiseSpeed * Time.deltaTime);
-            yield return null; // Wait until the next frame before continuing the loop
-}
-    }
+    
 
     [Header("Letters")]
     public GameObject Letter1;
@@ -841,5 +832,10 @@ public class FirstPersonControl : MonoBehaviour
     }
     [Header ("Bathroom Animation")]
     public Animator BDOORS;
+
+    public void CloseHelperPanel()
+    {
+        helperUI.SetActive(false);
+    }
 }
 
