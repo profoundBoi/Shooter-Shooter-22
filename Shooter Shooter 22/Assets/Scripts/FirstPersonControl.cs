@@ -836,6 +836,7 @@ public class FirstPersonControl : MonoBehaviour
     public void CloseHelperPanel()
     {
         helperUI.SetActive(false);
+        Time.timeScale = 1.0f;
     }
 }
 
