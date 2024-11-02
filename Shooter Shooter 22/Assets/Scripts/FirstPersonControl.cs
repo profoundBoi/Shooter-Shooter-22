@@ -212,16 +212,7 @@ public class FirstPersonControl : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.collider.gameObject.CompareTag ("Ammo")) 
-        { 
-            Destroy(hit.gameObject);
-            CanReload = true;
-        }
-
-        
-    }
+   
     private GameObject Gun;
     private void Awake()
     {
@@ -467,7 +458,20 @@ public class FirstPersonControl : MonoBehaviour
 
 
 
+        if (Eyed)
+        {
+            Eye.SetActive(true);
+        }
 
+        if (Armed)
+        {
+            Arm.SetActive(true);
+        }
+
+        if (Fanged)
+        {
+            Fang.SetActive(true);
+        }
 
     }
 
@@ -726,14 +730,30 @@ public class FirstPersonControl : MonoBehaviour
             if (hit.collider.CompareTag("EmergancySwitch")) // Assuming the switch has this tag
             {
                 healthManager.EmergancyStopped = true;
-               
+
             }
             else if (hit.collider.CompareTag("Helper")) // Check if the object is a door
             {
                 helperUI.SetActive(true);
                 Time.timeScale = 0;
-                
+
             }
+
+            else if (hit.collider.CompareTag("DoorK") && haveArm)
+            {
+                Armed = true;
+            }
+            else if (hit.collider.CompareTag("DoorK") && haveEye)
+            {
+                Eyed = true;
+            }
+            else if (hit.collider.CompareTag("DoorK") && haveFang)
+            {
+                Fanged = true;
+            }
+
+
+                
 
             else if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
             {
@@ -755,11 +775,14 @@ public class FirstPersonControl : MonoBehaviour
 
                 if (OpenedBDoor)
                 {
-                BDOORS.SetBool("OpenBD", false);
+                    BDOORS.SetBool("OpenBD", false);
 
                 }
                 else { BDOORS.SetBool("OpenBD", true); }
             }
+
+            
+
 
 
 
@@ -773,15 +796,15 @@ public class FirstPersonControl : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Handle3"))
             {
-               Open3 = true;
+                Open3 = true;
             }
 
-       else if (Physics.Raycast(ray, out hit, 3))
+            else if (Physics.Raycast(ray, out hit, 3))
             {
-               if (hit.collider.CompareTag("Letter"))
-                  {
+                if (hit.collider.CompareTag("Letter"))
+                {
                     StartCoroutine(ReadLetter1());
-                  }
+                }
                 if (hit.collider.CompareTag("Letter.3"))
                 {
                     StartCoroutine(ReadLetter4());
@@ -837,6 +860,41 @@ public class FirstPersonControl : MonoBehaviour
     {
         helperUI.SetActive(false);
         Time.timeScale = 1.0f;
+    }
+
+    [Header("Door Knoble Suff")]
+    public GameObject Eye, Arm, Fang;
+    [SerializeField]
+    private bool Eyed, Armed, Fanged;
+
+    [SerializeField]
+    private bool haveFang, haveEye, haveArm;
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.gameObject.CompareTag("Ammo"))
+        {
+            Destroy(hit.gameObject);
+            CanReload = true;
+        }
+
+        else if (hit.collider.gameObject.CompareTag("BunnyArm"))
+        {
+            haveArm = true;
+            Destroy(hit.gameObject);
+        }
+        else if (hit.collider.gameObject.CompareTag("Eye"))
+        {
+            haveEye = true;
+            Destroy(hit.gameObject);
+
+        }
+        else if (hit.collider.gameObject.CompareTag("Fang"))
+        {
+            haveFang = true;
+            Destroy(hit.gameObject);
+
+        }
     }
 }
 

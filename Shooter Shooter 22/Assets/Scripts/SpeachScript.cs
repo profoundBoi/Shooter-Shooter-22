@@ -165,7 +165,7 @@ public class SpeachScript : MonoBehaviour
     AudioSource SFXSRCE;
     private void Update()
     {
-        if (scare)
+        if (scare && Rabbit != null)
         {
             Rabbit.transform.position = Vector3.MoveTowards(Rabbit.transform.position, Player.transform.position, 100 * Time.deltaTime);
             Rabbit.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);

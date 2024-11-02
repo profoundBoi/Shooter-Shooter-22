@@ -46,6 +46,10 @@ TagManager:
   - BDOOR
   - Eye
   - Helper
+  - DoorKnoble
+  - BunnyArm
+  - Fang
+  - DoorK
   layers:
   - Default
   - TransparentFX
