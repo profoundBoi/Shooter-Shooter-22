@@ -473,6 +473,7 @@ public class FirstPersonControl : MonoBehaviour
             Fang.SetActive(true);
         }
 
+        
     }
 
     [Header("Main UI")]
@@ -742,14 +743,17 @@ public class FirstPersonControl : MonoBehaviour
             else if (hit.collider.CompareTag("DoorK") && haveArm)
             {
                 Armed = true;
+                Armed = false;
             }
             else if (hit.collider.CompareTag("DoorK") && haveEye)
             {
                 Eyed = true;
+                haveEye = false;
             }
             else if (hit.collider.CompareTag("DoorK") && haveFang)
             {
                 Fanged = true;
+                haveFang = false;
             }
 
 
@@ -870,29 +874,36 @@ public class FirstPersonControl : MonoBehaviour
     [SerializeField]
     private bool haveFang, haveEye, haveArm;
 
+    public GameObject fangUI, eyeUI, armUI;
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.gameObject.CompareTag("Ammo"))
         {
             Destroy(hit.gameObject);
             CanReload = true;
+
         }
 
         else if (hit.collider.gameObject.CompareTag("BunnyArm"))
         {
             haveArm = true;
             Destroy(hit.gameObject);
+            armUI.SetActive(true);
         }
         else if (hit.collider.gameObject.CompareTag("Eye"))
         {
             haveEye = true;
             Destroy(hit.gameObject);
+            eyeUI.SetActive(true);
+
 
         }
         else if (hit.collider.gameObject.CompareTag("Fang"))
         {
             haveFang = true;
             Destroy(hit.gameObject);
+            fangUI.SetActive(true);
 
         }
     }
