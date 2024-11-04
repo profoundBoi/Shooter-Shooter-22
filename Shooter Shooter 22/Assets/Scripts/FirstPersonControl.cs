@@ -128,21 +128,41 @@ public class FirstPersonControl : MonoBehaviour
 
         if (holdingBottle)
         {
-            
+
             GameObject Bottles = Instantiate(Bottle, holdPosition.position, Quaternion.identity);
             Bottles.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
             Rigidbody bt = Bottles.GetComponent<Rigidbody>();
             bt.velocity = bottlShootP.forward * 10;
-            
+
             foreach (Transform child in Bottles.transform)
             {
                 Rigidbody Gp = child.GetComponent<Rigidbody>();
                 Gp.velocity = bottlShootP.forward * projectileSpeed;
             }
-           holdingBottle = false;
+            holdingBottle = false;
             Destroy(heldObject);
 
+        }
+        else
+        {
+            Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, pickUpRange))
+            {
+            if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
+                {
+                    SFXSRCE.clip = keyPress;
+                    SFXSRCE.Play();
+
+                    Renderer Ren = hit.collider.GetComponent<Renderer>();
+                    if (Ren != null)
+                    {
+                        Ren.material.color = Color.green;
+
+                    }
+                }
+            }
         }
 
 
@@ -759,18 +779,7 @@ public class FirstPersonControl : MonoBehaviour
 
                 
 
-            else if (hit.collider.CompareTag("Key") || hit.collider.CompareTag("NoKey"))
-            {
-                SFXSRCE.clip = keyPress;
-                SFXSRCE.Play();
-
-                Renderer Ren = hit.collider.GetComponent<Renderer>();
-                if (Ren != null)
-                {
-                    Ren.material.color = Color.green;
-
-                }
-            }
+            
 
 
             else if (hit.collider.CompareTag("BDOOR"))

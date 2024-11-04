@@ -22,6 +22,7 @@ public class SpiderScript : MonoBehaviour
 
         if (distance <= 20 && distance > 0.5f)
         {
+
             Walk.SetBool("Walk", true);
             transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 9 * Time.deltaTime);
             Vector3 direction = Player.transform.position - transform.position;
