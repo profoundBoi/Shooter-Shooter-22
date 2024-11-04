@@ -29,7 +29,7 @@ public class BottleScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("wall") || collision.gameObject.CompareTag("Door"))
         {
-            GameObject BB = Instantiate(brokenBottle, transform.position, transform.rotation);
+            GameObject BB = Instantiate(brokenBottle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

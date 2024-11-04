@@ -20,7 +20,7 @@ public class SpiderScript : MonoBehaviour
         
         float distance = Vector3.Distance (transform.position, Player.transform.position);
 
-        if (distance <= 20)
+        if (distance <= 20 && distance > 0.5f)
         {
             Walk.SetBool("Walk", true);
             transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 9 * Time.deltaTime);
@@ -67,12 +67,11 @@ public class SpiderScript : MonoBehaviour
             GameObject Syth = GameObject.FindGameObjectWithTag("Syth");
             MeshCollider SC = Syth.GetComponent<MeshCollider>();
 
-            GameObject Knife = GameObject.FindGameObjectWithTag("Nothing");
-            BoxCollider KC = Knife.GetComponent<BoxCollider>();
+           
             if (SC.isTrigger)
             {
-                HPs--;
-                if (HPs == 0)
+                HPs -= 4;
+                if (HPs <= 0)
                 {
                     GameObject Bloodtrail = Instantiate(Blood, transform.position, Quaternion.identity);
                     Destroy(gameObject);
@@ -84,22 +83,7 @@ public class SpiderScript : MonoBehaviour
                     }
                 }
             }
-            else if (KC.isTrigger)
-            {
-                HPs--;
-
-                if (HPs == 0)
-                {
-                    GameObject Bloodtrail = Instantiate(Blood, transform.position, Quaternion.identity);
-                    Destroy(gameObject);
-                    Destroy(Bloodtrail, 0.5f);
-                    int Eye = Random.Range(0, 10);
-                    if (Eye == 7)
-                    {
-                        Instantiate(eyeCollectable, transform.position, Quaternion.identity);
-                    }
-                }
-            }
+            
             else { return; }
 
 

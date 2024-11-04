@@ -21648,6 +21648,8 @@ MonoBehaviour:
   Player: {fileID: 241236784}
   anim: {fileID: 211986744}
   Chase: 15
+  HP: 10
+  Arm: {fileID: 9023685074321285700, guid: 6bffa0db20ad3074aa6278b5fefa691a, type: 3}
 --- !u!54 &211986747
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21673,7 +21675,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &211986750
 CapsuleCollider:
@@ -43435,7 +43437,8 @@ PrefabInstance:
       value: pool chair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8391222552659086748, guid: a761e994c0ec19d4c98f719d0c302065, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a761e994c0ec19d4c98f719d0c302065,
@@ -58173,6 +58176,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a761e994c0ec19d4c98f719d0c302065,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1461304994638716399, guid: a761e994c0ec19d4c98f719d0c302065,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -58184,7 +58192,8 @@ PrefabInstance:
       value: pool chair (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8391222552659086748, guid: a761e994c0ec19d4c98f719d0c302065, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a761e994c0ec19d4c98f719d0c302065,
@@ -58921,7 +58930,7 @@ Transform:
   m_GameObject: {fileID: 670702131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.14, y: 2.06, z: -20.13}
+  m_LocalPosition: {x: 0.14, y: 2.06, z: -20.044}
   m_LocalScale: {x: 0.1, y: 33.790623, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -88785,34 +88794,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1027599445}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1028191153 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: f734f36bb59fda3479e3be8e96ba4a1e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1653308874}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1028191157
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028191153}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4493585093827132993, guid: f734f36bb59fda3479e3be8e96ba4a1e, type: 3}
 --- !u!1 &1031379232
 GameObject:
   m_ObjectHideFlags: 0
@@ -114656,7 +114637,8 @@ PrefabInstance:
       value: pool chair (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8391222552659086748, guid: a761e994c0ec19d4c98f719d0c302065, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a761e994c0ec19d4c98f719d0c302065,
@@ -129292,7 +129274,6 @@ GameObject:
   - component: {fileID: 1354785683}
   - component: {fileID: 1354785686}
   - component: {fileID: 1354785685}
-  - component: {fileID: 1354785684}
   m_Layer: 7
   m_Name: Hint
   m_TagString: Untagged
@@ -129318,28 +129299,6 @@ Transform:
   - {fileID: 276670648}
   m_Father: {fileID: 723467499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!64 &1354785684
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354785682}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1354785685
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -161272,7 +161231,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f734f36bb59fda3479e3be8e96ba4a1e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 199.54
+      value: 206.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f734f36bb59fda3479e3be8e96ba4a1e,
         type: 3}
@@ -161308,6 +161267,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: f734f36bb59fda3479e3be8e96ba4a1e,
+        type: 3}
+      propertyPath: m_Name
+      value: Syth
       objectReference: {fileID: 0}
     - target: {fileID: -8391222552659086748, guid: f734f36bb59fda3479e3be8e96ba4a1e,
         type: 3}
@@ -161347,15 +161311,16 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f734f36bb59fda3479e3be8e96ba4a1e,
         type: 3}
       propertyPath: m_Name
-      value: Reatile Davhana 2742157 Game Design syth
+      value: Syth container
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f734f36bb59fda3479e3be8e96ba4a1e,
         type: 3}
       propertyPath: m_TagString
-      value: Knife
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -516098083770646512, guid: f734f36bb59fda3479e3be8e96ba4a1e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: f734f36bb59fda3479e3be8e96ba4a1e,
@@ -161366,10 +161331,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1108861385}
-    - targetCorrespondingSourceObject: {fileID: -516098083770646512, guid: f734f36bb59fda3479e3be8e96ba4a1e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1028191157}
   m_SourcePrefab: {fileID: 100100000, guid: f734f36bb59fda3479e3be8e96ba4a1e, type: 3}
 --- !u!1 &1655035477
 GameObject:
@@ -163425,7 +163386,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 895244b8fe98a7440af8c046dcfd1ec3,
         type: 3}
       propertyPath: m_Name
-      value: knife 1
+      value: knife
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 895244b8fe98a7440af8c046dcfd1ec3,
         type: 3}
@@ -163435,7 +163396,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 895244b8fe98a7440af8c046dcfd1ec3,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Nothing
       objectReference: {fileID: 0}
     - target: {fileID: 8084854973141751649, guid: 895244b8fe98a7440af8c046dcfd1ec3,
         type: 3}
@@ -184895,7 +184856,6 @@ GameObject:
   - component: {fileID: 2060914128}
   - component: {fileID: 2060914131}
   - component: {fileID: 2060914130}
-  - component: {fileID: 2060914129}
   m_Layer: 7
   m_Name: Tape
   m_TagString: Untagged
@@ -184918,28 +184878,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1354785683}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &2060914129
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060914127}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2060914130
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -186400,7 +186338,8 @@ PrefabInstance:
       value: pool chair (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -8391222552659086748, guid: a761e994c0ec19d4c98f719d0c302065, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a761e994c0ec19d4c98f719d0c302065,
@@ -189232,7 +189171,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7627787428607536563, guid: 6bffa0db20ad3074aa6278b5fefa691a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
