@@ -50,6 +50,9 @@ TagManager:
   - BunnyArm
   - Fang
   - DoorK
+  - Iron
+  - BakeButton
+  - KeyHole
   layers:
   - Default
   - TransparentFX

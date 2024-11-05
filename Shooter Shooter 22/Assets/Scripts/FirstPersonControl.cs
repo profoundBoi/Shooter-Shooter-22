@@ -92,7 +92,7 @@ public class FirstPersonControl : MonoBehaviour
     }
     public void Shoot()
     {
-        if (holdingGun == true && Ammo > 0)
+        if (holdingGun == true && Ammo > 0 && Weapons[0].tag == "Gun")
         {
             SFXSRCE.clip = gunShot;
             SFXSRCE.Play();  
@@ -232,10 +232,19 @@ public class FirstPersonControl : MonoBehaviour
         }
     }
 
+    IEnumerator Cantmove()
+    {
+        yield return new WaitForSeconds(13);
+        canLook = true;
+    }
    
     private GameObject Gun;
     private void Awake()
     {
+
+        StartCoroutine(Cantmove());
+
+        Cursor.visible = false;
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
         //gunAim.SetActive(false);
@@ -290,6 +299,9 @@ public class FirstPersonControl : MonoBehaviour
 
         playerInput.Player.Scope.performed += ctx => Scope(); // Turn flash on and off
 
+        playerInput.Player.WeaponSwap.performed += ctx => WeaponSwap(); // Turn flash on and off
+
+
         playerInput.Player.Sprint.performed += ctx => Sprinted();
         playerInput.Player.Sprint.canceled += ctx => SprintDone();
 
@@ -315,11 +327,17 @@ public class FirstPersonControl : MonoBehaviour
         
     }
 
+    public void WeaponSwap()
+    {
+        Weapons.Reverse();
+    }
+
     public void SprintDone()
     {
 
         running = false;
         moveSpeed = 10;
+
 
     }
 
@@ -341,12 +359,19 @@ public class FirstPersonControl : MonoBehaviour
     [Header("MessageText")]
     public TextMeshProUGUI Message;
     private bool running;
+
+    public bool canLook = false;
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
         Move();
-        LookAround();
         ApplyGravity();
+
+        if (canLook)
+        {
+            LookAround();
+
+        }
 
         if (Scoped)
         {
@@ -493,7 +518,15 @@ public class FirstPersonControl : MonoBehaviour
             Fang.SetActive(true);
         }
 
-        
+        if (Weapons != null)
+        {
+
+            heldObject = Weapons[0];
+            Weapons[0].SetActive(true);
+            Weapons[1].SetActive(false);
+
+        }
+
     }
 
     [Header("Main UI")]
@@ -579,21 +612,19 @@ public class FirstPersonControl : MonoBehaviour
     public bool holdingKnife = false;
     public GameObject Knife;
     public Animator anim;
+
+    [Header("Swap Weapon")]
+    public List <GameObject> Weapons;
+
+
     public void PickUpObject()
     {
         // Check if we are already holding an object
-        if (heldObject != null)
+        /*if (heldObject != null)
         {
             heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
             heldObject.transform.parent = null;
             holdingGun = false;
-        }
-
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingKnife = false;
         }
 
         if (heldObject != null)
@@ -608,7 +639,7 @@ public class FirstPersonControl : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
             heldObject.transform.parent = null;
             holdingSyth = false;
-        }
+        }*/
 
        
 
@@ -622,52 +653,38 @@ public class FirstPersonControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
+           
             // Check if the hit object has the tag "PickUp"
-            if (hit.collider.CompareTag("Knife"))
+            if (hit.collider.CompareTag("Syth"))
             {
 
-               
+
                 // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+                GameObject HeldSyth = hit.collider.gameObject;
+                Weapons.Add( HeldSyth);
+                HeldSyth.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
 
                 // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.rotation = holdPosition.rotation;
-                heldObject.transform.parent = holdPosition;
-                holdingKnife = true;
-                
-            }
-
-            // Check if the hit object has the tag "PickUp"
-            else if (hit.collider.CompareTag("Syth"))
-            {
-
-               
-                // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
-
-
-                // Attach the object to the hold position
-                heldObject.transform.position = sythHoldingPosition.position;
-                heldObject.transform.rotation = sythHoldingPosition.rotation;
-                heldObject.transform.parent = sythHoldingPosition;
+                HeldSyth.transform.position = sythHoldingPosition.position;
+                HeldSyth.transform.rotation = sythHoldingPosition.rotation;
+                HeldSyth.transform.parent = sythHoldingPosition;
                 holdingSyth = true;
+
          
             }
             else if (hit.collider.CompareTag("Gun"))
             {
-                
+
                 // Pick up the object
-                heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
+                GameObject HeldGun = hit.collider.gameObject;
+                Weapons.Add( HeldGun);
+                HeldGun.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
                 // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
-                heldObject.transform.parent = holdPosition;
+                HeldGun.transform.position = holdPosition.position;
+                HeldGun.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
+                HeldGun.transform.parent = holdPosition;
                 holdingGun = true;
     
             }
@@ -703,11 +720,7 @@ public class FirstPersonControl : MonoBehaviour
            
 
             }
-            else if (hit.collider.CompareTag("PassKey"))
-            {
-                StartCoroutine(PassKey());
-
-            }
+            
 
 
         }
@@ -721,13 +734,6 @@ public class FirstPersonControl : MonoBehaviour
         ammoText.text = "";
     }
 
-    IEnumerator PassKey()
-    {
-        yield return new WaitForSeconds (0);
-        passKey.SetActive (true);
-        yield return new WaitForSeconds (3);
-        passKey.SetActive(false);
-    }
 
     public Vector3 GunRotation;
     private bool holdingBottle = false;
