@@ -14,6 +14,7 @@ public class DollScript : MonoBehaviour
     [SerializeField]
     private int HP = 10;
     public GameObject Arm;
+    public GameObject Ammo;
 
 
     void Update()
@@ -25,12 +26,14 @@ public class DollScript : MonoBehaviour
             StartCoroutine(SwapAnimations());
 
         }
-        if (Chased)
+        if (Chased )
         {
             transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 9 * Time.deltaTime);
             Vector3 direction = Player.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, angle + 90, 0);
+
+            StartCoroutine(ShootAtPlayer());
         }
 
         if (HP <= 0)
@@ -38,6 +41,8 @@ public class DollScript : MonoBehaviour
             Instantiate(Arm, transform.position, Quaternion.identity);
             Destroy (gameObject);
         }
+
+        
     }
 
     IEnumerator SwapAnimations()
@@ -60,6 +65,12 @@ public class DollScript : MonoBehaviour
         }
     }
 
+    IEnumerator ShootAtPlayer()
+    {
+        yield return new WaitForSeconds(1);
+        GameObject Flame = Instantiate(Ammo, transform.position, Quaternion.identity);
 
+        
+    }
 
 }
