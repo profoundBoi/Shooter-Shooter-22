@@ -763,6 +763,8 @@ public class FirstPersonControl : MonoBehaviour
             {
                 helperUI.SetActive(true);
                 Time.timeScale = 0;
+                canLook = false;
+                Cursor.visible = true;
 
             }
 
@@ -854,6 +856,7 @@ public class FirstPersonControl : MonoBehaviour
     {
         yield return new WaitForSeconds(0);
         Letter1.SetActive(true);
+        canLook = false;
         yield return new WaitForSeconds(10);
         Letter1.SetActive(false);
         yield return new WaitForSeconds(0);
@@ -862,6 +865,7 @@ public class FirstPersonControl : MonoBehaviour
         yield return new WaitForSeconds(3);
         speachBubble.SetActive(false);
         Speach.text = "";
+        canLook = true;
     }
 
     IEnumerator ReadLetter4()
@@ -879,6 +883,9 @@ public class FirstPersonControl : MonoBehaviour
     {
         helperUI.SetActive(false);
         Time.timeScale = 1.0f;
+        canLook = true;
+        Cursor.visible = false;
+
     }
 
     [Header("Door Knoble Suff")]

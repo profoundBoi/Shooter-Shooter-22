@@ -23913,6 +23913,7 @@ MonoBehaviour:
   - {fileID: 2111800847}
   CanSprint: 1
   Message: {fileID: 288594155}
+  canLook: 0
   gunUI: {fileID: 1085414831}
   flashUI: {fileID: 580011561}
   knifeUI: {fileID: 753932341}
@@ -24001,6 +24002,7 @@ MonoBehaviour:
   - {fileID: 3651462}
   - {fileID: 1442363558}
   - {fileID: 33018744}
+  - {fileID: 782578375}
   Eyes: {fileID: 1177218156}
   GetGun: 0
   Rabbit: {fileID: 1281998458}
@@ -86893,7 +86895,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20.000214, y: -285.9999}
+  m_AnchoredPosition: {x: -20.000244, y: -285.9999}
   m_SizeDelta: {x: -303.5573, y: -190.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &928640842
