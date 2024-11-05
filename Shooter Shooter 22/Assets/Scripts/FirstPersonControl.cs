@@ -763,7 +763,7 @@ public class FirstPersonControl : MonoBehaviour
             else if (hit.collider.CompareTag("DoorK") && haveArm)
             {
                 Armed = true;
-                Armed = false;
+                haveArm = false;
             }
             else if (hit.collider.CompareTag("DoorK") && haveEye)
             {
