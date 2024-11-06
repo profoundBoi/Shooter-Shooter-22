@@ -369,7 +369,7 @@ public class FirstPersonControl : MonoBehaviour
         Move();
         ApplyGravity();
   
-        if (Timer == 0 && Baking)
+        if (Timer == 0 && Baking && !haveKey)
         {
             Key.SetActive(true);
         }
