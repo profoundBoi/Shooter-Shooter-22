@@ -11,12 +11,8 @@ TagManager:
   - Ammo
   - Knife
   - Wall
-  - WallJump
-  - ShootingRange
-  - KnifePrefab
   - Switch
   - Door
-  - DoorKnob
   - Syth
   - Bottle
   - Floor
@@ -28,15 +24,11 @@ TagManager:
   - Handle
   - Handle2
   - Handle3
-  - MirrorScare
-  - DoorScare
   - Letter
-  - Death certificate
   - Letter.2
   - Flash
   - Rabbit
   - Scare2
-  - BloodTrail
   - Spider
   - Letter.3
   - StorageRoom
@@ -53,6 +45,7 @@ TagManager:
   - Iron
   - BakeButton
   - KeyHole
+  - RabbitActive
   layers:
   - Default
   - TransparentFX

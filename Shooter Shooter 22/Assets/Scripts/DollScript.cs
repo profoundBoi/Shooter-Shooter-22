@@ -28,7 +28,7 @@ public class DollScript : MonoBehaviour
         }
         if (Chased )
         {
-            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 9 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 6 * Time.deltaTime);
             Vector3 direction = Player.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, angle + 90, 0);

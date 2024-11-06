@@ -8,11 +8,10 @@ public class SpeachScript : MonoBehaviour
     public TextMeshProUGUI speachText;
     public GameObject SpeachBox;
 
-    [Header("Scarey LongLegs")]
-    public GameObject ScaryLongLegs;
-    public Transform ScaryLegsPosition;
-    public Transform ScaryLegsposition2;
+    [Header("Rabbit Activate")]
+    public GameObject RabbitActive;
 
+    [Header ("UI")]
     public List<GameObject> inGameUI;
     public GameObject Eyes;
 
@@ -27,6 +26,8 @@ public class SpeachScript : MonoBehaviour
             t.SetActive(false);
         }
         StartCoroutine(WakeUp());
+
+        RabbitActive.SetActive(false);
     }
 
     IEnumerator WakeUp()
@@ -53,25 +54,13 @@ public class SpeachScript : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.CompareTag("MirrorScare"))
+        if (hit.collider.gameObject.CompareTag("RabbitActive"))
         {
             Destroy(hit.gameObject);
-            GameObject Monster = Instantiate(ScaryLongLegs, ScaryLegsPosition.position, Quaternion.identity);
-            Destroy(Monster, 1.5f);
-
-            
-
+            RabbitActive.SetActive(true) ;
         }
 
-        if (hit.collider.gameObject.CompareTag("DoorScare"))
-        {
-            Destroy(hit.gameObject);
-            GameObject Monster = Instantiate(ScaryLongLegs, ScaryLegsposition2.position, Quaternion.identity);
-            Monster.transform.rotation = ScaryLegsposition2.rotation;
-            StartCoroutine(DoorScare());
-            Destroy(Monster, 1.5f);
-            GetGun = true;
-        }
+        
         if (hit.collider.gameObject.CompareTag("Scare2"))
         {
             Destroy(hit.gameObject);
@@ -104,26 +93,7 @@ public class SpeachScript : MonoBehaviour
     private bool scare;
     public GameObject Rabbit;
     public GameObject Player;
-    IEnumerator DoorScare()
-    {
-        yield return new WaitForSeconds(0);
-        SpeachBox.SetActive(true);
-        speachText.text = "What was that";
-        yield return new WaitForSeconds(2);
-        speachText.text = "Let me grab Dads weapon from the Safe";
-        yield return new WaitForSeconds(3);
-        speachText.text = "I Need a weapon if i want to get out of here";
-        yield return new WaitForSeconds(3);
-        speachText.text = "Let Me use Dads weapons from the safe";
-        yield return new WaitForSeconds(3);
-        speachText.text = "Luckily he keeps important things in the Safe";
-        yield return new WaitForSeconds(3);
-        speachText.text = "";
-        SpeachBox.SetActive(false);
-
-
-
-    }
+    
 
     IEnumerator StorageRoomTrigger()
     {
