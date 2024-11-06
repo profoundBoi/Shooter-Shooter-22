@@ -46,6 +46,8 @@ TagManager:
   - BakeButton
   - KeyHole
   - RabbitActive
+  - Manual
+  - Timer
   layers:
   - Default
   - TransparentFX

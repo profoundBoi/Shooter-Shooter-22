@@ -69,4 +69,12 @@ public class SceneLoader : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public GameObject BookManual;
+    public void CloseManual()
+    {
+        BookManual.SetActive(false);
+        Cursor.visible = false;
+
+    }
 }

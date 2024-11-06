@@ -361,11 +361,25 @@ public class FirstPersonControl : MonoBehaviour
     private bool running;
 
     public bool canLook = false;
+
+    
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
         Move();
         ApplyGravity();
+  
+        if (Timer == 0 && Baking)
+        {
+            Key.SetActive(true);
+        }
+        TimerText.text = "" + Timer;
+
+        if (Irons > 0 )
+        {
+            haveIron = true;
+        }
+
 
         if (canLook)
         {
@@ -619,28 +633,7 @@ public class FirstPersonControl : MonoBehaviour
 
     public void PickUpObject()
     {
-        // Check if we are already holding an object
-        /*if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingGun = false;
-        }
-
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingBottle = false;
-        }
-
-        if (heldObject != null)
-        {
-            heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
-            heldObject.transform.parent = null;
-            holdingSyth = false;
-        }*/
-
+        
        
 
 
@@ -653,7 +646,7 @@ public class FirstPersonControl : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
-           
+
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.CompareTag("Syth"))
             {
@@ -661,7 +654,7 @@ public class FirstPersonControl : MonoBehaviour
 
                 // Pick up the object
                 GameObject HeldSyth = hit.collider.gameObject;
-                Weapons.Add( HeldSyth);
+                Weapons.Add(HeldSyth);
                 HeldSyth.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
 
@@ -671,14 +664,14 @@ public class FirstPersonControl : MonoBehaviour
                 HeldSyth.transform.parent = sythHoldingPosition;
                 holdingSyth = true;
 
-         
+
             }
             else if (hit.collider.CompareTag("Gun"))
             {
 
                 // Pick up the object
                 GameObject HeldGun = hit.collider.gameObject;
-                Weapons.Add( HeldGun);
+                Weapons.Add(HeldGun);
                 HeldGun.GetComponent<Rigidbody>().isKinematic = true;// Disable physics
 
                 // Attach the object to the hold position
@@ -686,7 +679,7 @@ public class FirstPersonControl : MonoBehaviour
                 HeldGun.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 HeldGun.transform.parent = holdPosition;
                 holdingGun = true;
-    
+
             }
 
             else if (hit.collider.CompareTag("Flash"))
@@ -717,14 +710,56 @@ public class FirstPersonControl : MonoBehaviour
                 heldObject.transform.eulerAngles = new Vector3(holdPosition.eulerAngles.x, holdPosition.eulerAngles.y, holdPosition.eulerAngles.z);
                 heldObject.transform.parent = holdPosition;
                 holdingBottle = true;
-           
+
 
             }
-            
+
+            else if (hit.collider.CompareTag("Iron"))
+            {
+                Irons++;
+                Destroy(hit.collider.gameObject);
+            }
+            else if (hit.collider.CompareTag("Key"))
+            {
+                haveKey = true;
+                Destroy(hit.collider.gameObject);
+
+            }
 
 
         }
     }
+
+    [Header("Manual Stuff")]
+    public GameObject bookManual;
+    [SerializeField]
+    private bool haveKey, haveIron, Baking;
+    [SerializeField]
+    private int Irons;
+    [SerializeField]
+    private int IronsAdded;
+    public Animator CloseKeymaker;
+    [SerializeField]
+    private int Timer;
+    public GameObject Key;
+    public List<GameObject> ironsInMaker;
+
+
+    public TextMeshPro TimerText;
+
+    IEnumerator TimerCountDown()
+    {
+        yield return new WaitForSeconds(1);
+        Timer--;
+        if (Timer > 0)
+        {
+            StartCoroutine(TimerCountDown());
+        }
+        
+    }
+
+
+
 
     IEnumerator FlashLightOn ()
     {
@@ -783,11 +818,41 @@ public class FirstPersonControl : MonoBehaviour
                 Fanged = true;
                 haveFang = false;
             }
-
-
+            else if (hit.collider.CompareTag("Manual"))
+            {
+                bookManual.SetActive (true);
+                Cursor.visible = true;
+            }
+            else if (hit.collider.CompareTag("KeyHole") && haveIron )
+            {
+                IronsAdded++;
+                ironsInMaker[0].SetActive (true);
+                ironsInMaker.RemoveAt(0);
                 
+            }
+            else if (hit.collider.CompareTag("BakeButton"))
+            {
+                if (IronsAdded >= 3 && Timer == 30)
+                {
+                    CloseKeymaker.SetBool("Close", true);
+                    StartCoroutine(TimerCountDown());
+                    Baking = true;
+                    hit.collider.gameObject.tag = null;
+                }
+            }
+            else if (hit.collider.CompareTag("Timer"))
+            {
+                Timer += 5;
+                if (Timer == 60)
+                {
+                    Timer = 0;  
+                }
+                
+            }
 
-            
+
+
+
 
 
             else if (hit.collider.CompareTag("BDOOR"))
@@ -929,5 +994,7 @@ public class FirstPersonControl : MonoBehaviour
 
         }
     }
+
+    
 }
 
