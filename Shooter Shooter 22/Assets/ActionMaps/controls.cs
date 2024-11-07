@@ -73,15 +73,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Crouch"",
-                    ""type"": ""Button"",
-                    ""id"": ""c4e8049f-3e25-48d4-af51-0634bb4f3a69"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""2d7c310d-10ae-43c8-b345-23dec674c31e"",
@@ -121,6 +112,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""WeaponSwap"",
                     ""type"": ""Button"",
                     ""id"": ""0f55252a-a56a-4789-82af-5cae0517d2e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Walker"",
+                    ""type"": ""Button"",
+                    ""id"": ""411bb464-7e83-4d99-b93c-8a8149598666"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -339,28 +339,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""786fd80a-cfa2-4a47-a6dd-d46a90e3eb04"",
-                    ""path"": ""<Keyboard>/ctrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""be7eec56-6724-42db-9612-bb8ef19069c7"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2f8195ff-b7ce-4da0-8ed4-580dfa31bea5"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
@@ -457,6 +435,50 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""WeaponSwap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d109f53-805a-4bbf-b2ac-697792fe8f4b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walker"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c429a125-6d65-44f8-b035-9506939eed0a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walker"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f1902f2-4bed-4608-bc9b-c3303efc1a40"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walker"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7e71946-b336-4bf9-8800-aacaa0291a8b"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walker"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -493,12 +515,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
-        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_FlashOn = m_Player.FindAction("FlashOn", throwIfNotFound: true);
         m_Player_Scope = m_Player.FindAction("Scope", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_WeaponSwap = m_Player.FindAction("WeaponSwap", throwIfNotFound: true);
+        m_Player_Walker = m_Player.FindAction("Walker", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -565,12 +587,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_PickUp;
-    private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_FlashOn;
     private readonly InputAction m_Player_Scope;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_WeaponSwap;
+    private readonly InputAction m_Player_Walker;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -580,12 +602,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
-        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @FlashOn => m_Wrapper.m_Player_FlashOn;
         public InputAction @Scope => m_Wrapper.m_Player_Scope;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @WeaponSwap => m_Wrapper.m_Player_WeaponSwap;
+        public InputAction @Walker => m_Wrapper.m_Player_Walker;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -610,9 +632,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PickUp.started += instance.OnPickUp;
             @PickUp.performed += instance.OnPickUp;
             @PickUp.canceled += instance.OnPickUp;
-            @Crouch.started += instance.OnCrouch;
-            @Crouch.performed += instance.OnCrouch;
-            @Crouch.canceled += instance.OnCrouch;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -628,6 +647,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @WeaponSwap.started += instance.OnWeaponSwap;
             @WeaponSwap.performed += instance.OnWeaponSwap;
             @WeaponSwap.canceled += instance.OnWeaponSwap;
+            @Walker.started += instance.OnWalker;
+            @Walker.performed += instance.OnWalker;
+            @Walker.canceled += instance.OnWalker;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -647,9 +669,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PickUp.started -= instance.OnPickUp;
             @PickUp.performed -= instance.OnPickUp;
             @PickUp.canceled -= instance.OnPickUp;
-            @Crouch.started -= instance.OnCrouch;
-            @Crouch.performed -= instance.OnCrouch;
-            @Crouch.canceled -= instance.OnCrouch;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -665,6 +684,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @WeaponSwap.started -= instance.OnWeaponSwap;
             @WeaponSwap.performed -= instance.OnWeaponSwap;
             @WeaponSwap.canceled -= instance.OnWeaponSwap;
+            @Walker.started -= instance.OnWalker;
+            @Walker.performed -= instance.OnWalker;
+            @Walker.canceled -= instance.OnWalker;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -707,11 +729,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnPickUp(InputAction.CallbackContext context);
-        void OnCrouch(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFlashOn(InputAction.CallbackContext context);
         void OnScope(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnWeaponSwap(InputAction.CallbackContext context);
+        void OnWalker(InputAction.CallbackContext context);
     }
 }

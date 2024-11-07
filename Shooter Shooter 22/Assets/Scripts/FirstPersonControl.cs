@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
@@ -47,7 +48,6 @@ public class FirstPersonControl : MonoBehaviour
     [Space(5)]
     public float crouchHeight = 1.0f; //make short
     public float standingHeight = 2.0f; //make normal
-    public float crouchSpeed = 1.5f; //make slow
     private bool isCrouching = false; //chech if crouch
 
     [Header("INTERACT SETTINGS")]
@@ -74,6 +74,13 @@ public class FirstPersonControl : MonoBehaviour
     [Header("Running")]
     public Slider Stamina;
     public float StaminaSpeed = 1f;
+
+
+    [Header("Main Character Animation")]
+    public Animator mainCA;
+    [SerializeField] private bool Walking, RunningWithGun, WalkingWithGun, StandingWithGun, Jumping, Attacking, StandingWithSyth, Running;
+
+
     public void FlashOnAndOff()
     {
         if (holdingFlash == true && !FlashLight.activeSelf)
@@ -288,8 +295,6 @@ public class FirstPersonControl : MonoBehaviour
         // Subscribe to the pick-up input event 
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); //Call the PickUpObject method when pick-up input is performed
 
-        // subscribe to the crouch input event
-        playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); //Call the ToggleCrouch method when Crouch input is performed
 
         // Subscribe to the interact input event
         playerInput.Player.Interact.performed += ctx => Interact(); // Interact with switch
@@ -305,9 +310,14 @@ public class FirstPersonControl : MonoBehaviour
         playerInput.Player.Sprint.performed += ctx => Sprinted();
         playerInput.Player.Sprint.canceled += ctx => SprintDone();
 
+       
+
+
 
 
     }
+
+  
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
 
@@ -320,6 +330,7 @@ public class FirstPersonControl : MonoBehaviour
             {
                 moveSpeed = 15;
                 running = true;
+                Running = true;
             }
 
         }
@@ -337,6 +348,8 @@ public class FirstPersonControl : MonoBehaviour
 
         running = false;
         moveSpeed = 10;
+        Running = false;
+
 
 
     }
@@ -368,7 +381,37 @@ public class FirstPersonControl : MonoBehaviour
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
         Move();
         ApplyGravity();
+
+        if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0 )
+        {
+            if (!Running)
+            {
+                Walking = true;
+            }
+            else if (Running && Walking)
+            {
+                Walking = false;
+            }
+        }
+        
+        if ( Running)
+        {
+            mainCA.SetBool("Run", true);
+            mainCA.speed = 2;
+        }
+        else 
+        {
+            mainCA.SetBool("Run", false);
+        }
+
   
+        if (Walking)
+        {
+           mainCA.SetBool ("Walk", true);
+        }else { mainCA.SetBool("Walk", false); }
+        
+
+
         if (Timer == 0 && Baking && !haveKey)
         {
             Key.SetActive(true);
@@ -501,12 +544,6 @@ public class FirstPersonControl : MonoBehaviour
             gunUI.SetActive(true);
         }
 
-        if (holdingKnife)
-        {
-            knifeUI.SetActive(true);
-            Knife.tag = "Nothing";
-            Knife.layer = 0;
-        }
        
 
         if (Fang.activeSelf && Eye.activeSelf && Arm.activeSelf && Keys.activeSelf)
@@ -582,6 +619,7 @@ public class FirstPersonControl : MonoBehaviour
     public Animator ShakeDoorKnoble;
     public void Move()
     {
+        
         // Create a movement vector based on the input
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
 
@@ -590,31 +628,15 @@ public class FirstPersonControl : MonoBehaviour
 
         // Move the character controller based on the movement vector and speed
         characterController.Move(move * moveSpeed * Time.deltaTime);
-
-        float currentSpeed;
-        if (isCrouching)
-        {
-            currentSpeed = crouchSpeed;
-        }
-        else
-        {
-            currentSpeed = moveSpeed;
-        }
+        
+        //Animator Bool
+        //Walking = true;
+        
     }
 
-    public void ToggleCrouch()
-    {
-        if (isCrouching)
-        {
-            characterController.height = standingHeight;
-            isCrouching = false;
-        }
-        else
-        {
-            characterController.height = crouchHeight;
-            isCrouching = true;
-        }
-    }
+   
+
+    
     public void LookAround()
     {
         // Get horizontal and vertical look inputs and adjust based on sensitivity

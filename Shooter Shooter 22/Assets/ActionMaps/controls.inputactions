@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "c4e8049f-3e25-48d4-af51-0634bb4f3a69",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "2d7c310d-10ae-43c8-b345-23dec674c31e",
@@ -99,6 +90,15 @@
                     "name": "WeaponSwap",
                     "type": "Button",
                     "id": "0f55252a-a56a-4789-82af-5cae0517d2e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Walker",
+                    "type": "Button",
+                    "id": "411bb464-7e83-4d99-b93c-8a8149598666",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -317,28 +317,6 @@
                 },
                 {
                     "name": "",
-                    "id": "786fd80a-cfa2-4a47-a6dd-d46a90e3eb04",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "be7eec56-6724-42db-9612-bb8ef19069c7",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2f8195ff-b7ce-4da0-8ed4-580dfa31bea5",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -433,6 +411,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "WeaponSwap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d109f53-805a-4bbf-b2ac-697792fe8f4b",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walker",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c429a125-6d65-44f8-b035-9506939eed0a",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walker",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f1902f2-4bed-4608-bc9b-c3303efc1a40",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walker",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7e71946-b336-4bf9-8800-aacaa0291a8b",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walker",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
