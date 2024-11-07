@@ -507,13 +507,7 @@ public class FirstPersonControl : MonoBehaviour
             Knife.tag = "Nothing";
             Knife.layer = 0;
         }
-        else
-        {
-            knifeUI.SetActive(false);
-            Knife.tag = "Knife";
-            Knife.layer = 6;
-
-        }
+       
 
         if (Fang.activeSelf && Eye.activeSelf && Arm.activeSelf && Keys.activeSelf)
         {
