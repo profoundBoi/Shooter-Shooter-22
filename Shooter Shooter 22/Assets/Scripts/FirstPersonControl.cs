@@ -995,6 +995,7 @@ public class FirstPersonControl : MonoBehaviour
 
     [Header("Door Knoble Suff")]
     public GameObject Eye, Arm, Fang, Keys;
+    public GameObject DoorKnoble;
     [SerializeField]
     private bool Eyed, Armed, Fanged, Unlcoked;
 

@@ -9160,6 +9160,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3372953765197604040, guid: b57b65081cd530c489800c93ecd845d4, type: 3}
+--- !u!1 &67709236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9142572119390854919, guid: 42c28cc313c6c4b48af7fec9c37fe75d,
+    type: 3}
+  m_PrefabInstance: {fileID: 171299313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &67709243 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3188811510815775058, guid: 42c28cc313c6c4b48af7fec9c37fe75d,
@@ -24381,6 +24387,7 @@ MonoBehaviour:
   Arm: {fileID: 1215047853}
   Fang: {fileID: 1417613522}
   Keys: {fileID: 1613269829}
+  DoorKnoble: {fileID: 67709236}
   Eyed: 0
   Armed: 0
   Fanged: 0
@@ -89374,7 +89381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20.000214, y: -285.9999}
+  m_AnchoredPosition: {x: -20.000275, y: -285.99994}
   m_SizeDelta: {x: -303.5573, y: -190.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &928640842
