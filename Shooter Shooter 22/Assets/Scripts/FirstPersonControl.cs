@@ -515,6 +515,18 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
+        if (Fang.activeSelf && Eye.activeSelf && Arm.activeSelf && Keys.activeSelf)
+        {
+            Winner = true;
+        }
+
+        if (Winner == true)
+        {
+           
+            Winner = false;
+            StartCoroutine(Winners());
+        }
+
 
 
         if (Eyed)
@@ -530,6 +542,10 @@ public class FirstPersonControl : MonoBehaviour
         if (Fanged)
         {
             Fang.SetActive(true);
+        }
+        if (Unlcoked)
+        {
+            Keys.SetActive(true);   
         }
 
         if (Weapons != null)
@@ -548,8 +564,27 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject flashUI;
     public GameObject knifeUI;
 
+    IEnumerator Winners()
+    {
+        Fang.SetActive(false);
+        yield return new WaitForSeconds(1);
+        Eye.SetActive(false);
+        yield return new WaitForSeconds(1);
+        Arm.SetActive(false);
+        yield return new WaitForSeconds(1);
+        ShakeDoorKnoble.SetBool("Shake", true);
+        ShakeDoorKnoble.speed = 0.4f;
+        yield return new WaitForSeconds(2);
+        ShakeDoorKnoble.speed = 0.8f;
+        yield return new WaitForSeconds(1.5f);
+        ShakeDoorKnoble.speed = 1f;
+        yield return new WaitForSeconds(1.5f);
+        ShakeDoorKnoble.speed = 1.5f;
+        yield return new WaitForSeconds(0);
+        WellDone.SetBool("Open", true);
+    }
 
-
+    public Animator ShakeDoorKnoble;
     public void Move()
     {
         // Create a movement vector based on the input
@@ -818,6 +853,11 @@ public class FirstPersonControl : MonoBehaviour
                 Fanged = true;
                 haveFang = false;
             }
+            else if (hit.collider.CompareTag("DoorK") && haveKey)
+            {
+                Unlcoked = true;
+                haveKey = false;
+            }
             else if (hit.collider.CompareTag("Manual"))
             {
                 bookManual.SetActive (true);
@@ -954,9 +994,13 @@ public class FirstPersonControl : MonoBehaviour
     }
 
     [Header("Door Knoble Suff")]
-    public GameObject Eye, Arm, Fang;
+    public GameObject Eye, Arm, Fang, Keys;
     [SerializeField]
-    private bool Eyed, Armed, Fanged;
+    private bool Eyed, Armed, Fanged, Unlcoked;
+
+    public Animator WellDone;
+    [SerializeField]
+    private bool Winner;
 
     [SerializeField]
     private bool haveFang, haveEye, haveArm;
