@@ -582,6 +582,7 @@ public class FirstPersonControl : MonoBehaviour
         ShakeDoorKnoble.speed = 1.5f;
         yield return new WaitForSeconds(0);
         WellDone.SetBool("Open", true);
+        DoorKnoble.SetActive(false);
     }
 
     public Animator ShakeDoorKnoble;
