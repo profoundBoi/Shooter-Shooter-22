@@ -374,42 +374,63 @@ public class FirstPersonControl : MonoBehaviour
     private bool running;
 
     public bool canLook = false;
+    private bool ismoving;
 
-    
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
         Move();
         ApplyGravity();
 
-        if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0 )
+        if (characterController.isGrounded)
         {
-            if (!Running)
+            Jumping = false;
+            if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
             {
-                Walking = true;
+                ismoving = true;
+                if (!Running)
+                {
+                    Walking = true;
+                }
+                else if (Running && Walking)
+                {
+                    Walking = false;
+                    mainCA.SetBool("Walk", false);
+                }
             }
-            else if (Running && Walking)
+            else
             {
-                Walking = false;
+                mainCA.SetBool("Walk", false);
+                ismoving = false;
+
             }
-        }
-        
-        if ( Running)
-        {
-            mainCA.SetBool("Run", true);
-            mainCA.speed = 2;
-        }
-        else 
-        {
-            mainCA.SetBool("Run", false);
+
+
+            if (Running && ismoving)
+            {
+                mainCA.SetBool("Run", true);
+                mainCA.speed = 2;
+            }
+            else
+            {
+                mainCA.SetBool("Run", false);
+                mainCA.speed = 1;
+            }
+
+
+            if (Walking && ismoving)
+            {
+                mainCA.SetBool("Walk", true);
+            }
+            else { mainCA.SetBool("Walk", false); }
         }
 
-  
-        if (Walking)
+        if (characterController.isGrounded == false && Jumping)
         {
-           mainCA.SetBool ("Walk", true);
-        }else { mainCA.SetBool("Walk", false); }
-        
+            mainCA.SetBool("Jump", true);
+            mainCA.speed = 1.5f;
+        }
+        else { mainCA.SetBool("Jump", false); mainCA.speed = 1; }
 
 
         if (Timer == 0 && Baking && !haveKey)
@@ -672,6 +693,7 @@ public class FirstPersonControl : MonoBehaviour
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Jumping = true;
         }
     }
 
