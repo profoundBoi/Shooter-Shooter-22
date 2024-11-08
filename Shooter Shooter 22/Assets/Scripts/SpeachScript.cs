@@ -38,7 +38,6 @@ public class SpeachScript : MonoBehaviour
         foreach (GameObject t in inGameUI)
         {
             t.SetActive(true);
-            Debug.Log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
         }
         speachText.text = "What... What Happened";
         yield return new WaitForSeconds(4);

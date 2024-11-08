@@ -86,12 +86,12 @@ public class HealthManager : MonoBehaviour
 
     IEnumerator EmergancyCall()
     {
-        yield return new WaitForSeconds(Random.RandomRange(MinTime,MaxTime));
+        yield return new WaitForSeconds(Random.Range(MinTime,MaxTime));
         StartCoroutine(CallEmergancy());
         SFXSRCE.clip = Alarm;
         SFXSRCE.Play();
         SFXSRCE.loop = true;
-        yield return new WaitForSeconds(Random.RandomRange(MinTime,MaxTime));
+        yield return new WaitForSeconds(Random.Range(MinTime,MaxTime));
         StartCoroutine(CallEmergancy());
 
     }

@@ -44,12 +44,7 @@ public class FirstPersonControl : MonoBehaviour
     public bool holdingGun = false;
     public bool holdingSyth = false;   
 
-    [Header("CROUCH SETTINGS")]
-    [Space(5)]
-    public float crouchHeight = 1.0f; //make short
-    public float standingHeight = 2.0f; //make normal
-    private bool isCrouching = false; //chech if crouch
-
+    
     [Header("INTERACT SETTINGS")]
     [Space(5)]
     public Material switchMaterial; // Material to apply when switch is activated
@@ -79,6 +74,7 @@ public class FirstPersonControl : MonoBehaviour
     [Header("Main Character Animation")]
     public Animator mainCA;
     [SerializeField] private bool Walking, RunningWithGun, WalkingWithGun, StandingWithGun, Jumping, Attacking, StandingWithSyth, Running;
+    [SerializeField] private bool holdingAGun, holdingASyth;
 
 
     public void FlashOnAndOff()
@@ -119,12 +115,7 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
-        if (holdingKnife)
-        {
-            StartCoroutine(Throw());
-
-
-        }
+       
 
         
 
@@ -197,18 +188,7 @@ public class FirstPersonControl : MonoBehaviour
 
 
     }
-    IEnumerator Throw()
-    {
-        anim.SetBool("Stab", true);
-        Knifecollider.isTrigger = true;
-
-        yield return new WaitForSeconds(0.11f);
-        anim.SetBool("Stab", false);
-        Knifecollider.isTrigger = false;
-
-
-
-    }
+   
     public void Scope()
     {
         if (holdingGun)
@@ -239,17 +219,13 @@ public class FirstPersonControl : MonoBehaviour
         }
     }
 
-    IEnumerator Cantmove()
-    {
-        yield return new WaitForSeconds(13);
-        canLook = true;
-    }
+    
    
     private GameObject Gun;
     private void Awake()
     {
 
-        StartCoroutine(Cantmove());
+        canLook = true;
 
         Cursor.visible = false;
         // Get and store the CharacterController component attached to this GameObject
@@ -381,8 +357,42 @@ public class FirstPersonControl : MonoBehaviour
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
         Move();
         ApplyGravity();
+        if (canLook)
+        {
+            LookAround();
 
-        if (characterController.isGrounded)
+        }
+
+        #region Weapon swaper
+        //if (Weapons.Count > 0)
+        //{
+
+        //    heldObject = Weapons[0];
+
+        //}
+        //else if (Weapons.Count == 2)
+        //{
+        //    heldObject = Weapons[0];
+        //    Weapons[0].SetActive(true);
+        //    Weapons[1].SetActive(false);
+        //}
+        if (Weapons.Count > 1)
+        {
+            if (Weapons[0].tag == "Gun")
+            {
+                Weapons[1].SetActive(false);
+                holdingGun = true;
+            }
+            else if (Weapons[1].tag == "Gun")
+            {
+                Weapons[0].SetActive(true);
+                holdingAGun = false;
+            }
+        }
+        #endregion
+
+        #region Animations Without Weapon
+        if (characterController.isGrounded && Weapons.Count == 0)
         {
             Jumping = false;
             if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
@@ -406,7 +416,7 @@ public class FirstPersonControl : MonoBehaviour
             }
 
 
-            if (Running && ismoving)
+            if (Running && ismoving && characterController.isGrounded)
             {
                 mainCA.SetBool("Run", true);
                 mainCA.speed = 2;
@@ -423,6 +433,49 @@ public class FirstPersonControl : MonoBehaviour
                 mainCA.SetBool("Walk", true);
             }
             else { mainCA.SetBool("Walk", false); }
+
+
+        }
+
+        #endregion
+
+        #region Animations with Gun
+        if (Weapons.Count > 0 && Weapons[0].tag == "Gun")
+        {
+            mainCA.SetBool("Syth", false);
+
+            //Walking with a gun
+            if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
+            {
+                ismoving = true;
+                mainCA.SetBool("GunWalk", true);
+
+            }
+            else{
+                mainCA.SetBool("Gun", true);
+                    mainCA.SetBool("GunWalk", false);
+                    ismoving = false;
+                }
+
+            //Jump With a Gun
+            if (characterController.isGrounded != true)
+            {
+                mainCA.SetBool("Jump", true) ;
+                mainCA.SetBool("GunRun", false) ;
+                mainCA.speed = 1.5f;
+            }
+            //Jump While running with a gun
+            if (Running && ismoving && characterController.isGrounded)
+            {
+                mainCA.SetBool("GunRun", true);
+                mainCA.SetBool("Gun", false);
+                mainCA.speed = 2;
+            }
+            else
+            {
+                mainCA.SetBool("GunRun", false);
+                mainCA.speed = 1;
+            }
         }
 
         if (characterController.isGrounded == false && Jumping)
@@ -431,40 +484,52 @@ public class FirstPersonControl : MonoBehaviour
             mainCA.speed = 1.5f;
         }
         else { mainCA.SetBool("Jump", false); mainCA.speed = 1; }
+        #endregion
 
 
-        if (Timer == 0 && Baking && !haveKey)
+
+
+
+
+        if (Weapons.Count > 0 && Weapons[0].tag == "Syth")
         {
-            Key.SetActive(true);
+            mainCA.SetBool("Gun", false);
+
+            if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
+            {
+                ismoving = true;
+                mainCA.SetBool("Walk", true);
+                mainCA.SetBool("GunWalk", false );
+                mainCA.SetBool("Syth", false);
+
+            }
+            else
+            {
+                mainCA.SetBool("Syth", true);
+                mainCA.SetBool("Walk", false);
+                ismoving = false;
+            }
+
+            if (characterController.isGrounded != true)
+            {
+                mainCA.SetBool("Jump", true);
+                mainCA.SetBool("Run", false);
+                mainCA.speed = 1.5f;
+            }
+            if (Running && ismoving && characterController.isGrounded)
+            {
+                mainCA.SetBool("Run", true);
+                mainCA.SetBool("Syth", false);
+                mainCA.speed = 2;
+            }
+            else
+            {
+                mainCA.SetBool("Run", false);
+                mainCA.speed = 1;
+            }
         }
-        TimerText.text = "" + Timer;
 
-        if (Irons > 0 )
-        {
-            haveIron = true;
-        }
-
-
-        if (canLook)
-        {
-            LookAround();
-
-        }
-
-        if (Scoped)
-        {
-
-            Cam.fieldOfView = scopeView;
-        }
-        else if (!Scoped)
-        {
-            Cam.fieldOfView = 60;
-        }
-
-        if (!holdingGun)
-        {
-            Scoped = false;
-        }
+        #region Stamina Stuff
 
         Stamina.value = StaminaSpeed;
 
@@ -487,10 +552,9 @@ public class FirstPersonControl : MonoBehaviour
         {
             StaminaSpeed -= 0.005f;
         }
+        #endregion
 
-
-
-
+        #region Flash On and OFF
         if (!holdingFlash)
         {
             FlashLight.SetActive(false);
@@ -510,9 +574,9 @@ public class FirstPersonControl : MonoBehaviour
         {
             Drawer3.transform.position = Vector3.MoveTowards(Drawer3.transform.position, Opened3.position, 3 * Time.deltaTime);
         }
+        #endregion
 
-     
-
+        #region Safe stuff
         foreach (GameObject go in unsafeCode)
         {
             Renderer Un = go.GetComponent<Renderer>();
@@ -547,10 +611,9 @@ public class FirstPersonControl : MonoBehaviour
             Gun.SetActive(true);
             
         }
-        
+        #endregion
 
-       
-       
+        #region Gun Stuff and Scoping
 
         if (!holdingGun)
         {
@@ -565,7 +628,25 @@ public class FirstPersonControl : MonoBehaviour
             gunUI.SetActive(true);
         }
 
-       
+        if (Scoped)
+        {
+
+            Cam.fieldOfView = scopeView;
+        }
+        else if (!Scoped)
+        {
+            Cam.fieldOfView = 60;
+        }
+
+        if (!holdingGun)
+        {
+            Scoped = false;
+        }
+
+        
+        #endregion
+
+        #region Win Code and animation, and Key Baker
 
         if (Fang.activeSelf && Eye.activeSelf && Arm.activeSelf && Keys.activeSelf)
         {
@@ -578,7 +659,6 @@ public class FirstPersonControl : MonoBehaviour
             Winner = false;
             StartCoroutine(Winners());
         }
-
 
 
         if (Eyed)
@@ -600,14 +680,22 @@ public class FirstPersonControl : MonoBehaviour
             Keys.SetActive(true);   
         }
 
-        if (Weapons != null)
+        if (Timer == 0 && Baking && !haveKey)
         {
-
-            heldObject = Weapons[0];
-            Weapons[0].SetActive(true);
-            Weapons[1].SetActive(false);
-
+            Key.SetActive(true);
         }
+        TimerText.text = "" + Timer;
+
+        if (Irons > 0)
+        {
+            haveIron = true;
+        }
+        #endregion
+
+
+
+
+
 
     }
 
