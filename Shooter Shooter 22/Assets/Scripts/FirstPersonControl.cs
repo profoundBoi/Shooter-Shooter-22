@@ -392,7 +392,7 @@ public class FirstPersonControl : MonoBehaviour
         #endregion
 
         #region Animations Without Weapon
-        if (characterController.isGrounded && Weapons.Count == 0)
+        if (characterController.isGrounded )
         {
             Jumping = false;
             if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
@@ -437,96 +437,17 @@ public class FirstPersonControl : MonoBehaviour
 
         }
 
-        #endregion
-
-        #region Animations with Gun
-        if (Weapons.Count > 0 && Weapons[0].tag == "Gun")
-        {
-            mainCA.SetBool("Syth", false);
-
-            //Walking with a gun
-            if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
-            {
-                ismoving = true;
-                mainCA.SetBool("GunWalk", true);
-
-            }
-            else{
-                mainCA.SetBool("Gun", true);
-                    mainCA.SetBool("GunWalk", false);
-                    ismoving = false;
-                }
-
-            //Jump With a Gun
-            if (characterController.isGrounded != true)
-            {
-                mainCA.SetBool("Jump", true) ;
-                mainCA.SetBool("GunRun", false) ;
-                mainCA.speed = 1.5f;
-            }
-            //Jump While running with a gun
-            if (Running && ismoving && characterController.isGrounded)
-            {
-                mainCA.SetBool("GunRun", true);
-                mainCA.SetBool("Gun", false);
-                mainCA.speed = 2;
-            }
-            else
-            {
-                mainCA.SetBool("GunRun", false);
-                mainCA.speed = 1;
-            }
-        }
-
-        if (characterController.isGrounded == false && Jumping)
+        if (characterController.isGrounded != true)
         {
             mainCA.SetBool("Jump", true);
-            mainCA.speed = 1.5f;
         }
-        else { mainCA.SetBool("Jump", false); mainCA.speed = 1; }
+        else { mainCA.SetBool("Jump", false); }
+
         #endregion
 
-        #region Animation With Syth
+        
 
-        if (Weapons.Count > 0 && Weapons[0].tag == "Syth")
-        {
-            mainCA.SetBool("Gun", false);
-
-            if (moveInput.x > 0 || moveInput.y > 0 || moveInput.x < 0 || moveInput.y < 0)
-            {
-                ismoving = true;
-                mainCA.SetBool("Walk", true);
-                mainCA.SetBool("GunWalk", false );
-                mainCA.SetBool("Syth", false);
-
-            }
-            else
-            {
-                mainCA.SetBool("Syth", true);
-                mainCA.SetBool("Walk", false);
-                ismoving = false;
-            }
-
-            if (characterController.isGrounded != true)
-            {
-                mainCA.SetBool("Jump", true);
-                mainCA.SetBool("Run", false);
-                mainCA.speed = 1.5f;
-            }
-            if (Running && ismoving && characterController.isGrounded)
-            {
-                mainCA.SetBool("Run", true);
-                mainCA.SetBool("Syth", false);
-                mainCA.speed = 2;
-            }
-            else
-            {
-                mainCA.SetBool("Run", false);
-                mainCA.speed = 1;
-            }
-        }
-
-        #endregion
+        
 
         #region Stamina Stuff
 
