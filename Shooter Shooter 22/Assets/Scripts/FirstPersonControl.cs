@@ -19,8 +19,8 @@ public class FirstPersonControl : MonoBehaviour
     public float jumpHeight = 1.0f; // Height of the jump
     public Transform playerCamera; // Reference to the player's camera
     // Private variables to store input values and the character controller
-    private Vector2 moveInput; // Stores the movement input from the player
-    private Vector2 lookInput; // Stores the look input from the player
+    public Vector2 moveInput; // Stores the movement input from the player
+    public Vector2 lookInput; // Stores the look input from the player
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
@@ -486,10 +486,7 @@ public class FirstPersonControl : MonoBehaviour
         else { mainCA.SetBool("Jump", false); mainCA.speed = 1; }
         #endregion
 
-
-
-
-
+        #region Animation With Syth
 
         if (Weapons.Count > 0 && Weapons[0].tag == "Syth")
         {
@@ -528,6 +525,8 @@ public class FirstPersonControl : MonoBehaviour
                 mainCA.speed = 1;
             }
         }
+
+        #endregion
 
         #region Stamina Stuff
 
@@ -881,7 +880,7 @@ public class FirstPersonControl : MonoBehaviour
                 Irons++;
                 Destroy(hit.collider.gameObject);
             }
-            else if (hit.collider.CompareTag("Key"))
+            else if (hit.collider.CompareTag("Keys"))
             {
                 haveKey = true;
                 Destroy(hit.collider.gameObject);

@@ -48,6 +48,9 @@ TagManager:
   - RabbitActive
   - Manual
   - Timer
+  - Death certificate
+  - KnifePrefab
+  - Keys
   layers:
   - Default
   - TransparentFX
