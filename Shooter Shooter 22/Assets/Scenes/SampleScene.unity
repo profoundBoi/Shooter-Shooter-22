@@ -21114,7 +21114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door Knoble
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2870023829087051806, guid: 42c28cc313c6c4b48af7fec9c37fe75d, type: 3}
+    - {fileID: 8669385780214853988, guid: 42c28cc313c6c4b48af7fec9c37fe75d, type: 3}
+    - {fileID: 5168148100378473658, guid: 42c28cc313c6c4b48af7fec9c37fe75d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
