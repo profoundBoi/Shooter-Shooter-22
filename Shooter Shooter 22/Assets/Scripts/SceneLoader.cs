@@ -13,6 +13,7 @@ public class SceneLoader : MonoBehaviour
     public GameObject LoadingPage;
 
     public FirstPersonControl FirstPersonControl;
+    public Animator Cam;
     public void PausedButtonClicked()
     {
         PausePanel.SetActive(true);
@@ -28,7 +29,8 @@ public class SceneLoader : MonoBehaviour
     }
     public void StartButtonClicked()
     {
-        SceneManager.LoadSceneAsync("Story");
+        StartCoroutine(StartGames());
+
         Debug.Log("Loading Story");
     }
 
@@ -78,5 +80,12 @@ public class SceneLoader : MonoBehaviour
         BookManual.SetActive(false);
         Cursor.visible = false;
         FirstPersonControl.canLook = true;
+    }
+
+    IEnumerator StartGames()
+    {
+        Cam.SetBool("Start", true);
+        yield return new WaitForSeconds(2.8f);
+        SceneManager.LoadSceneAsync("Story");
     }
 }

@@ -26556,6 +26556,7 @@ MonoBehaviour:
     type: 3}
   ammoText: {fileID: 439753351}
   Gun: {fileID: 989236177}
+  SL: {fileID: 2108959922}
   safeCode:
   - {fileID: 1850997746}
   - {fileID: 1874716660}
@@ -219784,6 +219785,7 @@ MonoBehaviour:
   SettingsPanel: {fileID: 0}
   LoadingPage: {fileID: 0}
   FirstPersonControl: {fileID: 241236790}
+  Cam: {fileID: 0}
   BookManual: {fileID: 1735206683}
 --- !u!4 &2108959923
 Transform:

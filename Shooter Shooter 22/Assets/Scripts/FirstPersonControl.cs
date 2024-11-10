@@ -286,14 +286,22 @@ public class FirstPersonControl : MonoBehaviour
         playerInput.Player.Sprint.performed += ctx => Sprinted();
         playerInput.Player.Sprint.canceled += ctx => SprintDone();
 
-       
+        playerInput.Player.Pause.performed += ctx => Pause();
+
+
 
 
 
 
     }
+    public SceneLoader SL;
 
-  
+    public void Pause()
+    {
+        SL.PausedButtonClicked();
+    }
+
+
     public GameObject[] safeCode;
     public GameObject[] unsafeCode;
 
