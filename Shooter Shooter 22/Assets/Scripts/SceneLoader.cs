@@ -34,6 +34,10 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("Loading Story");
     }
 
+    public void MenuButtonClicked()
+    {
+        SceneManager.LoadSceneAsync("Start Manu");
+    }
     public void Next01ButtonClicked()
     {
         SceneManager.LoadSceneAsync("Story2");
