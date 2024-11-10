@@ -639,6 +639,7 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject gunUI;
     public GameObject flashUI;
     public GameObject SythUI;
+    public GameObject KeyUI;
 
 
     #region Win Animation
@@ -825,6 +826,7 @@ public class FirstPersonControl : MonoBehaviour
             {
                 haveKey = true;
                 Destroy(hit.collider.gameObject);
+                KeyUI.SetActive(true);
 
             }
 
