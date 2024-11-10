@@ -921,6 +921,7 @@ public class FirstPersonControl : MonoBehaviour
             {
                 bookManual.SetActive (true);
                 Cursor.visible = true;
+                canLook = false;
             }
             else if (hit.collider.CompareTag("KeyHole") && haveIron )
             {

@@ -11,6 +11,8 @@ public class SceneLoader : MonoBehaviour
     public GameObject PausePanel;
     public GameObject SettingsPanel;
     public GameObject LoadingPage;
+
+    public FirstPersonControl FirstPersonControl;
     public void PausedButtonClicked()
     {
         PausePanel.SetActive(true);
@@ -75,6 +77,6 @@ public class SceneLoader : MonoBehaviour
     {
         BookManual.SetActive(false);
         Cursor.visible = false;
-
+        FirstPersonControl.canLook = true;
     }
 }
