@@ -51,6 +51,8 @@ TagManager:
   - Death certificate
   - KnifePrefab
   - Keys
+  - Garage
+  - DollFight
   layers:
   - Default
   - TransparentFX

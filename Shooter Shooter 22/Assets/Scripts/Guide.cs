@@ -18,6 +18,7 @@ public class Guide : MonoBehaviour
     public LayerMask PU;
     public LayerMask Look;
     public LayerMask Keys;
+    public GameObject GuideBG;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,24 +45,34 @@ public class Guide : MonoBehaviour
             {
                 GameObject Object = hit.collider.gameObject;
                 guideText.text = hit.collider.name + " - Click 'F' To Interact";
+                GuideBG.SetActive(true);
             }
             else if (Physics.Raycast(ray, out hit, pickUpRange, Look))
             {
                 GameObject Object = hit.collider.gameObject;
                 guideText.text = hit.collider.name;
+                GuideBG.SetActive(true);
+
             }
             else if (Physics.Raycast(ray, out hit, pickUpRange, PU))
             {
                 GameObject Object = hit.collider.gameObject;
                 guideText.text = hit.collider.name + " - Click 'E' To PickUp";
+                GuideBG.SetActive(true);
+
             }
             else if (Physics.Raycast(ray, out hit, pickUpRange, Keys))
             {
                 GameObject Object = hit.collider.gameObject;
                 guideText.text = hit.collider.name + " - Left Click To Enter Pin";
+                GuideBG.SetActive(true);
+
             }
 
-            else { guideText.text = ""; }
+            else { 
+                guideText.text = ""; 
+                GuideBG.SetActive(false);
+                }
         }
         else if (guided) { guideText.text = ""; }
 

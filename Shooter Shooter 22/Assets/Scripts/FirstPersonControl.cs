@@ -76,7 +76,8 @@ public class FirstPersonControl : MonoBehaviour
     [SerializeField] private bool Walking, RunningWithGun, WalkingWithGun, StandingWithGun, Jumping, Attacking, StandingWithSyth, Running;
     [SerializeField] private bool holdingAGun, holdingASyth;
 
-
+    [Header("Scrip Reference")]
+    public SpeachScript speachScript;
     public void FlashOnAndOff()
     {
         if (holdingFlash == true && !FlashLight.activeSelf)
@@ -221,7 +222,7 @@ public class FirstPersonControl : MonoBehaviour
 
     
    
-    private GameObject Gun;
+    public GameObject Gun;
     private void Awake()
     {
 
@@ -234,7 +235,6 @@ public class FirstPersonControl : MonoBehaviour
         // pickUpAim.SetActive(true);
 
         ammoText.text = "";
-        Gun = GameObject.FindGameObjectWithTag("Gun");
 
         //NoKey = GameObject.FindGameObjectsWithTag("NoKey");
         //Key = GameObject.FindGameObjectsWithTag("Key");
@@ -242,7 +242,7 @@ public class FirstPersonControl : MonoBehaviour
         passKey.SetActive(false);
         FlashLight.SetActive(false);
 
-        Gun.SetActive(false);
+        //Gun.SetActive(false);
 
     }
     private void OnEnable()
@@ -355,13 +355,19 @@ public class FirstPersonControl : MonoBehaviour
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
-        Move();
+
+        if (speachScript.canMove)
+        {
+            Move();
+        }
+        
         ApplyGravity();
-        if (canLook)
+        if (speachScript.canLook)
         {
             LookAround();
 
         }
+        
 
         #region Weapon swaper
         //if (Weapons.Count > 0)
@@ -387,6 +393,7 @@ public class FirstPersonControl : MonoBehaviour
             {
                 Weapons[0].SetActive(true);
                 holdingAGun = false;
+                Gun.SetActive(false);
             }
         }
         #endregion
@@ -528,9 +535,13 @@ public class FirstPersonControl : MonoBehaviour
         if (OpenSafe())
         {
             Safe.SetBool("Open", true);
-            Gun.SetActive(true);
+
+            Gun.tag = "Gun";
+            
+           
             
         }
+       
         #endregion
 
         #region Gun Stuff and Scoping
@@ -712,7 +723,7 @@ public class FirstPersonControl : MonoBehaviour
     [Header("Swap Weapon")]
     public List <GameObject> Weapons;
 
-
+    #region Pickup 
     public void PickUpObject()
     {
         
@@ -811,6 +822,7 @@ public class FirstPersonControl : MonoBehaviour
 
         }
     }
+    #endregion
 
     [Header("Manual Stuff")]
     public GameObject bookManual;
