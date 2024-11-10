@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -662,6 +663,8 @@ public class FirstPersonControl : MonoBehaviour
         yield return new WaitForSeconds(4);
         WellDone.SetBool("Open", true);
         DoorKnoble.SetActive(false);
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("EndGame");
     }
     #endregion 
 
