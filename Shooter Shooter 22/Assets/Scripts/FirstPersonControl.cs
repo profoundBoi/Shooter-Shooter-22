@@ -978,27 +978,8 @@ public class FirstPersonControl : MonoBehaviour
                 else { BDOORS.SetBool("OpenBD", true); }
             }
 
-            
 
-
-
-
-            else if (hit.collider.CompareTag("Handle"))
-            {
-                Open1 = true;
-            }
-            else if (hit.collider.CompareTag("Handle2"))
-            {
-                Open2 = true;
-            }
-            else if (hit.collider.CompareTag("Handle3"))
-            {
-                Open3 = true;
-            }
-
-            else if (Physics.Raycast(ray, out hit, 3))
-            {
-                if (hit.collider.CompareTag("Letter"))
+             else if (hit.collider.CompareTag("Letter"))
                 {
                     StartCoroutine(ReadLetter1());
                 }
@@ -1006,7 +987,7 @@ public class FirstPersonControl : MonoBehaviour
                 {
                     StartCoroutine(ReadLetter4());
                 }
-            }
+            
 
 
         }
@@ -1032,7 +1013,6 @@ public class FirstPersonControl : MonoBehaviour
     {
         yield return new WaitForSeconds(0);
         Letter1.SetActive(true);
-        canLook = false;
         yield return new WaitForSeconds(10);
         Letter1.SetActive(false);
         yield return new WaitForSeconds(0);
