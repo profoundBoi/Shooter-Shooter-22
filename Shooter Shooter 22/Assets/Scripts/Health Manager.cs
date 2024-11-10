@@ -74,7 +74,22 @@ public class HealthManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spider"))
         {
+            Health -= 0.0005f;
+        }
+        else if (collision.gameObject.CompareTag("FireBall"))
+        {
             Health -= 0.01f;
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+       
+         if (other.gameObject.CompareTag("FireBall"))
+        {
+            Health -= 0.001f;
+            Destroy(other.gameObject);
         }
     }
 

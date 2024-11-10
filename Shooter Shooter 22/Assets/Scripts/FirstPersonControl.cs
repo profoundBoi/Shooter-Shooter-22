@@ -386,6 +386,7 @@ public class FirstPersonControl : MonoBehaviour
         {
             if (Weapons[0].tag == "Gun")
             {
+                Weapons[0].SetActive(true);
                 Weapons[1].SetActive(false);
                 holdingGun = true;
             }

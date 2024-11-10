@@ -53,6 +53,7 @@ TagManager:
   - Keys
   - Garage
   - DollFight
+  - FireBall
   layers:
   - Default
   - TransparentFX

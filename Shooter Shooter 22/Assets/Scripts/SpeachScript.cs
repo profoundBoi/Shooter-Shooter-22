@@ -26,6 +26,8 @@ public class SpeachScript : MonoBehaviour
     private string textToShow;
 
     public bool canMove, canLook;
+
+    public GameObject DollHPBAr;
     
 
     // Start is called before the first frame update
@@ -41,6 +43,8 @@ public class SpeachScript : MonoBehaviour
 
         RabbitActive.SetActive(false);
 
+
+        #region Texts
         //Wake Up Text
 
         wakeUpText.Add("What... What Happened");
@@ -69,7 +73,7 @@ public class SpeachScript : MonoBehaviour
         DollFight.Add("I have to Get that Dolls Arm");
         DollFight.Add("I need to use the syth to get it");
 
-
+        #endregion
 
 
     }
@@ -156,6 +160,7 @@ public class SpeachScript : MonoBehaviour
 
         if (hit.collider.gameObject.CompareTag("DollFight"))
         {
+            DollHPBAr.SetActive(true);
             Destroy(hit.gameObject);
             SpeachBox.SetActive(true);
             DollFightB.SetActive(true);
