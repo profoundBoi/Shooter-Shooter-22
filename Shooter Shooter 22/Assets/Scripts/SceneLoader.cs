@@ -14,6 +14,13 @@ public class SceneLoader : MonoBehaviour
 
     public FirstPersonControl FirstPersonControl;
     public Animator Cam;
+
+    private void Start()
+    {
+        Source2.clip = Clip2;
+        Source2.loop = true;
+        Source2.Play();
+    }
     public void PausedButtonClicked()
     {
         PausePanel.SetActive(true);
@@ -86,11 +93,17 @@ public class SceneLoader : MonoBehaviour
         Cursor.visible = false;
         FirstPersonControl.canLook = true;
     }
-
+    public AudioSource Source, Source2;
+    public AudioClip Clip, Clip2;
     IEnumerator StartGames()
     {
         Cam.SetBool("Start", true);
+        Source.clip = Clip;
+        Source.loop = true;
+        Source.Play();
         yield return new WaitForSeconds(2.8f);
         SceneManager.LoadSceneAsync("Story");
     }
+
+    
 }
