@@ -300,6 +300,7 @@ public class FirstPersonControl : MonoBehaviour
     public void Pause()
     {
         SL.PausedButtonClicked();
+        Cursor.visible = true;
     }
 
 
@@ -377,6 +378,14 @@ public class FirstPersonControl : MonoBehaviour
 
         }
         
+        if (!speachScript.canLook)
+        {
+            gameObject.tag = "Untagged";
+        }
+        else if (speachScript.canLook)
+        {
+            gameObject.tag = "Player";
+        }
 
         #region Weapon swaper
         //if (Weapons.Count > 0)

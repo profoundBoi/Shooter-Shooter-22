@@ -34,6 +34,7 @@ public class SceneLoader : MonoBehaviour
         ControlPanel02.SetActive(false);
         Time.timeScale = 1;
         PauseButton.SetActive(true);
+        Cursor.visible = false;
     }
     public void StartButtonClicked()
     {
