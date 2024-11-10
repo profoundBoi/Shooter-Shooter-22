@@ -23245,7 +23245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7b70e2b39fab7f2428c3c203c4f9abc1, type: 3}
+  m_Texture: {fileID: 2800000, guid: 6b5ecc623e5b00643b84f2bc14820443, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -98801,7 +98801,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 947973213}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
