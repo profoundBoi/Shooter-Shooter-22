@@ -638,7 +638,8 @@ public class FirstPersonControl : MonoBehaviour
     [Header("Main UI")]
     public GameObject gunUI;
     public GameObject flashUI;
-    public GameObject knifeUI;
+    public GameObject SythUI;
+
 
     #region Win Animation
     IEnumerator Winners()
@@ -763,6 +764,7 @@ public class FirstPersonControl : MonoBehaviour
                 HeldSyth.transform.rotation = sythHoldingPosition.rotation;
                 HeldSyth.transform.parent = sythHoldingPosition;
                 holdingSyth = true;
+                SythUI.SetActive(true);
 
 
             }
@@ -1077,22 +1079,19 @@ public class FirstPersonControl : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.CompareTag("Ammo"))
-        {
-            Destroy(hit.gameObject);
-            CanReload = true;
-
-        }
-
-        else if (hit.collider.gameObject.CompareTag("BunnyArm"))
+        
+         if (hit.collider.gameObject.CompareTag("BunnyArm"))
         {
             haveArm = true;
+            hit.collider.isTrigger = true;
             Destroy(hit.gameObject);
             armUI.SetActive(true);
+
         }
         else if (hit.collider.gameObject.CompareTag("Eye"))
         {
             haveEye = true;
+            hit.collider.isTrigger = true;
             Destroy(hit.gameObject);
             eyeUI.SetActive(true);
 
@@ -1101,6 +1100,7 @@ public class FirstPersonControl : MonoBehaviour
         else if (hit.collider.gameObject.CompareTag("Fang"))
         {
             haveFang = true;
+            hit.collider.isTrigger = true;
             Destroy(hit.gameObject);
             fangUI.SetActive(true);
 
