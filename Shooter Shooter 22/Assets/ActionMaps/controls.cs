@@ -125,6 +125,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""73bd9271-f924-4465-8551-0438891d7ca0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -479,6 +488,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Walker"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""412ae9a9-5108-4a94-957d-6a89b9d6978f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -521,6 +541,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_WeaponSwap = m_Player.FindAction("WeaponSwap", throwIfNotFound: true);
         m_Player_Walker = m_Player.FindAction("Walker", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -593,6 +614,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_WeaponSwap;
     private readonly InputAction m_Player_Walker;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -608,6 +630,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @WeaponSwap => m_Wrapper.m_Player_WeaponSwap;
         public InputAction @Walker => m_Wrapper.m_Player_Walker;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -650,6 +673,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Walker.started += instance.OnWalker;
             @Walker.performed += instance.OnWalker;
             @Walker.canceled += instance.OnWalker;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -687,6 +713,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Walker.started -= instance.OnWalker;
             @Walker.performed -= instance.OnWalker;
             @Walker.canceled -= instance.OnWalker;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -735,5 +764,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnWeaponSwap(InputAction.CallbackContext context);
         void OnWalker(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
