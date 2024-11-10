@@ -24,6 +24,7 @@ public class SceneLoader : MonoBehaviour
     public void PlayButtonClicked()
     {
         PausePanel.SetActive(false);
+        ControlPanel02.SetActive(false);
         Time.timeScale = 1;
         PauseButton.SetActive(true);
     }
