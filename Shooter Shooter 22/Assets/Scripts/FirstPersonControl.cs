@@ -96,7 +96,7 @@ public class FirstPersonControl : MonoBehaviour
     }
     public void Shoot()
     {
-        if (holdingGun == true && Ammo > 0 && Weapons[0].tag == "Gun")
+        if (holdingGun == true && Ammo > 0 && Weapons[0].tag == "Gun" && speachScript.canLook)
         {
             SFXSRCE.clip = gunShot;
             SFXSRCE.Play();  
@@ -452,10 +452,6 @@ public class FirstPersonControl : MonoBehaviour
 
         #endregion
 
-        
-
-        
-
         #region Stamina Stuff
 
         Stamina.value = StaminaSpeed;
@@ -635,6 +631,7 @@ public class FirstPersonControl : MonoBehaviour
     public GameObject flashUI;
     public GameObject knifeUI;
 
+    #region Win Animation
     IEnumerator Winners()
     {
         Fang.SetActive(false);
@@ -651,10 +648,11 @@ public class FirstPersonControl : MonoBehaviour
         ShakeDoorKnoble.speed = 1f;
         yield return new WaitForSeconds(1.5f);
         ShakeDoorKnoble.speed = 1.5f;
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(4);
         WellDone.SetBool("Open", true);
         DoorKnoble.SetActive(false);
     }
+    #endregion 
 
     public Animator ShakeDoorKnoble;
     public void Move()
