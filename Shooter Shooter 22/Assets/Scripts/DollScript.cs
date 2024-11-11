@@ -112,12 +112,16 @@ public class DollScript : MonoBehaviour
         MeshCollider SC = Syth.GetComponent<MeshCollider>();
 
 
-        if (SC.isTrigger)
+        if (SC.isTrigger && other.gameObject.CompareTag("Syth"))
         {
-            if (other.gameObject.CompareTag("Syth"))
-            {
+            
                 HP--;
-            }
+            
+        }
+
+        else if (other.gameObject.CompareTag("Bullet"))
+        {
+            HP--;
         }
     }
 

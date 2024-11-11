@@ -1026,13 +1026,17 @@ public class FirstPersonControl : MonoBehaviour
         yield return new WaitForSeconds(3);
         speachBubble.SetActive(false);
         Speach.text = "";
+        GuideUI.SetActive(false);
         canLook = true;
     }
+
+    public GameObject GuideUI;
 
     IEnumerator ReadLetter4()
     {
         yield return new WaitForSeconds(0);
         Letter4.SetActive(true);
+        GuideUI.SetActive(false);
         yield return new WaitForSeconds(2);
         Letter4.SetActive(false);
        
