@@ -7,7 +7,6 @@ public class SceneLoader : MonoBehaviour
 {
     public GameObject ControlPanel;
     public GameObject ControlPanel02;
-    public GameObject PauseButton;
     public GameObject PausePanel;
     public GameObject SettingsPanel;
     public GameObject LoadingPage;
@@ -17,15 +16,13 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
-        Source2.clip = Clip2;
-        Source2.loop = true;
-        Source2.Play();
+        
     }
     public void PausedButtonClicked()
     {
         PausePanel.SetActive(true);
         Time.timeScale = 0; //i am pausing the state at which the game runs
-        PauseButton.SetActive(false);
+        Cursor.visible = true;
     }
 
     public void PlayButtonClicked()
@@ -33,7 +30,6 @@ public class SceneLoader : MonoBehaviour
         PausePanel.SetActive(false);
         ControlPanel02.SetActive(false);
         Time.timeScale = 1;
-        PauseButton.SetActive(true);
         Cursor.visible = false;
     }
     public void StartButtonClicked()

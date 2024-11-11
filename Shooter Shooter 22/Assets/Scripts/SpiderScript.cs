@@ -11,31 +11,37 @@ public class SpiderScript : MonoBehaviour
     private int HPs = 4;
     [SerializeField]
     public GameObject eyeCollectable;
+    public SpeachScript SpeachScript;
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
+        SpeachScript = GetComponent<SpeachScript>();
     }
     private void Update()
     {
         
-        float distance = Vector3.Distance (transform.position, Player.transform.position);
 
-        if (distance <= 20 && distance > 0.5f)
-        {
+            float distance = Vector3.Distance(transform.position, Player.transform.position);
 
-            Walk.SetBool("Walk", true);
-            transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 9 * Time.deltaTime);
-            Vector3 direction = Player.transform.position - transform.position;
-            float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, angle + 90, 0);
+            if (distance <= 20 && distance > 0.5f)
+            {
 
-               
-        }
-        else if (distance > 25) { 
-            Walk.SetBool("Walk", false);
-            transform.rotation = transform.rotation;
+                Walk.SetBool("Walk", true);
+                transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, 9 * Time.deltaTime);
+                Vector3 direction = Player.transform.position - transform.position;
+                float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, angle + 90, 0);
+
+
+            }
+            else if (distance > 25)
+            {
+                Walk.SetBool("Walk", false);
+                transform.rotation = transform.rotation;
+
+            }
         
-        }
+        
 
         
     }
