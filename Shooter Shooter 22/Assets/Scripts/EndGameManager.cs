@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class EndGameManager : MonoBehaviour
 {
+    public void Start()
+    {
+        Cursor.visible = true;
+    }
     public void ExitButtonClicked()
     {
         Application.Quit();

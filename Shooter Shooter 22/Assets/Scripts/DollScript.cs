@@ -105,10 +105,10 @@ public class DollScript : MonoBehaviour
 
 
     }
-
+    public GameObject Syth;
     private void OnTriggerEnter(Collider other)
     {
-        GameObject Syth = GameObject.FindGameObjectWithTag("Syth");
+        
         MeshCollider SC = Syth.GetComponent<MeshCollider>();
 
 
