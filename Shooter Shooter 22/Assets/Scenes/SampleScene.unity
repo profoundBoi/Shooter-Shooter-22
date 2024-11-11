@@ -673,7 +673,7 @@ Light:
   m_Color: {r: 0.56078434, g: 0.5514114, b: 0.39607844, a: 1}
   m_Intensity: 1000
   m_Range: 100
-  m_SpotAngle: 49.12374
+  m_SpotAngle: 91.77329
   m_InnerSpotAngle: 41.77616
   m_CookieSize: 10
   m_Shadows:
