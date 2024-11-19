@@ -113,7 +113,8 @@ public class FirstPersonControl : MonoBehaviour
 
             // Destroy the projectile after 3 seconds
             Destroy(projectile, 3f);
-          
+
+            StartCoroutine(Shooter());
 
         }
 
@@ -189,6 +190,12 @@ public class FirstPersonControl : MonoBehaviour
 
 
 
+    }
+    IEnumerator Shooter()
+    {
+        gunAnimator.SetBool("Shoot", true);
+        yield return new WaitForSeconds(0.15f);
+        gunAnimator.SetBool("Shoot", false);
     }
    
     public void Scope()
@@ -425,12 +432,15 @@ public class FirstPersonControl : MonoBehaviour
                 {
                     Walking = false;
                     mainCA.SetBool("Walk", false);
+                    gunAnimator.SetBool("Walk", false);
+
                 }
             }
             else
             {
                 mainCA.SetBool("Walk", false);
                 ismoving = false;
+                gunAnimator.SetBool("Walk", false);
 
             }
 
@@ -438,20 +448,27 @@ public class FirstPersonControl : MonoBehaviour
             if (Running && ismoving && characterController.isGrounded)
             {
                 mainCA.SetBool("Run", true);
+
                 mainCA.speed = 2;
+                gunAnimator.SetBool("Run", true);
+
             }
             else
             {
                 mainCA.SetBool("Run", false);
                 mainCA.speed = 1;
+                gunAnimator.SetBool("Run", false);
+
             }
 
 
             if (Walking && ismoving)
             {
                 mainCA.SetBool("Walk", true);
+                gunAnimator.SetBool("Walk", true);
             }
-            else { mainCA.SetBool("Walk", false); }
+            else { mainCA.SetBool("Walk", false); gunAnimator.SetBool("Walk", false);
+            }
 
 
         }
@@ -1014,6 +1031,10 @@ public class FirstPersonControl : MonoBehaviour
     
     public TextMeshProUGUI Speach;
     public GameObject speachBubble;
+
+    [Header("Gun Animation")]
+    public Animator gunAnimator;
+
    IEnumerator ReadLetter1()
     {
         yield return new WaitForSeconds(0);

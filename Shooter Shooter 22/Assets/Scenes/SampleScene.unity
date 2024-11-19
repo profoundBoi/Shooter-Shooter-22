@@ -26665,6 +26665,7 @@ MonoBehaviour:
   Letter4: {fileID: 227090921}
   Speach: {fileID: 288594155}
   speachBubble: {fileID: 928640839}
+  gunAnimator: {fileID: 1444999430}
   GuideUI: {fileID: 782578375}
   BDOORS: {fileID: 1586567946}
   Eye: {fileID: 885485677}
@@ -78354,7 +78355,7 @@ Transform:
   m_GameObject: {fileID: 730322864}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7313538, z: 0.6819983, w: 0}
-  m_LocalPosition: {x: -0.218, y: -0.176, z: 0.34}
+  m_LocalPosition: {x: -0.261, y: -0.274, z: 0.347}
   m_LocalScale: {x: 0.17155714, y: 0.28, z: 0.27602625}
   m_ConstrainProportionsScale: 1
   m_Children: []
