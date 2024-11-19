@@ -891,7 +891,7 @@ public class FirstPersonControl : MonoBehaviour
     IEnumerator FlashLightOn ()
     {
         yield return new WaitForSeconds(0);
-        ammoText.text = "RIght Click to Turn on and off";
+        ammoText.text = "Click TAB TO Toggle ON and OFF";
         yield return new WaitForSeconds(4);
         ammoText.text = "";
     }
