@@ -1035,12 +1035,18 @@ public class FirstPersonControl : MonoBehaviour
     [Header("Gun Animation")]
     public Animator gunAnimator;
 
+    [Header("Read Letter")]
+    public GameObject Crosshead;
+    public GameObject HelpUi;
    IEnumerator ReadLetter1()
     {
         yield return new WaitForSeconds(0);
         Letter1.SetActive(true);
+        Crosshead.SetActive(false);
+        HelpUi.SetActive(false);
         yield return new WaitForSeconds(10);
         Letter1.SetActive(false);
+        Crosshead.SetActive(true);
         yield return new WaitForSeconds(0);
         speachBubble.SetActive(true);
         Speach.text = "Let Me grab a flash light and Look for everyone";
