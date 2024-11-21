@@ -119,7 +119,7 @@ public class DollScript : MonoBehaviour
             
         }
 
-        else if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
             HP--;
         }
